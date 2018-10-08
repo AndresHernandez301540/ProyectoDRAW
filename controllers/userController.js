@@ -1,9 +1,9 @@
 const express = require('express');
 
 function createUser(req, res, next){
-  res.send(`Nombre completo ${req.body.name}`);
-  res.send(`Fecha de nacimiento ${req.body.date}`);
-  res.send(`Rol - ${req.body.role}`)
+  res.send(`Nombre completo - ${req.params.name}
+    Fecha de nacimiento - ${req.params.date}
+    Rol - ${req.params.role}`);
 };
 
 function indexUser(req, res, next){
@@ -12,17 +12,15 @@ function indexUser(req, res, next){
 };
 
 function listUser(req, res, next){
-  res.send(`Nombre completo ${req.body.name}`);
-  res.send(`Fecha de nacimiento ${req.body.date}`);
-  res.send(`Rol - ${req.body.role}`)
+  res.send(`Nombre completo ${req.params.name}`);
 };
 
 function updateUser(req, res, next){
-  res.send(`El usuario ${req.body.name} ha sido actualizado `);
+  res.send(`El usuario ${req.params.name} ha sido actualizado `);
 };
 
 function deleteUser(req,res,next){
-  res.send(`El usuario ${req.body.name} ha sido eliminado`);
+  res.send(`El usuario ${req.params.name} ha sido eliminado`);
 };
 
 module.exports={
