@@ -17,12 +17,12 @@ function indexProyect(req, res, next){
 
 function listProyect(req, res, next){
   res.send(`El proyecto con el nombre - ${req.params.name},
-    Fecha de solicitud del proyecto - ${req.params.name},
-    Fecha de arranque del proyecto - ${req.params.name},
-    Descripción del proyecto - ${req.params.name},
-    Scrum master -  ${req.params.name},
-    Product owner - ${req.params.name},
-    Equipo de desarrollo -  ${req.params.name}`);
+    Fecha de solicitud del proyecto - ${req.params.duedate},
+    Fecha de arranque del proyecto - ${req.params.startdate},
+    Descripción del proyecto - ${req.params.description},
+    Scrum master -  ${req.params.scrum},
+    Product owner - ${req.params.owner},
+    Equipo de desarrollo -  ${req.params.team}`);
 };
 
 function updateProyect(req, res, next){
