@@ -3,18 +3,18 @@ html
   head
     meta(charset='utf-8')
     meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
-    title Star Admin Free Bootstrap Admin Dashboard Template
+    title SCRUM
     // plugins:css
-    link(rel='stylesheet' href='vendors/iconfonts/mdi/css/materialdesignicons.min.css')
-    link(rel='stylesheet' href='vendors/css/vendor.bundle.base.css')
-    link(rel='stylesheet' href='vendors/css/vendor.bundle.addons.css')
+    link(rel='stylesheet' href='/vendors/iconfonts/mdi/css/materialdesignicons.min.css')
+    link(rel='stylesheet' href='/vendors/css/vendor.bundle.base.css')
+    link(rel='stylesheet' href='/vendors/css/vendor.bundle.addons.css')
     // endinject
     // plugin css for this page
     // End plugin css for this page
     // inject:css
-    link(rel='stylesheet' href='css/style.css')
+    link(rel='stylesheet' href='/css/style.css')
     // endinject
-    link(rel='shortcut icon' href='images/favicon.png')
+    link(rel='shortcut icon' href='/images/favicon.png')
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
@@ -24,17 +24,17 @@ html
       nav.navbar.default-layout.col-lg-12.col-12.p-0.fixed-top.d-flex.flex-row
         .text-center.navbar-brand-wrapper.d-flex.align-items-top.justify-content-center
           a.navbar-brand.brand-logo(href='index.html')
-            img(src='images/logo.svg' alt='logo')
+            strong SCRUMPage
           a.navbar-brand.brand-logo-mini(href='index.html')
             img(src='images/logo-mini.svg' alt='logo')
         .navbar-menu-wrapper.d-flex.align-items-center
 
           ul.navbar-nav.navbar-nav-right
 
-          
+
             li.nav-item.dropdown.d-none.d-xl-inline-block
               a#UserDropdown.nav-link.dropdown-toggle(href='#' data-toggle='dropdown' aria-expanded='false')
-                span.profile-text Hello, Richard V.Welsh !
+                span.profile-text Hello, Andrés Hernández !
                 img.img-xs.rounded-circle(src='images/faces/face1.jpg' alt='Profile image')
               .dropdown-menu.dropdown-menu-right.navbar-dropdown(aria-labelledby='UserDropdown')
                 a.dropdown-item.p-0
@@ -66,7 +66,7 @@ html
                   .profile-image
                     img(src='images/faces/face1.jpg' alt='profile image')
                   .text-wrapper
-                    p.profile-name Richard V.Welsh
+                    p.profile-name Andrés Hernández
                     div
                       small.designation.text-muted Manager
                       span.status-indicator.online
@@ -74,40 +74,17 @@ html
                   | New Project
                   i.mdi.mdi-plus
             li.nav-item
-              a.nav-link(href='index.html')
+              a.nav-link(href='users/list')
                 i.menu-icon.mdi.mdi-television
-                span.menu-title Dashboard
-            li.nav-item
-              a.nav-link(data-toggle='collapse' href='#ui-basic' aria-expanded='false' aria-controls='ui-basic')
-                i.menu-icon.mdi.mdi-content-copy
-                span.menu-title Basic UI Elements
-                i.menu-arrow
-              #ui-basic.collapse
-                ul.nav.flex-column.sub-menu
-                  li.nav-item
-                    a.nav-link(href='pages/ui-features/buttons.html') Buttons
-                  li.nav-item
-                    a.nav-link(href='pages/ui-features/typography.html') Typography
-            li.nav-item
-              a.nav-link(href='pages/forms/basic_elements.html')
-                i.menu-icon.mdi.mdi-backup-restore
-                span.menu-title Form elements
-            li.nav-item
-              a.nav-link(href='pages/charts/chartjs.html')
-                i.menu-icon.mdi.mdi-chart-line
-                span.menu-title Charts
+                span.menu-title Equipo de trabajo
             li.nav-item
               a.nav-link(href='pages/tables/basic-table.html')
                 i.menu-icon.mdi.mdi-table
-                span.menu-title Tables
-            li.nav-item
-              a.nav-link(href='pages/icons/font-awesome.html')
-                i.menu-icon.mdi.mdi-sticker
-                span.menu-title Icons
+                span.menu-title Proyectos de desarrollo
             li.nav-item
               a.nav-link(data-toggle='collapse' href='#auth' aria-expanded='false' aria-controls='auth')
                 i.menu-icon.mdi.mdi-restart
-                span.menu-title User Pages
+                span.menu-title Miembros
                 i.menu-arrow
               #auth.collapse
                 ul.nav.flex-column.sub-menu
@@ -121,3 +98,4 @@ html
                     a.nav-link(href='pages/samples/error-404.html')  404
                   li.nav-item
                     a.nav-link(href='pages/samples/error-500.html')  500
+  block content
