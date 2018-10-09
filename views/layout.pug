@@ -8,13 +8,10 @@ html
     link(rel='stylesheet' href='/vendors/iconfonts/mdi/css/materialdesignicons.min.css')
     link(rel='stylesheet' href='/vendors/css/vendor.bundle.base.css')
     link(rel='stylesheet' href='/vendors/css/vendor.bundle.addons.css')
-    // endinject
-    // plugin css for this page
-    // End plugin css for this page
-    // inject:css
+    link(rel='shortcut icon' href='images/favicon.png')
     link(rel='stylesheet' href='/css/style.css')
-    // endinject
     link(rel='shortcut icon' href='/images/favicon.png')
+
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
@@ -26,7 +23,7 @@ html
           a.navbar-brand.brand-logo(href='index.html')
             strong SCRUMPage
           a.navbar-brand.brand-logo-mini(href='index.html')
-            img(src='images/logo-mini.svg' alt='logo')
+            img(src='/images/logo-mini.svg' alt='logo')
         .navbar-menu-wrapper.d-flex.align-items-center
 
           ul.navbar-nav.navbar-nav-right
@@ -35,7 +32,7 @@ html
             li.nav-item.dropdown.d-none.d-xl-inline-block
               a#UserDropdown.nav-link.dropdown-toggle(href='#' data-toggle='dropdown' aria-expanded='false')
                 span.profile-text Hello, Andrés Hernández !
-                img.img-xs.rounded-circle(src='images/faces/face1.jpg' alt='Profile image')
+                img.img-xs.rounded-circle(src='/images/faces/face1.jpg' alt='Profile image')
               .dropdown-menu.dropdown-menu-right.navbar-dropdown(aria-labelledby='UserDropdown')
                 a.dropdown-item.p-0
                   .d-flex.border-bottom
@@ -64,7 +61,7 @@ html
               .nav-link
                 .user-wrapper
                   .profile-image
-                    img(src='images/faces/face1.jpg' alt='profile image')
+                    img(src='/images/faces/face1.jpg' alt='profile image')
                   .text-wrapper
                     p.profile-name Andrés Hernández
                     div
@@ -78,24 +75,35 @@ html
                 i.menu-icon.mdi.mdi-television
                 span.menu-title Equipo de trabajo
             li.nav-item
-              a.nav-link(href='pages/tables/basic-table.html')
+              a.nav-link(href='/pages/tables/basic-table.html')
                 i.menu-icon.mdi.mdi-table
                 span.menu-title Proyectos de desarrollo
             li.nav-item
-              a.nav-link(data-toggle='collapse' href='#auth' aria-expanded='false' aria-controls='auth')
-                i.menu-icon.mdi.mdi-restart
-                span.menu-title Miembros
-                i.menu-arrow
+              a.nav-link(data-toggle='collapse' href='#ui-basic' aria-expanded='false' aria-controls='ui-basic')
+                  i.menu-icon.mdi.mdi-content-copy
+                  span.menu-title Miembros
+                  i.menu-arrow
+              #ui-basic.collapse
+                ul.nav.flex-column.sub-menu
+                  li.nav-item
+                    a.nav-link(href='../../pages/ui-features/buttons.html') Buttons
+                  li.nav-item
+                    a.nav-link(href='../../pages/ui-features/typography.html') Typography
+
               #auth.collapse
                 ul.nav.flex-column.sub-menu
                   li.nav-item
-                    a.nav-link(href='pages/samples/blank-page.html')  Blank Page
+                    a.nav-link(href='/pages/samples/blank-page.html')  Blank Page
                   li.nav-item
-                    a.nav-link(href='pages/samples/login.html')  Login
+                    a.nav-link(href='/pages/samples/login.html')  Login
                   li.nav-item
-                    a.nav-link(href='pages/samples/register.html')  Register
+                    a.nav-link(href='/pages/samples/register.html')  Register
                   li.nav-item
-                    a.nav-link(href='pages/samples/error-404.html')  404
+                    a.nav-link(href='/pages/samples/error-404.html')  404
                   li.nav-item
-                    a.nav-link(href='pages/samples/error-500.html')  500
+                    a.nav-link(href='/pages/samples/error-500.html')  500
   block content
+  script(src='/vendors/js/vendor.bundle.base.js')
+  script(src='/vendors/js/vendor.bundle.addons.js')
+  script(src='/js/off-canvas.js')
+  script(src='/js/misc.js')
