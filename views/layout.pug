@@ -1,7 +1,121 @@
 doctype html
 html
   head
+    meta(charset='utf-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    title Star Admin Free Bootstrap Admin Dashboard Template
+    // plugins:css
+    link(rel='stylesheet' href='vendors/iconfonts/mdi/css/materialdesignicons.min.css')
+    link(rel='stylesheet' href='vendors/css/vendor.bundle.base.css')
+    link(rel='stylesheet' href='vendors/css/vendor.bundle.addons.css')
+    // endinject
+    // plugin css for this page
+    // End plugin css for this page
+    // inject:css
+    link(rel='stylesheet' href='css/style.css')
+    // endinject
+    link(rel='shortcut icon' href='images/favicon.png')
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    block content
+    .container-scroller
+      nav.navbar.default-layout.col-lg-12.col-12.p-0.fixed-top.d-flex.flex-row
+        .text-center.navbar-brand-wrapper.d-flex.align-items-top.justify-content-center
+          a.navbar-brand.brand-logo(href='index.html')
+            img(src='images/logo.svg' alt='logo')
+          a.navbar-brand.brand-logo-mini(href='index.html')
+            img(src='images/logo-mini.svg' alt='logo')
+        .navbar-menu-wrapper.d-flex.align-items-center
+
+          ul.navbar-nav.navbar-nav-right
+
+          
+            li.nav-item.dropdown.d-none.d-xl-inline-block
+              a#UserDropdown.nav-link.dropdown-toggle(href='#' data-toggle='dropdown' aria-expanded='false')
+                span.profile-text Hello, Richard V.Welsh !
+                img.img-xs.rounded-circle(src='images/faces/face1.jpg' alt='Profile image')
+              .dropdown-menu.dropdown-menu-right.navbar-dropdown(aria-labelledby='UserDropdown')
+                a.dropdown-item.p-0
+                  .d-flex.border-bottom
+                    .py-3.px-4.d-flex.align-items-center.justify-content-center
+                      i.mdi.mdi-bookmark-plus-outline.mr-0.text-gray
+                    .py-3.px-4.d-flex.align-items-center.justify-content-center.border-left.border-right
+                      i.mdi.mdi-account-outline.mr-0.text-gray
+                    .py-3.px-4.d-flex.align-items-center.justify-content-center
+                      i.mdi.mdi-alarm-check.mr-0.text-gray
+                a.dropdown-item.mt-2
+                  | Manage Accounts
+                a.dropdown-item
+                  | Change Password
+                a.dropdown-item
+                  | Check Inbox
+                a.dropdown-item
+                  | Sign Out
+          button.navbar-toggler.navbar-toggler-right.d-lg-none.align-self-center(type='button' data-toggle='offcanvas')
+            span.mdi.mdi-menu
+      // partial
+      .container-fluid.page-body-wrapper
+        // partial:partials/_sidebar.html
+        nav#sidebar.sidebar.sidebar-offcanvas
+          ul.nav
+            li.nav-item.nav-profile
+              .nav-link
+                .user-wrapper
+                  .profile-image
+                    img(src='images/faces/face1.jpg' alt='profile image')
+                  .text-wrapper
+                    p.profile-name Richard V.Welsh
+                    div
+                      small.designation.text-muted Manager
+                      span.status-indicator.online
+                button.btn.btn-success.btn-block
+                  | New Project
+                  i.mdi.mdi-plus
+            li.nav-item
+              a.nav-link(href='index.html')
+                i.menu-icon.mdi.mdi-television
+                span.menu-title Dashboard
+            li.nav-item
+              a.nav-link(data-toggle='collapse' href='#ui-basic' aria-expanded='false' aria-controls='ui-basic')
+                i.menu-icon.mdi.mdi-content-copy
+                span.menu-title Basic UI Elements
+                i.menu-arrow
+              #ui-basic.collapse
+                ul.nav.flex-column.sub-menu
+                  li.nav-item
+                    a.nav-link(href='pages/ui-features/buttons.html') Buttons
+                  li.nav-item
+                    a.nav-link(href='pages/ui-features/typography.html') Typography
+            li.nav-item
+              a.nav-link(href='pages/forms/basic_elements.html')
+                i.menu-icon.mdi.mdi-backup-restore
+                span.menu-title Form elements
+            li.nav-item
+              a.nav-link(href='pages/charts/chartjs.html')
+                i.menu-icon.mdi.mdi-chart-line
+                span.menu-title Charts
+            li.nav-item
+              a.nav-link(href='pages/tables/basic-table.html')
+                i.menu-icon.mdi.mdi-table
+                span.menu-title Tables
+            li.nav-item
+              a.nav-link(href='pages/icons/font-awesome.html')
+                i.menu-icon.mdi.mdi-sticker
+                span.menu-title Icons
+            li.nav-item
+              a.nav-link(data-toggle='collapse' href='#auth' aria-expanded='false' aria-controls='auth')
+                i.menu-icon.mdi.mdi-restart
+                span.menu-title User Pages
+                i.menu-arrow
+              #auth.collapse
+                ul.nav.flex-column.sub-menu
+                  li.nav-item
+                    a.nav-link(href='pages/samples/blank-page.html')  Blank Page
+                  li.nav-item
+                    a.nav-link(href='pages/samples/login.html')  Login
+                  li.nav-item
+                    a.nav-link(href='pages/samples/register.html')  Register
+                  li.nav-item
+                    a.nav-link(href='pages/samples/error-404.html')  404
+                  li.nav-item
+                    a.nav-link(href='pages/samples/error-500.html')  500
