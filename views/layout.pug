@@ -3,5 +3,35 @@ html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+    link(rel='stylesheet', href='/stylesheets/fontawesome.min.css')
   body
+  // NAVIGATION
+  .container(style={color:red, background:blue})
+.navbar-header
+  button.navbar-toggle(type='button' data-toggle='collapse' data-target='.navbar-ex1-collapse')
+    span.sr-only Toggle nav
+    span.icon-bar
+    span.icon-bar
+    span.icon-bar
+  // Logo text or image
+  a.navbar-brand(href='') SCRUM
+.navigation.collapse.navbar-collapse.navbar-ex1-collapse
+  ul.nav.navbar-nav
+    li
+      a(href='#intro') Home
+    li
+      a(href='#about') About
+    li
+      a(href='#services') Service
+    li
+      a(href='projects.pug') Projects
+    li
+      a(href='#team') Team
+    li
+      a(href='#contact') Contact
+
+    i.fa.fa-chevron-up
+
+
     block content
