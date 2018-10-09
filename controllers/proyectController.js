@@ -12,7 +12,14 @@ function createProyect(req, res, next){
 
 function indexProyect(req, res, next){
   let name = req.params.name ? req.params.name :'Sin nombre del proyecto';
-  res.render('users/list',{name:req.params.name});
+  let duedate = req.params.duedate ? req.params.duedate :'Sin fecha de entrega'
+  let startdate=req.params.startdate ? req.params.startdate :'Sin fecha de arranque'
+  let description=req.params.description ? req.params.description :'Sin descripción'
+  let master=req.params.scrum ? req.params.scrum :'Sin Scrum master'
+  let owner=req.params.owner ? req.params.owner :'Sin product owner'
+  let team=req.params.team ? req.params.team :'Sin equipo de desarrollo'
+  res.render('users/projects',{name:req.params.name,duedate:req.params.duedate,startdate:req.params.startdate,
+    description:req.params.description,master:req.params.scrum,owner:req.params.owner,team:req.params.team});
 };
 
 function listProyect(req, res, next){

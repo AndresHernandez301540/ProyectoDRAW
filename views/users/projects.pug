@@ -1,0 +1,28 @@
+extends ../layout
+block content
+  .content-wrapper
+    .row
+      .col-lg-6.grid-margin.stretch-card
+        .card
+          .card-body
+            h4.card-title Tabla de proyectos
+            .table-responsive
+              table.table
+                thead
+                  tr
+                    th Nombre del proyecto
+                    th Fecha de solicitud del proyecto
+                    th Fecha de arranque del proyecto
+                    th Descripcion del proyecto
+                    th Scrum Master
+                    th Product owner
+                    th Equipo de desarrollo
+                tbody
+                  tr
+                    td #{name}
+                    td #{duedate}
+                    td #{startdate}
+                    td #{description}
+                    td #{scrum}
+                    td #{owner} 
+                    td #{team}
