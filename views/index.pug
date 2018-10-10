@@ -4,9 +4,9 @@ block content
   .container-scroller
     nav.navbar.default-layout.col-lg-12.col-12.p-0.fixed-top.d-flex.flex-row
       .text-center.navbar-brand-wrapper.d-flex.align-items-top.justify-content-center
-        a.navbar-brand.brand-logo(href='index.html')
+        a.navbar-brand.brand-logo(href='index.pug')
           strong SCRUMPage
-        a.navbar-brand.brand-logo-mini(href='index.html')
+        a.navbar-brand.brand-logo-mini(href='index.pug')
           img(src='/images/logo-mini.svg' alt='logo')
       .navbar-menu-wrapper.d-flex.align-items-center
 
@@ -61,15 +61,49 @@ block content
               i.menu-icon.mdi.mdi-table
               span.menu-title Proyectos
 
-            #auth.collapse
-              ul.nav.flex-column.sub-menu
-                li.nav-item
-                  a.nav-link(href='/pages/samples/blank-page.html')  Blank Page
-                li.nav-item
-                  a.nav-link(href='/pages/samples/login.html')  Login
-                li.nav-item
-                  a.nav-link(href='/pages/samples/register.html')  Register
-                li.nav-item
-                  a.nav-link(href='/pages/samples/error-404.html')  404
-                li.nav-item
-                  a.nav-link(href='/pages/samples/error-500.html')  500
+      .content-wrapper
+                .row
+                  .col-xl-3.col-lg-3.col-md-3.col-sm-6.grid-margin.stretch-card
+                    .card.card-statistics
+                      .card-body
+                        .clearfix
+                          .float-left
+                            i.mdi.mdi-receipt.text-warning.icon-lg
+                          .float-right
+                            p.mb-0.text-right Proyecto 1
+                            .fluid-container
+                              h3.font-weight-medium.text-right.mb-0 ProjectManager
+                        p.text-muted.mt-3.mb-0
+                  .col-xl-3.col-lg-3.col-md-3.col-sm-6.grid-margin.stretch-card
+                    .card.card-statistics
+                      .card-body
+                        .clearfix
+                          .float-left
+                            i.mdi.mdi-receipt.text-warning.icon-lg
+                          .float-right
+                            p.mb-0.text-right Proyecto 2
+                            .fluid-container
+                              h3.font-weight-medium.text-right.mb-0 ProjectManager
+                        p.text-muted.mt-3.mb-0
+                  .col-xl-3.col-lg-3.col-md-3.col-sm-6.grid-margin.stretch-card
+                    .card.card-statistics
+                      .card-body
+                        .clearfix
+                          .float-left
+                            i.mdi.mdi-receipt.text-warning.icon-lg
+                          .float-right
+                            p.mb-0.text-right Proyecto 3
+                            .fluid-container
+                              h3.font-weight-medium.text-right.mb-0 ProjectManager
+                        p.text-muted.mt-3.mb-0
+                  .col-xl-3.col-lg-3.col-md-3.col-sm-6.grid-margin.stretch-card
+                    .card.card-statistics
+                      .card-body
+                        .clearfix
+                          .float-left
+                            i.mdi.mdi-receipt.text-warning.icon-lg
+                          .float-right
+                            p.mb-0.text-right Proyecto 4
+                            .fluid-container
+                              h3.font-weight-medium.text-right.mb-0 ProjectManager
+                        p.text-muted.mt-3.mb-0
