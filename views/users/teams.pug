@@ -50,7 +50,7 @@ block content
                   div
                     small.designation.text-muted Manager
                     span.status-indicator.online
-              button.btn.btn-success.btn-block
+              button.btn.btn-success.btn-block(type='button' data-toggle='modal' data-target='#myModal')
                 | Proyecto Nuevo
                 i.mdi.mdi-plus
           li.nav-item
@@ -61,6 +61,41 @@ block content
             a.nav-link(href='/projects/DRAW/09-10-18/02-10-18/ProyectoMateriaDRAW/1/AndresHernandez/3')
               i.menu-icon.mdi.mdi-table
               span.menu-title Proyectos
+
+      #myModal.modal(tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true')
+        .modal-dialog(role='document')
+          .modal-content
+            .modal-header
+              h5#exampleModalLabel.modal-title Crear proyecto
+              button.close(type='button' data-dismiss='modal' aria-label='Close')
+                span(aria-hidden='true') &times;
+            .modal-body
+              form
+                .form-group
+                  label.col-form-label(for='recipient-name') Nombre del proyecto:
+                  input#recipient-name.form-control(type='text')
+                .form-group
+                  label.col-form-label(for='recipient-name') Fecha de solicitud del proyecto:
+                  input#recipient-name.form-control(type='date')
+                .form-group
+                  label.col-form-label(for='recipient-name') Fecha de arranque del proyecto:
+                  input#recipient-name.form-control(type='date')
+                .form-group
+                  label.col-form-label(for='message-text') Descripcion del proyecto:
+                  textarea#message-text.form-control
+                .form-group
+                  label.col-form-label(for='recipient-name') Scrum master:
+                  input#recipient-name.form-control(type='text')
+                .form-group
+                  label.col-form-label(for='recipient-name') Product Owner:
+                  input#recipient-name.form-control(type='text')
+                .form-group
+                  label.col-form-label(for='recipient-name') Equipo de desarrollo:
+                  input#recipient-name.form-control(type='text')    
+            .modal-footer
+              button.btn.btn-secondary(type='button' data-dismiss='modal') Cerrar
+              button.btn.btn-primary(type='button') Crear
+
 
             #auth.collapse
               ul.nav.flex-column.sub-menu
