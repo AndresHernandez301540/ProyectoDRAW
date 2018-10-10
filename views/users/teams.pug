@@ -1,5 +1,4 @@
-extends layout
-
+extends ../layout
 block content
   .container-scroller
     nav.navbar.default-layout.col-lg-12.col-12.p-0.fixed-top.d-flex.flex-row
@@ -11,6 +10,8 @@ block content
       .navbar-menu-wrapper.d-flex.align-items-center
 
         ul.navbar-nav.navbar-nav-right
+
+
           li.nav-item.dropdown.d-none.d-xl-inline-block
             a#UserDropdown.nav-link.dropdown-toggle(href='#' data-toggle='dropdown' aria-expanded='false')
               span.profile-text Hola, Andrés Hernández !
@@ -61,49 +62,40 @@ block content
               i.menu-icon.mdi.mdi-table
               span.menu-title Proyectos
 
+            #auth.collapse
+              ul.nav.flex-column.sub-menu
+                li.nav-item
+                  a.nav-link(href='/pages/samples/blank-page.html')  Blank Page
+                li.nav-item
+                  a.nav-link(href='/pages/samples/login.html')  Login
+                li.nav-item
+                  a.nav-link(href='/pages/samples/register.html')  Register
+                li.nav-item
+                  a.nav-link(href='/pages/samples/error-404.html')  404
+                li.nav-item
+                  a.nav-link(href='/pages/samples/error-500.html')  500
       .content-wrapper
-                .row
-                  .col-xl-3.col-lg-3.col-md-3.col-sm-6.grid-margin.stretch-card
-                    .card.card-statistics
-                      .card-body
-                        .clearfix
-                          .float-left
-                            i.mdi.mdi-receipt.text-warning.icon-lg
-                          .float-right
-                            p.mb-0.text-right Proyecto 1
-                            .fluid-container
-                              h3.font-weight-medium.text-right.mb-0 ProjectManager
-                        p.text-muted.mt-3.mb-0
-                  .col-xl-3.col-lg-3.col-md-3.col-sm-6.grid-margin.stretch-card
-                    .card.card-statistics
-                      .card-body
-                        .clearfix
-                          .float-left
-                            i.mdi.mdi-receipt.text-warning.icon-lg
-                          .float-right
-                            p.mb-0.text-right Proyecto 2
-                            .fluid-container
-                              h3.font-weight-medium.text-right.mb-0 ProjectManager
-                        p.text-muted.mt-3.mb-0
-                  .col-xl-3.col-lg-3.col-md-3.col-sm-6.grid-margin.stretch-card
-                    .card.card-statistics
-                      .card-body
-                        .clearfix
-                          .float-left
-                            i.mdi.mdi-receipt.text-warning.icon-lg
-                          .float-right
-                            p.mb-0.text-right Proyecto 3
-                            .fluid-container
-                              h3.font-weight-medium.text-right.mb-0 ProjectManager
-                        p.text-muted.mt-3.mb-0
-                  .col-xl-3.col-lg-3.col-md-3.col-sm-6.grid-margin.stretch-card
-                    .card.card-statistics
-                      .card-body
-                        .clearfix
-                          .float-left
-                            i.mdi.mdi-receipt.text-warning.icon-lg
-                          .float-right
-                            p.mb-0.text-right Proyecto 4
-                            .fluid-container
-                              h3.font-weight-medium.text-right.mb-0 ProjectManager
-                        p.text-muted.mt-3.mb-0
+        .row
+          .col-lg-10.grid-margin.stretch-card
+            .card
+              .card-body
+                h4.card-title Miembros del equipo
+                .table-responsive
+                  table.table
+                    thead
+                      tr
+                        th Nombre del empleado
+                        th Fecha de nacimiento
+                        th CURP
+                        th RFC
+                        th Domicilio
+                        th Lista de habilidades
+                    tbody
+                      tr
+                        td #{name}
+                        td #{date}
+                        td #{curp}
+                        td #{rfc}
+                        td #{domicilio}
+                        td #{abilities} 
+                        

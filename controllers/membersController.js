@@ -11,7 +11,13 @@ function createMember(req, res, next){
 
 function indexMember(req, res, next){
   let name = req.params.name ? req.params.name :'Sin nombre';
-  res.render('users/list',{name:req.params.name});
+  let date = req.params.date ? req.params.date :'Sin fecha de nacimiento';
+  let curp = req.params.curp ? req.params.curp :'Sin CURP';
+  let rfc = req.params.rfc ? req.params.rfc :'Sin RFC';
+  let domicilio = req.params.home ? req.params.home :'Sin domicilio';
+  let abilities = req.params.abilities ? req.params.abilities :'Sin habilidades';
+  res.render('users/teams',{name:req.params.name,date:req.params.date,curp:req.params.curp,
+  rfc:req.params.rfc,domicilio:req.params.home,abilities:req.params.abilities});
 };
 
 function listMember(req, res, next){
