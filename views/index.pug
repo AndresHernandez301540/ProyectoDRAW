@@ -52,7 +52,7 @@ block content
               button.btn.btn-success.btn-block(type='button' data-toggle='modal' data-target='#myModal')
                 | Proyecto Nuevo
                 i.mdi.mdi-plus
-                  
+
           li.nav-item
             a.nav-link(href='/team/Andres Hernandez/03-07-18/HEZA/HEZA970307/Calle Principal/JAVA-Junior')
               i.menu-icon.mdi.mdi-television
@@ -91,7 +91,7 @@ block content
                   input#recipient-name.form-control(type='text')
                 .form-group
                   label.col-form-label(for='recipient-name') Equipo de desarrollo:
-                  input#recipient-name.form-control(type='text')    
+                  input#recipient-name.form-control(type='text')
             .modal-footer
               button.btn.btn-secondary(type='button' data-dismiss='modal') Cerrar
               button.btn.btn-primary(type='button') Crear
@@ -99,16 +99,17 @@ block content
       .content-wrapper
                 .row
                   .col-xl-3.col-lg-3.col-md-3.col-sm-6.grid-margin.stretch-card
-                    .card.card-statistics
-                      .card-body
-                        .clearfix
-                          .float-left
-                            i.mdi.mdi-receipt.text-warning.icon-lg
-                          .float-right
-                            p.mb-0.text-right Proyecto 1
-                            .fluid-container
-                              h3.font-weight-medium.text-right.mb-0 ProjectManager
-                        p.text-muted.mt-3.mb-0
+                      a(href='/users/dashboard')
+                        .card.card-statistics
+                          .card-body
+                            .clearfix
+                              .float-left
+                                i.mdi.mdi-receipt.text-warning.icon-lg
+                              .float-right
+                                p.mb-0.text-right Proyecto 1
+                                .fluid-container
+                                  h3.font-weight-medium.text-right.mb-0 ProjectManager
+                            p.text-muted.mt-3.mb-0
                   .col-xl-3.col-lg-3.col-md-3.col-sm-6.grid-margin.stretch-card
                     .card.card-statistics
                       .card-body
