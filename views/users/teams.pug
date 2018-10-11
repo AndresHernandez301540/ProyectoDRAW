@@ -51,7 +51,7 @@ block content
                     small.designation.text-muted Manager
                     span.status-indicator.online
               button.btn.btn-success.btn-block(type='button' data-toggle='modal' data-target='#myModal')
-                | Proyecto Nuevo
+                | Añadir Miembro
                 i.mdi.mdi-plus
           li.nav-item
             a.nav-link(href='/team/Andres Hernandez/03-07-18/HEZA/HEZA970307/Calle Principal/JAVA-Junior')
@@ -66,35 +66,32 @@ block content
         .modal-dialog(role='document')
           .modal-content
             .modal-header
-              h5#exampleModalLabel.modal-title Crear proyecto
+              h5#exampleModalLabel.modal-title Añadir Miembro
               button.close(type='button' data-dismiss='modal' aria-label='Close')
                 span(aria-hidden='true') &times;
             .modal-body
               form
                 .form-group
-                  label.col-form-label(for='recipient-name') Nombre del proyecto:
+                  label.col-form-label(for='recipient-name') Nombre del empleado:
                   input#recipient-name.form-control(type='text')
                 .form-group
-                  label.col-form-label(for='recipient-name') Fecha de solicitud del proyecto:
+                  label.col-form-label(for='recipient-name') Fecha de nacimiento:
                   input#recipient-name.form-control(type='date')
                 .form-group
-                  label.col-form-label(for='recipient-name') Fecha de arranque del proyecto:
-                  input#recipient-name.form-control(type='date')
+                  label.col-form-label(for='message-text') CURP:
+                  input#recipient-name.form-control(type='text')
                 .form-group
-                  label.col-form-label(for='message-text') Descripcion del proyecto:
+                  label.col-form-label(for='recipient-name') RFC:
+                  input#recipient-name.form-control(type='text')
+                .form-group
+                  label.col-form-label(for='recipient-name') Domicilio:
+                  input#recipient-name.form-control(type='text')
+                .form-group
+                  label.col-form-label(for='recipient-name') Lista de habilidades:
                   textarea#message-text.form-control
-                .form-group
-                  label.col-form-label(for='recipient-name') Scrum master:
-                  input#recipient-name.form-control(type='text')
-                .form-group
-                  label.col-form-label(for='recipient-name') Product Owner:
-                  input#recipient-name.form-control(type='text')
-                .form-group
-                  label.col-form-label(for='recipient-name') Equipo de desarrollo:
-                  input#recipient-name.form-control(type='text')    
             .modal-footer
               button.btn.btn-secondary(type='button' data-dismiss='modal') Cerrar
-              button.btn.btn-primary(type='button') Crear
+              button.btn.btn-primary(type='button') Añadir
 
 
             #auth.collapse
@@ -132,5 +129,4 @@ block content
                         td #{curp}
                         td #{rfc}
                         td #{domicilio}
-                        td #{abilities} 
-                        
+                        td #{abilities}
