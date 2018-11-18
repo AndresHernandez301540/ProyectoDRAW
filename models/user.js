@@ -11,8 +11,8 @@ const schema = Schema({
 class User{
  constructor(fullName, birthdayDate, role){
    _fullName=fullName;
-   _birthdayDate=_birthdayDate;
-   _role=_role;
+   _birthdayDate=birthdayDate;
+   _role=role;
  }
 
  get fullName(){
