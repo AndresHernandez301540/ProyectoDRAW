@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const usersController=require('../controllers/usersController');
+const usersController=require('../controllers/userController');
 const { check, body, params} = require('express-validator/check');
 
 const userController=require('../controllers/userController');
