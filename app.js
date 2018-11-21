@@ -4,6 +4,15 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+const authRoutes=require('./routes/auth-routes');
+const profileRoutes=require('./routes/profile-routes');
+const passportSetup=require('./config/passport-setup');
+const mongoose=require('mongoose');
+const key=require('./config/keys');
+const cookieSession=require('cookie-session');
+const passport=require('passport');
+
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var projectRouter=require('./routes/project');
@@ -17,6 +26,16 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
+app.use(cookieSession({
+  maxAge:24*60*60*1000,
+  keys:[key.session.cookieKey]
+}));
+
+
+//Inicializar passportSetup
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -29,11 +48,17 @@ app.use('/projects',projectRouter);
 app.use('/team',teamRouter);
 app.use('/dashboard',dashboardRouter);
 app.use('/login',loginRouter);
+app.use('/auth',authRoutes);
+app.use('/profile',profileRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
+
+app.get('/',(req,res)=>{
+  res.render('home',{usuario:req.user});
+})
 
 // error handler
 app.use(function(err, req, res, next) {
