@@ -1,7 +1,5 @@
 const router=require('express').Router();
 
-
-
 const authCheck=(req,res,next)=>{
   if(!req.user){
     // Si el usuario no esta logeado
@@ -12,7 +10,7 @@ const authCheck=(req,res,next)=>{
   }
 };
 
-router.get('/',authCheck,(req,res)=>{
+router.get('/home',authCheck,(req,res)=>{
   res.render('index',{usuario:req.user});
 });
 

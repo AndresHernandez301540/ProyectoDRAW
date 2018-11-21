@@ -27,6 +27,7 @@ passport.use(new GoogleStrategy({
       if(currentUser){
         // Ya tiene al usuario
         console.log('El usuario es:'+currentUser);
+        console.log(profile);
         done(null,currentUser);
       }else{
         // No tiene al usuario entonces se crea
@@ -53,6 +54,7 @@ passport.use(new FacebookStrategy({
       if(currentUser){
         // Ya tiene al usuario
         console.log('El usuario es:'+currentUser);
+        console.log(profile);
         done(null,currentUser);
       }else{
         // No tiene al usuario entonces se crea
@@ -79,6 +81,7 @@ passport.use(new TwitterStrategy({
       if(currentUser){
         // Ya tiene al usuario
         console.log('El usuario es:'+currentUser);
+        console.log(profile);
         done(null,currentUser);
       }else{
         // No tiene al usuario entonces se crea

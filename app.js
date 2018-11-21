@@ -1,26 +1,23 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-
-const authRoutes=require('./routes/auth-routes');
-const profileRoutes=require('./routes/profile-routes');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 const passportSetup=require('./config/passport-setup');
 const mongoose=require('mongoose');
 const key=require('./config/keys');
 const cookieSession=require('cookie-session');
 const passport=require('passport');
 
+const profileRoutes=require('./routes/profile-routes');
+const authRoutes=require('./routes/auth-routes');
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const projectRouter=require('./routes/project');
+const teamRouter=require('./routes/equipo');
+const dashboardRouter=require('./routes/dashboard');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var projectRouter=require('./routes/project');
-var teamRouter=require('./routes/equipo');
-var dashboardRouter=require('./routes/dashboard');
-var loginRouter=require('./routes/login');
-
-var app = express();
+const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -47,7 +44,6 @@ app.use('/users', usersRouter);
 app.use('/projects',projectRouter);
 app.use('/team',teamRouter);
 app.use('/dashboard',dashboardRouter);
-app.use('/login',loginRouter);
 app.use('/auth',authRoutes);
 app.use('/profile',profileRoutes);
 
@@ -56,9 +52,7 @@ app.use(function(req, res, next) {
   next(createError(404));
 });
 
-app.get('/',(req,res)=>{
-  res.render('home',{usuario:req.user});
-})
+
 
 // error handler
 app.use(function(err, req, res, next) {

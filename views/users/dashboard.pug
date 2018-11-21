@@ -3,7 +3,7 @@ block content
   .container-scroller
     nav.navbar.default-layout.col-lg-12.col-12.p-0.fixed-top.d-flex.flex-row
       .text-center.navbar-brand-wrapper.d-flex.align-items-top.justify-content-center
-        a.navbar-brand.brand-logo(href='/')
+        a.navbar-brand.brand-logo(href='/home')
           strong SCRUMPage
         a.navbar-brand.brand-logo-mini(href='/')
           img(src='/images/logo-mini.svg' alt='logo')
@@ -29,7 +29,7 @@ block content
                 | Cambiar contraseña
               a.dropdown-item
                 | Revisar mensajes
-              a.dropdown-item
+              a.dropdown-item(href='/auth/logout')
                 | Salir
         button.navbar-toggler.navbar-toggler-right.d-lg-none.align-self-center(type='button' data-toggle='offcanvas')
           span.mdi.mdi-menu
