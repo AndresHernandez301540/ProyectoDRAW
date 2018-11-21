@@ -22,7 +22,8 @@ app.set('port', port);
 
 var server = http.createServer(app);
 
-const uri = 'mongodb://localhost:27017/proyectoDraw';
+//const uri = 'mongodb://localhost:27017/proyectodraw';
+const uri = 'mongodb://admin:admin1234@ds039707.mlab.com:39707/proyecto-draw'
 
 mongoose.connect(uri);
 
