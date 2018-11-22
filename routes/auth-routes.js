@@ -19,7 +19,7 @@ router.get('/google',passport.authenticate('google',{
 }));
 //Facebook
 router.get('/facebook',passport.authenticate('facebook',{
-  scope:['public_profile']
+  scope:['public_profile user_birthday']
 }));
 //Twitter
 router.get('/twitter',passport.authenticate('twitter',{

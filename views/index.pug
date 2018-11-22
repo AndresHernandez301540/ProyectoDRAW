@@ -12,13 +12,13 @@ block content
         ul.navbar-nav.navbar-nav-right
           li.nav-item.dropdown.d-none.d-xl-inline-block
             a#UserDropdown.nav-link.dropdown-toggle(href='#' data-toggle='dropdown' aria-expanded='false')
-              span.profile-text Hola, Andres Hernandez!
-              img.img-xs.rounded-circle(src='../../images/faces/face1.jpg' alt='Profile image')
+              span.profile-text Hola, #{usuario.fullName}!
+              img.img-xs.rounded.circle(src=usuario.thumbnail)
             .dropdown-menu.dropdown-menu-right.navbar-dropdown(aria-labelledby='UserDropdown')
               a.dropdown-item.p-0
                 .d-flex.border-bottom
                   .py-3.px-4.d-flex.align-items-center.justify-content-center
-                    i.mdi.mdi-bookmark-plus-outline.mr-0.text-gray Hola
+                    i.mdi.mdi-bookmark-plus-outline.mr-0.text-gray Hola 
                   .py-3.px-4.d-flex.align-items-center.justify-content-center.border-left.border-right
                     i.mdi.mdi-account-outline.mr-0.text-gray Hola2
                   .py-3.px-4.d-flex.align-items-center.justify-content-center
@@ -28,7 +28,7 @@ block content
               a.dropdown-item
                 | Cambiar contraseña
               a.dropdown-item
-                | Revisar mensajes
+                | Revisar mensajes 
               a.dropdown-item(href='/auth/logout')
                 | Salir
         button.navbar-toggler.navbar-toggler-right.d-lg-none.align-self-center(type='button' data-toggle='offcanvas')
@@ -41,9 +41,9 @@ block content
             .nav-link
               .user-wrapper
                 .profile-image
-                  img(src='/images/faces/face1.jpg' alt='profile image')
+                  img(src=usuario.thumbnail)
                 .text-wrapper
-                  p.profile-name Andrés Hernández
+                  p.profile-name #{usuario.fullName}
                   div
                     small.designation.text-muted Manager
                     span.status-indicator.online

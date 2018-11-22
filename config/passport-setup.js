@@ -33,6 +33,8 @@ passport.use(new GoogleStrategy({
         // No tiene al usuario entonces se crea
         new User({
           _fullName:profile.displayName,
+          _birthdayDate:profile.birthday,
+          _role:'Basico',
           _socialId:profile.id,
           _thumbnail:profile._json.image.url
         }).save().then((newUser)=>{
@@ -60,7 +62,10 @@ passport.use(new FacebookStrategy({
         // No tiene al usuario entonces se crea
         new User({
           _fullName:profile.displayName,
-          _socialId:profile.id
+          _birthdayDate:profile.user_birthday,
+          _role:'Basico',
+          _socialId:profile.id,
+          _thumbnail:'https://graph.facebook.com/'+profile.id+'/picture?type=large'
         }).save().then((newUser)=>{
           console.log('Usuario nuevo creado:'+newUser);
           done(null,newUser);
@@ -87,6 +92,8 @@ passport.use(new TwitterStrategy({
         // No tiene al usuario entonces se crea
         new User({
           _fullName:profile.displayName,
+          _birthdayDate:profile.birthdayDate,
+          _role:'Basico',
           _socialId:profile.id,
           _thumbnail:profile._json.profile_image_url
         }).save().then((newUser)=>{
