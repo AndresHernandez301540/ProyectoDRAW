@@ -87,7 +87,6 @@ function updateUser(req, res, next){
   }).catch((err)=>{
 
   });
-
 };
 
 function deleteUser(req,res,next){

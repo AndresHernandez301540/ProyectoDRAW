@@ -15,10 +15,16 @@ const authCheck=(req,res,next)=>{
 
 
 /* GET users listing. */
-router.get('/:name?/:duedate?/:startdate?/:description?/:scrum?/:owner?/:team?',authCheck,projectController.indexProject);
+router.get('/:id?',
+authCheck,projectController.indexProject);
+
 router.get('/',authCheck,projectController.listProject);
-router.post('/:name/:duedate/:startdate/:description/:scrum/:owner/:team',authCheck,projectController.createProject);
-router.put('/:name',authCheck,projectController.updateProject);
-router.delete('/:name',authCheck,projectController.deleteProject);
+
+router.post('/:name/:duedate/:startdate/:description/:scrum/:owner/:team',
+authCheck,projectController.createProject);
+
+router.put('/:id',authCheck,projectController.updateProject);
+
+router.delete('/:id',authCheck,projectController.deleteProject);
 
 module.exports = router;

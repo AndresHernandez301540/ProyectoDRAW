@@ -12,8 +12,9 @@ const authCheck=(req,res,next)=>{
 };
 
 router.get('/',authCheck,(req, res)=> {
-  res.render('../views/users/login',{usuario:req.user});
+  res.render('../views/index',{usuario:req.user});
 });
+
 router.get('/home', authCheck,(req, res)=> {
   res.render('../views/index',{usuario:req.user});
 });
