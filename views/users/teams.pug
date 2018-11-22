@@ -3,7 +3,7 @@ block content
   .container-scroller
     nav.navbar.default-layout.col-lg-12.col-12.p-0.fixed-top.d-flex.flex-row
       .text-center.navbar-brand-wrapper.d-flex.align-items-top.justify-content-center
-        a.navbar-brand.brand-logo(href='/home')
+        a.navbar-brand.brand-logo(href='/')
           strong SCRUMPage
         a.navbar-brand.brand-logo-mini(href='/')
           img(src='/images/logo-mini.svg' alt='logo')
@@ -45,17 +45,17 @@ block content
                 .text-wrapper
                   p.profile-name #{usuario.fullName}
                   div
-                    small.designation.text-muted Manager
+                    small.designation.text-muted #{usuario.role}
                     span.status-indicator.online
               button.btn.btn-success.btn-block(type='button' data-toggle='modal' data-target='#myModal')
                 | Añadir Miembro
                 i.mdi.mdi-plus
           li.nav-item
-            a.nav-link(href='/team/Andres Hernandez/03-07-18/HEZA/HEZA970307/Calle Principal/JAVA-Junior')
+            a.nav-link(href='/team')
               i.menu-icon.mdi.mdi-television
               span.menu-title Equipo de trabajo
           li.nav-item
-            a.nav-link(href='/projects/DRAW/09-10-18/02-10-18/ProyectoMateriaDRAW/1/AndresHernandez/3')
+            a.nav-link(href='/projects')
               i.menu-icon.mdi.mdi-table
               span.menu-title Proyectos
 

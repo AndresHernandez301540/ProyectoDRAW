@@ -51,7 +51,8 @@ function indexProject(req, res, next){
           errors:[{message:'Algo salio mal'}],
           data:[]
       });
-    });};
+    });
+  };
 
 function listProject(req, res, next){
   let page=req.params.page ? req.params.page : 1;

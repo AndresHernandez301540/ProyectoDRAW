@@ -13,10 +13,16 @@ const authCheck=(req,res,next)=>{
 };
 
 /* GET users listing. */
-router.get('/:name?/:date?/:curp?/:rfc?/:home?/:abilities?',authCheck,membersController.indexMember);
+router.get('/:id?',
+authCheck,membersController.indexMember);
+
 router.get('/',authCheck,membersController.listMember);
-router.post('/:name/:date/:curp/:rfc/:home/:abilities',authCheck,membersController.createMember);
-router.put('/:name',authCheck,membersController.updateMember);
-router.delete('/:name',authCheck,membersController.deleteMember);
+
+router.post('/:name/:date/:curp/:rfc/:home/:abilities',
+authCheck,membersController.createMember);
+
+router.put('/:id',authCheck,membersController.updateMember);
+
+router.delete('/:id',authCheck,membersController.deleteMember);
 
 module.exports = router;
