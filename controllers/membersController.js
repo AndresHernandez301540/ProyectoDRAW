@@ -11,15 +11,15 @@ function createMember(req, res, next){
     }
     let member = new Member({
       _fullName:req.body.fullName,
-      _birthdayDate:req.body.date,
+      _birthdayDate:req.body.birthdayDate,
       _curp:req.body.curp,
       _rfc:req.body.rfc,
       _home:req.body.home,
-      _abilities:req.body.abilities
+      _abilities:req.body.abilities+'-'+req.body.rank
     });
     member.save()
         .then((obj)=>{
-          res.render('users/teams',{usuario:req.user,member:req.obj});
+          res.redirect('/team/list');
     /*        res.status(200).json({
             errors:[],
             data:obj
@@ -63,10 +63,7 @@ function listMember(req, res, next){
   };
   Member.paginate({},options)
   .then((objects)=>{
-    res.status(200).json({
-      errors:[],
-      data:objects
-    });
+      res.render('users/teams',{usuario:req.user,members:objects});
   }).catch((err)=>{
     res.status(500).json({
       errors:[{message:'Algo salio mal'}],

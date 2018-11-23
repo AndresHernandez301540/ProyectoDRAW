@@ -51,7 +51,7 @@ block content
                 | Añadir Miembro
                 i.mdi.mdi-plus
           li.nav-item
-            a.nav-link(href='/team')
+            a.nav-link(href='/team/list')
               i.menu-icon.mdi.mdi-television
               span.menu-title Equipo de trabajo
           li.nav-item
@@ -67,49 +67,34 @@ block content
               button.close(type='button' data-dismiss='modal' aria-label='Close')
                 span(aria-hidden='true') &times;
             .modal-body
-              form
+              form(action='/team/',method='POST')
                 .form-group
-                  label.col-form-label(for='recipient-name') Nombre del empleado:
-                  input#recipient-name.form-control(type='text')
+                  label.col-form-label(for='fullName') Nombre del empleado:
+                  input.form-control(type='text',id='fullName',name='fullName')
                 .form-group
-                  label.col-form-label(for='recipient-name') Fecha de nacimiento:
-                  input#recipient-name.form-control(type='date')
+                  label.col-form-label(for='birthdayDate') Fecha de nacimiento:
+                  input.form-control(type='date',id='birthdayDate',name='birthdayDate')
                 .form-group
-                  label.col-form-label(for='message-text') CURP:
-                  input#recipient-name.form-control(type='text')
+                  label.col-form-label(for='curp') CURP:
+                  input.form-control(type='text',id='curp',name='curp')
                 .form-group
-                  label.col-form-label(for='recipient-name') RFC:
-                  input#recipient-name.form-control(type='text')
+                  label.col-form-label(for='rfc') RFC:
+                  input.form-control(type='text',id='rfc',name='rfc')
                 .form-group
-                  label.col-form-label(for='recipient-name') Domicilio:
-                  input#recipient-name.form-control(type='text')
+                  label.col-form-label(for='home') Domicilio:
+                  input.form-control(type='text',id='home',name='home')
                 .form-group
                   label.col-form-label(for='recipient-name') Lista de habilidades:
-                  textarea#message-text.form-control
+                  textarea.form-control(id='abilities',name='abilities')
                 .form-group
                   select.custom-select
-                    option(value='junior') Junior
-                    option(value='senior') Senior
-                    option(value='master') Master
+                    option(value='junior',id='rank') Junior
+                    option(value='senior',id='rank') Senior
+                    option(value='master',id='rank') Master                      
                 .form-group
-                  button.plus-button.plus-button--larg                       
-            .modal-footer
-              button.btn.btn-secondary(type='button' data-dismiss='modal') Cerrar
-              button.btn.btn-primary(type='button') Añadir
+                  input.btn.btn-primary(type='submit')  
+                  button.btn.btn-secondary(type='button' data-dismiss='modal') Cerrar  
 
-
-            #auth.collapse
-              ul.nav.flex-column.sub-menu
-                li.nav-item
-                  a.nav-link(href='/pages/samples/blank-page.html')  Blank Page
-                li.nav-item
-                  a.nav-link(href='/pages/samples/login.html')  Login
-                li.nav-item
-                  a.nav-link(href='/pages/samples/register.html')  Register
-                li.nav-item
-                  a.nav-link(href='/pages/samples/error-404.html')  404
-                li.nav-item
-                  a.nav-link(href='/pages/samples/error-500.html')  500
       .content-wrapper
         .row
           .col-lg-10.grid-margin.stretch-card
@@ -117,20 +102,22 @@ block content
               .card-body
                 h4.card-title Miembros del equipo
                 .table-responsive
-                  table.table
-                    thead
-                      tr
-                        th Nombre del empleado
-                        th Fecha de nacimiento
-                        th CURP
-                        th RFC
-                        th Domicilio
-                        th Lista de habilidades
-                    tbody
-                      tr
-                        td #{name}
-                        td #{date}
-                        td #{curp}
-                        td #{rfc}
-                        td #{domicilio}
-                        td #{abilities}
+                  div(ip='app')
+                    table.table
+                      thead
+                        tr
+                          th Nombre del empleado
+                          th Fecha de nacimiento
+                          th CURP
+                          th RFC
+                          th Domicilio
+                          th Lista de habilidades
+                      tbody
+                        each member in members.docs  
+                          tr
+                            td #{member._fullName}
+                            td #{member.birthdayDate}
+                            td #{member.curp}
+                            td #{member.rfc}
+                            td #{member.home}
+                            td #{member.abilities}

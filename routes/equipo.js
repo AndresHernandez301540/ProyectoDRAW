@@ -12,14 +12,14 @@ const authCheck=(req,res,next)=>{
   }
 };
 
+router.post('/',
+authCheck,membersController.createMember);
 /* GET users listing. */
-router.get('/:id?',
+router.get('/id/:id?',
 authCheck,membersController.indexMember);
 
-router.get('/',authCheck,membersController.listMember);
+router.get('/list/:page?',authCheck,membersController.listMember);
 
-router.post('/:name/:date/:curp/:rfc/:home/:abilities',
-authCheck,membersController.createMember);
 
 router.put('/:id',authCheck,membersController.updateMember);
 

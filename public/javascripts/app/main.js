@@ -2,7 +2,8 @@ const app = new Vue({
   el:'#app',
   data:{
     //Objetos que contengan informacion de la app (modelos)
-    projects:[]
+    projects:[],
+    members:[]
   },
   methods:{
     // Todas las funciones comunes de la aplicacion
@@ -58,6 +59,11 @@ const app = new Vue({
     .then(response => response.json())
     .then(json =>{
       this.projects=json.data.docs
+    });
+    fetch('/team/list/')
+    .then(response => response.json())
+    .then(json =>{
+      this.members=json.data.docs
     });
   }
 });

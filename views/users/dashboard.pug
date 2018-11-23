@@ -51,7 +51,7 @@ block content
                 | Proyecto Nuevo
                 i.mdi.mdi-plus
           li.nav-item
-            a.nav-link(href='/team')
+            a.nav-link(href='/team/list')
               i.menu-icon.mdi.mdi-television
               span.menu-title Equipo de trabajo
           li.nav-item
@@ -159,39 +159,39 @@ block content
                           td
                             label.badge.badge-success Completed
 
-        #myModal.modal(tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true')
-          .modal-dialog(role='document')
-            .modal-content
-              .modal-header
-                h5#exampleModalLabel.modal-title Crear proyecto
-                button.close(type='button' data-dismiss='modal' aria-label='Close')
-                  span(aria-hidden='true') &times;
-              .modal-body
-                form
+      #myModal.modal(tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true')
+        .modal-dialog(role='document')
+          .modal-content
+            .modal-header
+              h5#exampleModalLabel.modal-title Crear proyecto
+              button.close(type='button' data-dismiss='modal' aria-label='Close')
+                span(aria-hidden='true') &times;
+            .modal-body
+              form(action='/projects/',method='POST')
+                .form-group
+                  label.col-form-label(for='nombre') Nombre del proyecto:
+                  input.form-control(type='text', id='name', name='name')
                   .form-group
-                    label.col-form-label(for='recipient-name') Nombre del proyecto:
-                    input#recipient-name.form-control(type='text')
-                  .form-group
-                    label.col-form-label(for='recipient-name') Fecha de solicitud del proyecto:
-                    input#recipient-name.form-control(type='date')
-                  .form-group
-                    label.col-form-label(for='recipient-name') Fecha de arranque del proyecto:
-                    input#recipient-name.form-control(type='date')
-                  .form-group
-                    label.col-form-label(for='message-text') Descripcion del proyecto:
-                    textarea#message-text.form-control
-                  .form-group
-                    label.col-form-label(for='recipient-name') Scrum master:
-                    input#recipient-name.form-control(type='text')
-                  .form-group
-                    label.col-form-label(for='recipient-name') Product Owner:
-                    input#recipient-name.form-control(type='text')
-                  .form-group
-                    label.col-form-label(for='recipient-name') Equipo de desarrollo:
-                    input#recipient-name.form-control(type='text')
-              .modal-footer
-                button.btn.btn-secondary(type='button' data-dismiss='modal') Cerrar
-                button.btn.btn-primary(type='button') Crear
+                  label.col-form-label(for='duedate') Fecha de solicitud del proyecto:
+                  input.form-control(type='date', id='dueDate',name='dueDate')
+                .form-group
+                  label.col-form-label(for='startdate') Fecha de arranque del proyecto:
+                  input.form-control(type='date', id='startDate',name='startDate')
+                .form-group
+                  label.col-form-label(for='description') Descripcion del proyecto:
+                  textarea.form-control(id='description',name='description')
+                .form-group
+                  label.col-form-label(for='scrumMaster') Scrum master:
+                  input.form-control(type='text',id='scrumMaster',name='scrumMaster', value=usuario.fullName)
+                .form-group
+                  label.col-form-label(for='owner') Product Owner:
+                  input.form-control(type='text',id='owner',name='owner')
+                .form-group
+                  label.col-form-label(for='team') Equipo de desarrollo:
+                  input.form-control(type='text',id='team',name='team')
+                .form-group
+                  input.btn.btn-primary(type='submit')  
+                  button.btn.btn-secondary(type='button' data-dismiss='modal') Cerrar  
 
 
   script(src='../../vendors/js/vendor.bundle.base.js')
