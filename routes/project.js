@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-
 const projectController=require('../controllers/projectController');
+const { check, body, params} = require('express-validator/check');
 
 const authCheck=(req,res,next)=>{
   if(!req.user){
@@ -13,15 +13,15 @@ const authCheck=(req,res,next)=>{
   }
 };
 
-
+router.post('/',
+authCheck,projectController.createProject);
 /* GET users listing. */
-router.get('/:id?',
+router.get('/list/:page?',
 authCheck,projectController.indexProject);
 
-router.get('/',authCheck,projectController.listProject);
+router.get('/id/:id?',authCheck,projectController.listProject);
 
-router.post('/:name/:duedate/:startdate/:description/:scrum/:owner/:team',
-authCheck,projectController.createProject);
+
 
 router.put('/:id',authCheck,projectController.updateProject);
 

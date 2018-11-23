@@ -23,10 +23,10 @@ class Proyect{
    _team=team;
  }
 
-  get fullName(){
+  get name(){
     return this._name;
   }
-  set fullName(v){
+  set name(v){
     this._name=v;
   }
   get dueDate(){

@@ -11,7 +11,6 @@ function createProject(req, res, next){
     }
 
     let project = new Project({
-      _fullName:req.body.fullName,
       _name:req.body.name,
       _dueDate:req.body.dueDate,
       _startDate:req.body.startDate,
@@ -22,13 +21,11 @@ function createProject(req, res, next){
     });
     project.save()
         .then((obj)=>{
-          res.render('users/projects',{usuario:req.user,project:req.obj});
-  /*        res.status(200).json({
-            errors:[],
-            data:obj
-          });
-    */    })
+            console.log(obj);
+            res.redirect('/projects/list');
+        })
         .catch((err)=>{
+          console.log(err);
             res.status(500).json({
               errors:[{message:'Algo salio mal'}],
               data:[]
@@ -39,7 +36,7 @@ function createProject(req, res, next){
 function indexProject(req, res, next){
   Project.findById(req.params.id)
       .then((obj)=>{
-        res.render('users/projects',{usuario:req.user,project:req.obj});
+        res.render('users/projects',{usuario:req.user});
       /*  res.status(200).json({
           errors:[],
           data:obj,
@@ -60,7 +57,7 @@ function listProject(req, res, next){
   const options = {
     page:page,
     limit:5,
-    select :'_fullName _name _dueDate _startDate _description _scrumMaster _owner _team'
+    select :' _name _dueDate _startDate _description _scrumMaster _owner _team'
   };
   Project.paginate({},options)
   .then((objects)=>{
@@ -79,7 +76,6 @@ function listProject(req, res, next){
 function updateProject(req, res, next){
   Project.findById(req.params.id)
   .then((obj)=>{
-    obj.fullName=req.body.fullName ? req.body.fullName : obj.fullName;
     obj.name=req.body.name ? req.body.name : obj.name;
     obj.dueDate=req.body.dueDate ? req.body.dueDate : obj.dueDate;
     obj.startDate=req.body.startDate ? req.body.startDate : obj.startDate;

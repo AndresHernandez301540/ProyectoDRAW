@@ -55,7 +55,7 @@ block content
               i.menu-icon.mdi.mdi-television
               span.menu-title Equipo de trabajo
           li.nav-item
-            a.nav-link(href='/projects')
+            a.nav-link(href='/projects/list')
               i.menu-icon.mdi.mdi-table
               span.menu-title Proyectos
 
@@ -86,6 +86,13 @@ block content
                 .form-group
                   label.col-form-label(for='recipient-name') Lista de habilidades:
                   textarea#message-text.form-control
+                .form-group
+                  select.custom-select
+                    option(value='junior') Junior
+                    option(value='senior') Senior
+                    option(value='master') Master
+                .form-group
+                  button.plus-button.plus-button--larg                       
             .modal-footer
               button.btn.btn-secondary(type='button' data-dismiss='modal') Cerrar
               button.btn.btn-primary(type='button') Añadir
