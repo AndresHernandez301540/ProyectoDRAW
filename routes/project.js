@@ -16,10 +16,10 @@ const authCheck=(req,res,next)=>{
 router.post('/',
 authCheck,projectController.createProject);
 /* GET users listing. */
-router.get('/list/:page?',
+router.get('/id/:id?',
 authCheck,projectController.indexProject);
 
-router.get('/id/:id?',authCheck,projectController.listProject);
+router.get('/list/:page?',authCheck,projectController.listProject);
 
 
 

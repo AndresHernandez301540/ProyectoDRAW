@@ -2,8 +2,7 @@ const app = new Vue({
   el:'#app',
   data:{
     //Objetos que contengan informacion de la app (modelos)
-    users:[],
-    products:[]
+    projects:[]
   },
   methods:{
     // Todas las funciones comunes de la aplicacion
@@ -29,7 +28,6 @@ const app = new Vue({
       .then(json => {
         this.users = json.data.docs;
         document.location.replace('/products/blank');
-
       });
     },
     deleteUser:function(id){
@@ -56,15 +54,10 @@ const app = new Vue({
   },
   created(){
     // Aqui se ejecuta codigo al inicializar la aplicacion, como si fuera el constructor
-    fetch('/users/get/') //el fetch es un get
-    .then(response => response.json())
-    .then(json => {
-      this.users = json.data.docs
-    });
-    fetch('/products/get/')
+    fetch('/projects/list/')
     .then(response => response.json())
     .then(json =>{
-      this.products=json.data.docs
+      this.projects=json.data.docs
     });
   }
 });

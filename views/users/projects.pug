@@ -81,8 +81,8 @@ block content
                   label.col-form-label(for='description') Descripcion del proyecto:
                   textarea.form-control(id='description',name='description')
                 .form-group
-                  label.col-form-label(for='scrum') Scrum master:
-                  input.form-control(type='text',id='scrum',name='scrum', value=usuario.fullName)
+                  label.col-form-label(for='scrumMaster') Scrum master:
+                  input.form-control(type='text',id='scrumMaster',name='scrumMaster', value=usuario.fullName)
                 .form-group
                   label.col-form-label(for='owner') Product Owner:
                   input.form-control(type='text',id='owner',name='owner')
@@ -100,22 +100,24 @@ block content
               .card-body
                 h4.card-title Tabla de proyectos
                 .table-responsive
-                  table.table
-                    thead
-                      tr
-                        th Nombre del proyecto
-                        th Fecha de solicitud del proyecto
-                        th Fecha de arranque del proyecto
-                        th Descripcion del proyecto
-                        th Scrum Master
-                        th Product owner
-                        th Equipo de desarrollo
-                    tbody
-                      tr
-                        td 1
-                        td 2
-                        td 3
-                        td 4
-                        td 5
-                        td 6
-                        td 7
+                  div(ip='app')
+                    table.table
+                      thead
+                        tr
+                          th Nombre del proyecto
+                          th Fecha de solicitud del proyecto
+                          th Fecha de arranque del proyecto
+                          th Descripcion del proyecto
+                          th Scrum Master
+                          th Product owner
+                          th Equipo de desarrollo
+                      tbody
+                        each project in projects.docs
+                          tr
+                            td #{project.name}
+                            td #{project.dueDate}
+                            td #{project.startDate}
+                            td #{project.description}
+                            td #{project.scrumMaster}
+                            td #{project.owner}
+                            td #{project.team}

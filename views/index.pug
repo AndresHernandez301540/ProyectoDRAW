@@ -94,56 +94,21 @@ block content
 
       .content-wrapper
                 .row
-                  .col-xl-3.col-lg-3.col-md-3.col-sm-6.grid-margin.stretch-card
-                      a(href='/dashboard')
-                        .card.card-statistics
-                          .card-body
-                            .clearfix
-                              .float-left
-                                i.mdi.mdi-receipt.text-warning.icon-lg
-                              .float-right
-                                p.mb-0.text-right Proyecto 1
-                                .fluid-container
-                                  h3.font-weight-medium.text-right.mb-0 ProjectManager
-                            p.text-muted.mt-3.mb-0
-                  .col-xl-3.col-lg-3.col-md-3.col-sm-6.grid-margin.stretch-card
-                    a(href='/dashboard')
-                      .card.card-statistics
-                        .card-body
-                          .clearfix
-                            .float-left
-                              i.mdi.mdi-receipt.text-warning.icon-lg
-                              .float-right
-                              p.mb-0.text-right Proyecto 2
-                              .fluid-container
-                                h3.font-weight-medium.text-right.mb-0 ProjectManager
+                  div(ip='app')
+                    each project in projects.docs
+                      .col-xl-3.col-lg-3.col-md-3.col-sm-6.grid-margin.stretch-card
+                          a(href='/dashboard')
+                            .card.card-statistics
+                              .card-body
+                                .clearfix
+                                  .float-left
+                                    i.mdi.mdi-receipt.text-warning.icon-lg
+                                  .float-right
+                                    p.mb-0.text-right #{project.name}
+                                    .fluid-container
+                                      h3.font-weight-medium.text-right.mb-0 #{project.scrumMaster}
                                 p.text-muted.mt-3.mb-0
-
-                  .col-xl-3.col-lg-3.col-md-3.col-sm-6.grid-margin.stretch-card
-                    a(href='/dashboard')
-                      .card.card-statistics
-                        .card-body
-                          .clearfix
-                            .float-left
-                              i.mdi.mdi-receipt.text-warning.icon-lg
-                            .float-right
-                              p.mb-0.text-right Proyecto 3
-                              .fluid-container
-                                h3.font-weight-medium.text-right.mb-0 ProjectManager
-                          p.text-muted.mt-3.mb-0
-
-                  .col-xl-3.col-lg-3.col-md-3.col-sm-6.grid-margin.stretch-card
-                    a(href='/dashboard')
-                      .card.card-statistics
-                        .card-body
-                          .clearfix
-                            .float-left
-                              i.mdi.mdi-receipt.text-warning.icon-lg
-                            .float-right
-                              p.mb-0.text-right Proyecto 4
-                              .fluid-container
-                                h3.font-weight-medium.text-right.mb-0 ProjectManager
-                          p.text-muted.mt-3.mb-0
+                  
   script(src='../../vendors/js/vendor.bundle.base.js')
   script(src='../../vendors/js/vendor.bundle.addons.js')
   script(src='../../js/off-canvas.js')

@@ -15,17 +15,15 @@ function createProject(req, res, next){
       _dueDate:req.body.dueDate,
       _startDate:req.body.startDate,
       _description:req.body.description,
-      _scrumMaster:req.body.scrum,
+      _scrumMaster:req.body.scrumMaster,
       _owner:req.body.owner,
       _team:req.body.team
     });
     project.save()
         .then((obj)=>{
-            console.log(obj);
             res.redirect('/projects/list');
         })
         .catch((err)=>{
-          console.log(err);
             res.status(500).json({
               errors:[{message:'Algo salio mal'}],
               data:[]
@@ -61,10 +59,7 @@ function listProject(req, res, next){
   };
   Project.paginate({},options)
   .then((objects)=>{
-    res.status(200).json({
-      errors:[],
-      data:objects
-    });
+    res.render('users/projects',{usuario:req.user,projects:objects});
   }).catch((err)=>{
     res.status(500).json({
       errors:[{message:'Algo salio mal'}],
