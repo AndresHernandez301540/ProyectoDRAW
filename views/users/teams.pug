@@ -1,123 +1,123 @@
 extends ../layout
 block content
-  .container-scroller
-    nav.navbar.default-layout.col-lg-12.col-12.p-0.fixed-top.d-flex.flex-row
-      .text-center.navbar-brand-wrapper.d-flex.align-items-top.justify-content-center
-        a.navbar-brand.brand-logo(href='/')
-          strong SCRUMPage
-        a.navbar-brand.brand-logo-mini(href='/')
-          img(src='/images/logo-mini.svg' alt='logo')
-      .navbar-menu-wrapper.d-flex.align-items-center
+  div(id='app')  
+    .container-scroller
+      nav.navbar.default-layout.col-lg-12.col-12.p-0.fixed-top.d-flex.flex-row
+        .text-center.navbar-brand-wrapper.d-flex.align-items-top.justify-content-center
+          a.navbar-brand.brand-logo(href='/')
+            strong SCRUMPage
+          a.navbar-brand.brand-logo-mini(href='/')
+            img(src='/images/logo-mini.svg' alt='logo')
+        .navbar-menu-wrapper.d-flex.align-items-center
 
-        ul.navbar-nav.navbar-nav-right
+          ul.navbar-nav.navbar-nav-right
 
-          li.nav-item.dropdown.d-none.d-xl-inline-block
-            a#UserDropdown.nav-link.dropdown-toggle(href='#' data-toggle='dropdown' aria-expanded='false')
-              span.profile-text Hola, #{usuario.fullName}!
-              img.img-xs.rounded.circle(src=usuario.thumbnail)
-            .dropdown-menu.dropdown-menu-right.navbar-dropdown(aria-labelledby='UserDropdown')
-              a.dropdown-item.p-0
-                .d-flex.border-bottom
-                  .py-3.px-4.d-flex.align-items-center.justify-content-center
-                    i.mdi.mdi-bookmark-plus-outline.mr-0.text-gray
-                  .py-3.px-4.d-flex.align-items-center.justify-content-center.border-left.border-right
-                    i.mdi.mdi-account-outline.mr-0.text-gray
-                  .py-3.px-4.d-flex.align-items-center.justify-content-center
-                    i.mdi.mdi-alarm-check.mr-0.text-gray
-              a.dropdown-item.mt-2
-                | Administrar cuentas
-              a.dropdown-item
-                | Cambiar contraseña
-              a.dropdown-item
-                | Revisar mensajes
-              a.dropdown-item(href='/auth/logout')
-                | Salir
-        button.navbar-toggler.navbar-toggler-right.d-lg-none.align-self-center(type='button' data-toggle='offcanvas')
-          span.mdi.mdi-menu
-    .container-fluid.page-body-wrapper
-      nav#sidebar.sidebar.sidebar-offcanvas
-        ul.nav
-          li.nav-item.nav-profile
-            .nav-link
-              .user-wrapper
-                .profile-image
-                  img(src=usuario.thumbnail)
-                .text-wrapper
-                  p.profile-name #{usuario.fullName}
-                  div
-                    small.designation.text-muted #{usuario.role}
-                    span.status-indicator.online
-              button.btn.btn-success.btn-block(type='button' data-toggle='modal' data-target='#myModal')
-                | Añadir Miembro
-                i.mdi.mdi-plus
-          li.nav-item
-            a.nav-link(href='/team/list')
-              i.menu-icon.mdi.mdi-television
-              span.menu-title Equipo de trabajo
-          li.nav-item
-            a.nav-link(href='/projects/list')
-              i.menu-icon.mdi.mdi-table
-              span.menu-title Proyectos
+            li.nav-item.dropdown.d-none.d-xl-inline-block
+              a#UserDropdown.nav-link.dropdown-toggle(href='#' data-toggle='dropdown' aria-expanded='false')
+                span.profile-text Hola, #{usuario.fullName}!
+                img.img-xs.rounded.circle(src=usuario.thumbnail)
+              .dropdown-menu.dropdown-menu-right.navbar-dropdown(aria-labelledby='UserDropdown')
+                a.dropdown-item.p-0
+                  .d-flex.border-bottom
+                    .py-3.px-4.d-flex.align-items-center.justify-content-center
+                      i.mdi.mdi-bookmark-plus-outline.mr-0.text-gray
+                    .py-3.px-4.d-flex.align-items-center.justify-content-center.border-left.border-right
+                      i.mdi.mdi-account-outline.mr-0.text-gray
+                    .py-3.px-4.d-flex.align-items-center.justify-content-center
+                      i.mdi.mdi-alarm-check.mr-0.text-gray
+                a.dropdown-item.mt-2
+                  | Administrar cuentas
+                a.dropdown-item
+                  | Cambiar contraseña
+                a.dropdown-item
+                  | Revisar mensajes
+                a.dropdown-item(href='/auth/logout')
+                  | Salir
+          button.navbar-toggler.navbar-toggler-right.d-lg-none.align-self-center(type='button' data-toggle='offcanvas')
+            span.mdi.mdi-menu
+      .container-fluid.page-body-wrapper
+        nav#sidebar.sidebar.sidebar-offcanvas
+          ul.nav
+            li.nav-item.nav-profile
+              .nav-link
+                .user-wrapper
+                  .profile-image
+                    img(src=usuario.thumbnail)
+                  .text-wrapper
+                    p.profile-name #{usuario.fullName}
+                    div
+                      small.designation.text-muted #{usuario.role}
+                      span.status-indicator.online
+                button.btn.btn-success.btn-block(type='button' data-toggle='modal' data-target='#myModal')
+                  | Añadir Miembro
+                  i.mdi.mdi-plus
+            li.nav-item
+              a.nav-link(href='/team/list')
+                i.menu-icon.mdi.mdi-television
+                span.menu-title Equipo de trabajo
+            li.nav-item
+              a.nav-link(href='/projects/list')
+                i.menu-icon.mdi.mdi-table
+                span.menu-title Proyectos
 
-      #myModal.modal(tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true')
-        .modal-dialog(role='document')
-          .modal-content
-            .modal-header
-              h5#exampleModalLabel.modal-title Añadir Miembro
-              button.close(type='button' data-dismiss='modal' aria-label='Close')
-                span(aria-hidden='true') &times;
-            .modal-body
-              form(action='/team/',method='POST')
-                .form-group
-                  label.col-form-label(for='fullName') Nombre del empleado:
-                  input.form-control(type='text',id='fullName',name='fullName')
-                .form-group
-                  label.col-form-label(for='birthdayDate') Fecha de nacimiento:
-                  input.form-control(type='date',id='birthdayDate',name='birthdayDate')
-                .form-group
-                  label.col-form-label(for='curp') CURP:
-                  input.form-control(type='text',id='curp',name='curp')
-                .form-group
-                  label.col-form-label(for='rfc') RFC:
-                  input.form-control(type='text',id='rfc',name='rfc')
-                .form-group
-                  label.col-form-label(for='home') Domicilio:
-                  input.form-control(type='text',id='home',name='home')
-                .form-group
-                  label.col-form-label(for='recipient-name') Lista de habilidades:
-                  textarea.form-control(id='abilities',name='abilities')
-                .form-group
-                  select.custom-select
-                    option(value='junior',id='rank') Junior
-                    option(value='senior',id='rank') Senior
-                    option(value='master',id='rank') Master                      
-                .form-group
-                  input.btn.btn-primary(type='submit')  
-                  button.btn.btn-secondary(type='button' data-dismiss='modal') Cerrar  
-
-      .content-wrapper
-        .row
-          .col-lg-10.grid-margin.stretch-card
-            .card
-              .card-body
-                h4.card-title Miembros del equipo
-                .table-responsive
-                  div(ip='app')
-                    table.table
-                      thead
-                        tr
-                          th Nombre del empleado
-                          th Fecha de nacimiento
-                          th CURP
-                          th RFC
-                          th Domicilio
-                          th Lista de habilidades
-                      tbody
-                        each member in members.docs  
+        #myModal.modal(tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true')
+          .modal-dialog(role='document')
+            .modal-content
+              .modal-header
+                h5#exampleModalLabel.modal-title Añadir Miembro
+                button.close(type='button' data-dismiss='modal' aria-label='Close')
+                  span(aria-hidden='true') &times;
+              .modal-body
+                form(action='/team/',method='POST')
+                  .form-group
+                    label.col-form-label(for='fullName') Nombre del empleado:
+                    input.form-control(type='text',id='fullName',name='fullName')
+                  .form-group
+                    label.col-form-label(for='birthdayDate') Fecha de nacimiento:
+                    input.form-control(type='date',id='birthdayDate',name='birthdayDate')
+                  .form-group
+                    label.col-form-label(for='curp') CURP:
+                    input.form-control(type='text',id='curp',name='curp')
+                  .form-group
+                    label.col-form-label(for='rfc') RFC:
+                    input.form-control(type='text',id='rfc',name='rfc')
+                  .form-group
+                    label.col-form-label(for='home') Domicilio:
+                    input.form-control(type='text',id='home',name='home')
+                  .form-group
+                    label.col-form-label(for='recipient-name') Lista de habilidades:
+                    textarea.form-control(id='abilities',name='abilities')
+                  .form-group
+                    select.custom-select(id='rank2', @change='valor' v-model='selected')
+                      option(value='Junior') Junior
+                      option(Value='Senior') Senior
+                      option(value='Master') Master 
+                    input.form-control(hidden='true',type='text',id='rank',name='rank')                     
+                  .form-group                 
+                    input.btn.btn-primary(type='submit')  
+                    button.btn.btn-secondary(type='button' data-dismiss='modal') Cerrar  
+        .content-wrapper
+          .row
+            .col-lg-10.grid-margin.stretch-card
+              .card
+                .card-body
+                  h4.card-title Miembros del equipo
+                  .table-responsive
+                      table.table
+                        thead
                           tr
-                            td #{member._fullName}
-                            td #{member.birthdayDate}
-                            td #{member.curp}
-                            td #{member.rfc}
-                            td #{member.home}
-                            td #{member.abilities}
+                            th Nombre del empleado
+                            th Fecha de nacimiento
+                            th CURP
+                            th RFC
+                            th Domicilio
+                            th Lista de habilidades
+                        tbody
+                          each member in members.docs  
+                            tr
+                              td #{member._fullName}
+                              td #{member.birthdayDate}
+                              td #{member.curp}
+                              td #{member.rfc}
+                              td #{member.home}
+                              td #{member.abilities}

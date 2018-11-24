@@ -3,12 +3,17 @@ const app = new Vue({
   data:{
     //Objetos que contengan informacion de la app (modelos)
     projects:[],
-    members:[]
+    members:[],
+    selected: ''
   },
   methods:{
     // Todas las funciones comunes de la aplicacion
     sum: function(event){
       this.operators.res= this.operators.n1+this.operators.n2;
+    },
+    valor(){
+      document.getElementById("rank").value=this.selected;
+      return this.selected;
     },
     updateUser: function(id,name,lastName,age){
       const datos ={
@@ -55,11 +60,6 @@ const app = new Vue({
   },
   created(){
     // Aqui se ejecuta codigo al inicializar la aplicacion, como si fuera el constructor
-    fetch('/projects/list/')
-    .then(response => response.json())
-    .then(json =>{
-      this.projects=json.data.docs
-    });
     fetch('/team/list/')
     .then(response => response.json())
     .then(json =>{
