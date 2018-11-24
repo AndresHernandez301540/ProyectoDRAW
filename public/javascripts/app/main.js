@@ -37,6 +37,7 @@ const app = new Vue({
 
         document.getElementById("edfullName").value=document.getElementById("tblnombre"+getIDRow).innerHTML;
         document.getElementById("edbirthdayDate").value=document.getElementById("tblbirthday"+getIDRow).innerHTML;
+        console.log(document.getElementById("tblbirthday"+getIDRow).innerHTML);
         document.getElementById("edcurp").value=document.getElementById("tblcurp"+getIDRow).innerHTML;
         document.getElementById("edrfc").value=document.getElementById("tblrfc"+getIDRow).innerHTML;
         document.getElementById("edhome").value=document.getElementById("tblhome"+getIDRow).innerHTML;
