@@ -155,7 +155,8 @@ block content
                         tbody
                           each member,index in members.docs  
                             tr(data-id=index, id="row"+index)
-                              td(id='tblnombre'+index, contenteditable='false') #{member._fullName}
+                              td(id='tblnombre'+index, contenteditable='false') 
+                                a(href='/team/id/'+ member._id) #{member._fullName}
                               td(id='tblbirthday'+index, contenteditable='false') #{member.birthdayDate}
                               td(id='tblcurp'+index, contenteditable='false') #{member.curp}
                               td(id='tblrfc'+index, contenteditable='false') #{member.rfc}

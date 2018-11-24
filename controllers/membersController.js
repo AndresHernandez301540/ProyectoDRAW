@@ -38,13 +38,9 @@ function createMember(req, res, next){
 function indexMember(req, res, next){
   Member.findById(req.params.id)
       .then((obj)=>{
-        res.render('users/teams',{usuario:req.user,member:req.obj});
-      /*  res.status(200).json({
-          errors:[],
-          data:obj,
+        res.render('users/profile',{usuario:req.user,member:obj});
 
-        });
-    */ })
+     })
       .catch((err)=>{
         res.status(500).json({
           errors:[{message:'Algo salio mal'}],
