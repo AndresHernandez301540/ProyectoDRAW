@@ -29,16 +29,16 @@ router.get('/twitter',passport.authenticate('twitter',{
 //Ruta de callback para que google se redirija
 router.get('/google/redirect',passport.authenticate('google'),(req,res)=>{
 //  res.send(req.user);
-  res.redirect('/home');
+  res.redirect('/');
 });
 // Ruta de callback para que facebook redirija
 router.get('/facebook/callback',passport.authenticate('facebook'),(req,res)=>{
 //  res.send(req.user);
-  res.redirect('/home');
+  res.redirect('/');
 });
 // Ruta de callback para que twitter redirija
 router.get('/twitter/callback',passport.authenticate('twitter'),(req,res)=>{
-  res.redirect('/home');
+  res.redirect('/');
 });
 
 module.exports=router;

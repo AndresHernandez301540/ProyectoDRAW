@@ -10,7 +10,6 @@ block content
       .navbar-menu-wrapper.d-flex.align-items-center
 
         ul.navbar-nav.navbar-nav-right
-
           li.nav-item.dropdown.d-none.d-xl-inline-block
             a#UserDropdown.nav-link.dropdown-toggle(href='#' data-toggle='dropdown' aria-expanded='false')
               span.profile-text Hola, #{usuario.fullName}!
@@ -34,6 +33,7 @@ block content
                 | Salir
         button.navbar-toggler.navbar-toggler-right.d-lg-none.align-self-center(type='button' data-toggle='offcanvas')
           span.mdi.mdi-menu
+            
     .container-fluid.page-body-wrapper
       nav#sidebar.sidebar.sidebar-offcanvas
         ul.nav
@@ -58,7 +58,6 @@ block content
             a.nav-link(href='/projects/list')
               i.menu-icon.mdi.mdi-table
               span.menu-title Proyectos
-
       #myModal.modal(tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true')
         .modal-dialog(role='document')
           .modal-content
@@ -93,6 +92,8 @@ block content
                   input.btn.btn-primary(type='submit')  
                   button.btn.btn-secondary(type='button' data-dismiss='modal') Cerrar  
       
+      
+      
       .content-wrapper
         .row
           .col-lg-10.grid-margin.stretch-card
@@ -111,6 +112,8 @@ block content
                           th Scrum Master
                           th Product owner
                           th Equipo de desarrollo
+                          th Editar
+                          th Eliminar
                       tbody
                         each project in projects.docs
                           tr
@@ -121,3 +124,15 @@ block content
                             td #{project.scrumMaster}
                             td #{project.owner}
                             td #{project.team}
+                            td                       
+                              button.btn.btn-primary.btn-xs
+                                span.glyphicon.glyphicon-pencil
+                            td                              
+                              button.btn.btn-danger.btn-xs
+                                span.glyphicon.glyphicon-trash
+                                  
+                                  
+  script(src='../../vendors/js/vendor.bundle.base.js')
+  script(src='../../vendors/js/vendor.bundle.addons.js')
+  script(src='../../js/off-canvas.js')
+  script(src='../../js/misc.js')

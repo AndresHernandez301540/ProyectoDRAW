@@ -112,6 +112,8 @@ block content
                             th RFC
                             th Domicilio
                             th Lista de habilidades
+                            th Editar
+                            th Eliminar
                         tbody
                           each member in members.docs  
                             tr
@@ -121,3 +123,15 @@ block content
                               td #{member.rfc}
                               td #{member.home}
                               td #{member.abilities}
+                              td                       
+                                button.btn.btn-primary.btn-xs
+                                  span.glyphicon.glyphicon-pencil
+                              td                              
+                                button.btn.btn-danger.btn-xs
+                                  span.glyphicon.glyphicon-trash
+                              
+                              
+  script(src='../../vendors/js/vendor.bundle.base.js')
+  script(src='../../vendors/js/vendor.bundle.addons.js')
+  script(src='../../js/off-canvas.js')
+  script(src='../../js/misc.js')
