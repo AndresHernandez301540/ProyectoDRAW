@@ -4,7 +4,16 @@ const app = new Vue({
     //Objetos que contengan informacion de la app (modelos)
     projects:[],
     members:[],
-    selected: ''
+    selected: '',
+    check:'0',
+    editmember:{
+      fullName:'',
+      birthdayDate:'',
+      curp:'',
+      rfc:'',
+      home:'',
+      abilities:''
+    }
   },
   methods:{
     // Todas las funciones comunes de la aplicacion
@@ -16,12 +25,37 @@ const app = new Vue({
       return this.selected;
     },
     cambiarpropiedad(){
-      var editableElements = document.querySelectorAll("[contenteditable=false]");
-      var iconos=document.getElementsByClassName("glyphicon-pencil");
-      for (var i = 0; i < editableElements.length; ++i) {
-          editableElements[i].setAttribute("contentEditable", true);
-          iconos[i].classList.remove('glyphicon-pencil');
-          iconos[i].classList.add('glyphicon-ok');
+
+      if(this.check=='0'){
+        this.check='1';
+        var getIDRow=$(event.target).closest('tr').data('id');
+        var indextabla=document.querySelector("#row"+getIDRow);
+        var editableElements = indextabla.querySelectorAll("[contentEditable=false]");
+        var iconos=indextabla.getElementsByClassName("glyphicon-pencil");
+        document.getElementById("btneditar"+getIDRow).classList.add('glyphicon-ok');
+        document.getElementById("btneditar"+getIDRow).classList.remove('glyphicon-pencil');
+
+        document.getElementById("edfullName").value=document.getElementById("tblnombre"+getIDRow).innerHTML;
+        document.getElementById("edbirthdayDate").value=document.getElementById("tblbirthday"+getIDRow).innerHTML;
+        document.getElementById("edcurp").value=document.getElementById("tblcurp"+getIDRow).innerHTML;
+        document.getElementById("edrfc").value=document.getElementById("tblrfc"+getIDRow).innerHTML;
+        document.getElementById("edhome").value=document.getElementById("tblhome"+getIDRow).innerHTML;
+        document.getElementById("edabilities").value=document.getElementById("tblabilities"+getIDRow).innerHTML;
+
+        for (var i = 0; i < editableElements.length; ++i) {
+            editableElements[i].setAttribute("contentEditable", true);
+        }
+      }else if(this.check=='1'){
+
+        this.check='0';
+        var getIDRow=$(event.target).closest('tr').data('id');
+        var indextabla=document.querySelector("#row"+getIDRow);
+        var editableElements = indextabla.querySelectorAll("[contentEditable=true]");
+        document.getElementById("btneditar"+getIDRow).classList.add('glyphicon-pencil');
+        document.getElementById("btneditar"+getIDRow).classList.remove('glyphicon-ok');
+        for (var i = 0; i < editableElements.length; ++i) {
+            editableElements[i].setAttribute("contentEditable", false);
+        }
       }
     },
     updateUser: function(id,name,lastName,age){

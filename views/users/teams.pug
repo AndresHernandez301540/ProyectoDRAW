@@ -101,29 +101,29 @@ block content
           .modal-dialog(role='document')
             .modal-content
               .modal-header
-                h5#exampleModalLabel.modal-title Añadir Miembro
+                h5#exampleModalLabel.modal-title Editar Miembro
                 button.close(type='button' data-dismiss='modal' aria-label='Close')
                   span(aria-hidden='true') &times;
               .modal-body
                 form(action='/team/',method='PUT')
                   .form-group
                     label.col-form-label(for='fullName') Nombre del empleado:
-                    input.form-control(type='text',id='fullName',name='fullName')
+                    input.form-control(type='text',id='edfullName',name='edfullName')
                   .form-group
                     label.col-form-label(for='birthdayDate') Fecha de nacimiento:
-                    input.form-control(type='date',id='birthdayDate',name='birthdayDate')
+                    input.form-control(type='date',id='edbirthdayDate',name='edbirthdayDate')
                   .form-group
                     label.col-form-label(for='curp') CURP:
-                    input.form-control(type='text',id='curp',name='curp')
+                    input.form-control(type='text',id='edcurp',name='edcurp')
                   .form-group
                     label.col-form-label(for='rfc') RFC:
-                    input.form-control(type='text',id='rfc',name='rfc')
+                    input.form-control(type='text',id='edrfc',name='edrfc')
                   .form-group
                     label.col-form-label(for='home') Domicilio:
-                    input.form-control(type='text',id='home',name='home')
+                    input.form-control(type='text',id='edhome',name='edhome')
                   .form-group
                     label.col-form-label(for='recipient-name') Lista de habilidades:
-                    textarea.form-control(id='abilities',name='abilities')
+                    textarea.form-control(id='edabilities',name='edabilities')
                   .form-group
                     select.custom-select(id='rank2', @change='valor' v-model='selected')
                       option(value='Junior') Junior
@@ -153,17 +153,17 @@ block content
                             th Editar
                             th Eliminar
                         tbody
-                          each member in members.docs  
-                            tr
-                              td(id='tblnombre', contenteditable='false') #{member._fullName}
-                              td(id='tblnombre', contenteditable='false') #{member.birthdayDate}
-                              td(id='tblnombre', contenteditable='false') #{member.curp}
-                              td(id='tblnombre', contenteditable='false') #{member.rfc}
-                              td(id='tblnombre', contenteditable='false') #{member.home}
-                              td(id='tblnombre', contenteditable='false') #{member.abilities}
+                          each member,index in members.docs  
+                            tr(data-id=index, id="row"+index)
+                              td(id='tblnombre'+index, contenteditable='false') #{member._fullName}
+                              td(id='tblbirthday'+index, contenteditable='false') #{member.birthdayDate}
+                              td(id='tblcurp'+index, contenteditable='false') #{member.curp}
+                              td(id='tblrfc'+index, contenteditable='false') #{member.rfc}
+                              td(id='tblhome'+index, contenteditable='false') #{member.home}
+                              td(id='tblabilities'+index, contenteditable='false') #{member.abilities}
                               td                       
-                                button.btn.btn-primary.btn-xs(data-toggle='modal', @click='cambiarpropiedad')
-                                  span.glyphicon.glyphicon-pencil(id='btneditar')
+                                button.btn.btn-primary.btn-xs(data-toggle='modal',data-target='#editar', @click='cambiarpropiedad')
+                                  span.glyphicon.glyphicon-pencil(id="btneditar"+index, data-toogle='modal', data-target='#editar')
                               td                              
                                 button.btn.btn-danger.btn-xs(id='btneliminar')
                                   span.glyphicon.glyphicon-trash
