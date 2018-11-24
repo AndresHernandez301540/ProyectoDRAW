@@ -15,6 +15,15 @@ const app = new Vue({
       document.getElementById("rank").value=this.selected;
       return this.selected;
     },
+    cambiarpropiedad(){
+      var editableElements = document.querySelectorAll("[contenteditable=false]");
+      var iconos=document.getElementsByClassName("glyphicon-pencil");
+      for (var i = 0; i < editableElements.length; ++i) {
+          editableElements[i].setAttribute("contentEditable", true);
+          iconos[i].classList.remove('glyphicon-pencil');
+          iconos[i].classList.add('glyphicon-ok');
+      }
+    },
     updateUser: function(id,name,lastName,age){
       const datos ={
         id:id,
