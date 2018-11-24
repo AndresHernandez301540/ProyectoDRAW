@@ -1,5 +1,4 @@
 extends layout
-
 block content
   .container-scroller
     nav.navbar.default-layout.col-lg-12.col-12.p-0.fixed-top.d-flex.flex-row
@@ -13,140 +12,104 @@ block content
         ul.navbar-nav.navbar-nav-right
           li.nav-item.dropdown.d-none.d-xl-inline-block
             a#UserDropdown.nav-link.dropdown-toggle(href='#' data-toggle='dropdown' aria-expanded='false')
-              span.profile-text Hola, Andrés Hernández !
-              img.img-xs.rounded-circle(src='/images/faces/face1.jpg' alt='Profile image')
+              span.profile-text Hola, #{usuario.fullName}!
+              img.img-xs.rounded.circle(src=usuario.thumbnail)
             .dropdown-menu.dropdown-menu-right.navbar-dropdown(aria-labelledby='UserDropdown')
               a.dropdown-item.p-0
                 .d-flex.border-bottom
                   .py-3.px-4.d-flex.align-items-center.justify-content-center
-                    i.mdi.mdi-bookmark-plus-outline.mr-0.text-gray
+                    i.mdi.mdi-bookmark-plus-outline.mr-0.text-gray  
                   .py-3.px-4.d-flex.align-items-center.justify-content-center.border-left.border-right
-                    i.mdi.mdi-account-outline.mr-0.text-gray
+                    i.mdi.mdi-account-outline.mr-0.text-gray 
                   .py-3.px-4.d-flex.align-items-center.justify-content-center
-                    i.mdi.mdi-alarm-check.mr-0.text-gray
+                    i.mdi.mdi-alarm-check.mr-0.text-gray 
               a.dropdown-item.mt-2
                 | Administrar cuentas
               a.dropdown-item
                 | Cambiar contraseña
               a.dropdown-item
-                | Revisar mensajes
-              a.dropdown-item
+                | Revisar mensajes 
+              a.dropdown-item(href='/auth/logout')
                 | Salir
         button.navbar-toggler.navbar-toggler-right.d-lg-none.align-self-center(type='button' data-toggle='offcanvas')
           span.mdi.mdi-menu
 
-
-    // partial
     .container-fluid.page-body-wrapper
-      // partial:partials/_sidebar.html
       nav#sidebar.sidebar.sidebar-offcanvas
         ul.nav
           li.nav-item.nav-profile
             .nav-link
               .user-wrapper
                 .profile-image
-                  img(src='/images/faces/face1.jpg' alt='profile image')
+                  img(src=usuario.thumbnail)
                 .text-wrapper
-                  p.profile-name Andrés Hernández
+                  p.profile-name #{usuario.fullName}
                   div
-                    small.designation.text-muted Manager
+                    small.designation.text-muted #{usuario.role}
                     span.status-indicator.online
               button.btn.btn-success.btn-block(type='button' data-toggle='modal' data-target='#myModal')
                 | Proyecto Nuevo
                 i.mdi.mdi-plus
-
           li.nav-item
-            a.nav-link(href='/team/Andres Hernandez/03-07-18/HEZA/HEZA970307/Calle Principal/JAVA-Junior')
+            a.nav-link(href='/team/list')
               i.menu-icon.mdi.mdi-television
               span.menu-title Equipo de trabajo
           li.nav-item
-            a.nav-link(href='/projects/DRAW/09-10-18/02-10-18/ProyectoMateriaDRAW/1/AndresHernandez/3')
+            a.nav-link(href='/projects/list')
               i.menu-icon.mdi.mdi-table
               span.menu-title Proyectos
-
       #myModal.modal(tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true')
         .modal-dialog(role='document')
           .modal-content
             .modal-header
-              h5#exampleModalLabel.modal-title Crear Proyecto
+              h5#exampleModalLabel.modal-title Crear proyecto
               button.close(type='button' data-dismiss='modal' aria-label='Close')
                 span(aria-hidden='true') &times;
             .modal-body
-              form
+              form(action='/projects/',method='POST')
                 .form-group
-                  label.col-form-label(for='recipient-name') Nombre del proyecto:
-                  input#recipient-name.form-control(type='text')
+                  label.col-form-label(for='nombre') Nombre del proyecto:
+                  input.form-control(type='text', id='name', name='name')
                   .form-group
-                  label.col-form-label(for='recipient-name') Fecha de solicitud del proyecto:
-                  input#recipient-name.form-control(type='date')
+                  label.col-form-label(for='duedate') Fecha de solicitud del proyecto:
+                  input.form-control(type='date', id='dueDate',name='dueDate')
                 .form-group
-                  label.col-form-label(for='recipient-name') Fecha de arranque del proyecto:
-                  input#recipient-name.form-control(type='date')
+                  label.col-form-label(for='startdate') Fecha de arranque del proyecto:
+                  input.form-control(type='date', id='startDate',name='startDate')
                 .form-group
-                  label.col-form-label(for='message-text') Descripcion del proyecto:
-                  textarea#message-text.form-control
+                  label.col-form-label(for='description') Descripcion del proyecto:
+                  textarea.form-control(id='description',name='description')
                 .form-group
-                  label.col-form-label(for='recipient-name') Scrum master:
-                  input#recipient-name.form-control(type='text')
+                  label.col-form-label(for='scrumMaster') Scrum master:
+                  input.form-control(type='text',id='scrumMaster',name='scrumMaster', value=usuario.fullName)
                 .form-group
-                  label.col-form-label(for='recipient-name') Product Owner:
-                  input#recipient-name.form-control(type='text')
+                  label.col-form-label(for='owner') Product Owner:
+                  input.form-control(type='text',id='owner',name='owner')
                 .form-group
-                  label.col-form-label(for='recipient-name') Equipo de desarrollo:
-                  input#recipient-name.form-control(type='text')
-            .modal-footer
-              button.btn.btn-secondary(type='button' data-dismiss='modal') Cerrar
-              button.btn.btn-primary(type='button') Crear
+                  label.col-form-label(for='team') Equipo de desarrollo:
+                  input.form-control(type='text',id='team',name='team')
+                .form-group
+                  input.btn.btn-primary(type='submit')  
+                  button.btn.btn-secondary(type='button' data-dismiss='modal') Cerrar  
 
       .content-wrapper
                 .row
-                  .col-xl-3.col-lg-3.col-md-3.col-sm-6.grid-margin.stretch-card
-                      a(href='/dashboard')
-                        .card.card-statistics
-                          .card-body
-                            .clearfix
-                              .float-left
-                                i.mdi.mdi-receipt.text-warning.icon-lg
-                              .float-right
-                                p.mb-0.text-right Proyecto 1
-                                .fluid-container
-                                  h3.font-weight-medium.text-right.mb-0 ProjectManager
-                            p.text-muted.mt-3.mb-0
-                  .col-xl-3.col-lg-3.col-md-3.col-sm-6.grid-margin.stretch-card
-                    a(href='/dashboard')
-                      .card.card-statistics
-                        .card-body
-                          .clearfix
-                            .float-left
-                              i.mdi.mdi-receipt.text-warning.icon-lg
-                              .float-right
-                              p.mb-0.text-right Proyecto 2
-                              .fluid-container
-                                h3.font-weight-medium.text-right.mb-0 ProjectManager
+                  div(ip='app')
+                    each project in projects.docs
+                      .col-xl-3.col-lg-3.col-md-3.col-sm-6.grid-margin.stretch-card
+                          a(href='/dashboard')
+                            .card.card-statistics
+                              .card-body
+                                .clearfix
+                                  .float-left
+                                    i.mdi.mdi-receipt.text-warning.icon-lg
+                                  .float-right
+                                    p.mb-0.text-right #{project.name}
+                                    .fluid-container
+                                      h3.font-weight-medium.text-right.mb-0 #{project.scrumMaster}
                                 p.text-muted.mt-3.mb-0
-
-                  .col-xl-3.col-lg-3.col-md-3.col-sm-6.grid-margin.stretch-card
-                    a(href='/dashboard')
-                      .card.card-statistics
-                        .card-body
-                          .clearfix
-                            .float-left
-                              i.mdi.mdi-receipt.text-warning.icon-lg
-                            .float-right
-                              p.mb-0.text-right Proyecto 3
-                              .fluid-container
-                                h3.font-weight-medium.text-right.mb-0 ProjectManager
-                          p.text-muted.mt-3.mb-0
-
-                  .col-xl-3.col-lg-3.col-md-3.col-sm-6.grid-margin.stretch-card
-                    a(href='/dashboard')
-                      .card.card-statistics
-                        .card-body
-                          .clearfix
-                            .float-left
-                              i.mdi.mdi-receipt.text-warning.icon-lg
-                            .float-right
-                              p.mb-0.text-right Proyecto 4
-                              .fluid-container
-                                h3.font-weight-medium.text-right.mb-0 ProjectManager
-                          p.text-muted.mt-3.mb-0
+                  
+  script(src='../../vendors/js/vendor.bundle.base.js')
+  script(src='../../vendors/js/vendor.bundle.addons.js')
+  script(src='../../js/off-canvas.js')
+  script(src='../../js/misc.js')

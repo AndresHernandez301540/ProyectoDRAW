@@ -1,0 +1,21 @@
+// Agregar este archivo a .gitignore
+module.exports={
+  google:{
+    clientID:'49998123457-tiq308sh6fuq7lno4oqu9p0dorobgdo0.apps.googleusercontent.com',
+    clientSecret:'PvA1cZS6hU1o2RxgZt0cyGDJ'
+  },
+  facebook:{
+    appID:'348199639277842',
+    appSecret:'7a182900ab7f5b424864d1b42dbb9c25'
+  },
+  twitter:{
+    consumerKey:'WFWYHY7Jeq48BU0Wl81vCIzVo',
+    consumerSecret:'tDuizeRh8lCxHwL5nZaYBMb755jqDGF4OJoF3s1e1bw46YuMp6'
+  },
+  mongodb:{
+    dbURI:'mongodb://ahernandez:hola1234@ds113134.mlab.com:13134/drawdb'
+  },
+  session:{
+    cookieKey:'sajdhasjkdsa'
+  }
+};

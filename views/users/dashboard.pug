@@ -10,44 +10,10 @@ block content
       .navbar-menu-wrapper.d-flex.align-items-center
 
         ul.navbar-nav.navbar-nav-right
-          li.nav-item.dropdown
-            .dropdown-menu.dropdown-menu-right.navbar-dropdown.preview-list(aria-labelledby='messageDropdown')
-              .dropdown-divider
-              a.dropdown-item.preview-item
-                .preview-thumbnail
-                  img.profile-pic(src='../../images/faces/face4.jpg' alt='image')
-                .preview-item-content.flex-grow
-                  h6.preview-subject.ellipsis.font-weight-medium.text-dark
-                    | David Grey
-                    span.float-right.font-weight-light.small-text 1 Minutes ago
-                  p.font-weight-light.small-text
-                    | The meeting is cancelled
-              .dropdown-divider
-
-              a.dropdown-item.preview-item
-                .preview-thumbnail
-                  img.profile-pic(src='../../images/faces/face2.jpg' alt='image')
-                .preview-item-content.flex-grow
-                  h6.preview-subject.ellipsis.font-weight-medium.text-dark
-                    | Tim Cook
-                    span.float-right.font-weight-light.small-text 15 Minutes ago
-                  p.font-weight-light.small-text
-                    | New product launch
-              .dropdown-divider
-              a.dropdown-item.preview-item
-                .preview-thumbnail
-                  img.profile-pic(src='../../images/faces/face3.jpg' alt='image')
-                .preview-item-content.flex-grow
-                  h6.preview-subject.ellipsis.font-weight-medium.text-dark
-                    | Johnson
-                    span.float-right.font-weight-light.small-text 18 Minutes ago
-                  p.font-weight-light.small-text
-                    | Upcoming board meeting
-
           li.nav-item.dropdown.d-none.d-xl-inline-block
             a#UserDropdown.nav-link.dropdown-toggle(href='#' data-toggle='dropdown' aria-expanded='false')
-              span.profile-text Hola, Andres Hernandez!
-              img.img-xs.rounded-circle(src='../../images/faces/face1.jpg' alt='Profile image')
+              span.profile-text Hola, #{usuario.fullName}!
+              img.img-xs.rounded.circle(src=usuario.thumbnail)
             .dropdown-menu.dropdown-menu-right.navbar-dropdown(aria-labelledby='UserDropdown')
               a.dropdown-item.p-0
                 .d-flex.border-bottom
@@ -63,39 +29,36 @@ block content
                 | Cambiar contraseña
               a.dropdown-item
                 | Revisar mensajes
-              a.dropdown-item
+              a.dropdown-item(href='/auth/logout')
                 | Salir
         button.navbar-toggler.navbar-toggler-right.d-lg-none.align-self-center(type='button' data-toggle='offcanvas')
           span.mdi.mdi-menu
 
-    // partial
     .container-fluid.page-body-wrapper
-      // partial:partials/_sidebar.html
       nav#sidebar.sidebar.sidebar-offcanvas
         ul.nav
           li.nav-item.nav-profile
             .nav-link
               .user-wrapper
                 .profile-image
-                  img(src='/images/faces/face1.jpg' alt='profile image')
+                  img(src=usuario.thumbnail)
                 .text-wrapper
-                  p.profile-name Andrés Hernández
+                  p.profile-name #{usuario.fullName}
                   div
-                    small.designation.text-muted Manager
+                    small.designation.text-muted #{usuario.role}
                     span.status-indicator.online
               button.btn.btn-success.btn-block(type='button' data-toggle='modal' data-target='#myModal')
                 | Proyecto Nuevo
                 i.mdi.mdi-plus
           li.nav-item
-            a.nav-link(href='/team/Andres Hernandez/03-07-18/HEZA/HEZA970307/Calle Principal/JAVA-Junior')
+            a.nav-link(href='/team/list')
               i.menu-icon.mdi.mdi-television
               span.menu-title Equipo de trabajo
           li.nav-item
-            a.nav-link(href='/projects/DRAW/09-10-18/02-10-18/ProyectoMateriaDRAW/1/AndresHernandez/3')
+            a.nav-link(href='/projects/list')
               i.menu-icon.mdi.mdi-table
               span.menu-title Proyectos
 
-      // partial
       .main-panel
         .content-wrapper
           strong NOMBRE DEL PROYECTO
@@ -196,65 +159,42 @@ block content
                           td
                             label.badge.badge-success Completed
 
-        // content-wrapper ends
+      #myModal.modal(tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true')
+        .modal-dialog(role='document')
+          .modal-content
+            .modal-header
+              h5#exampleModalLabel.modal-title Crear proyecto
+              button.close(type='button' data-dismiss='modal' aria-label='Close')
+                span(aria-hidden='true') &times;
+            .modal-body
+              form(action='/projects/',method='POST')
+                .form-group
+                  label.col-form-label(for='nombre') Nombre del proyecto:
+                  input.form-control(type='text', id='name', name='name')
+                  .form-group
+                  label.col-form-label(for='duedate') Fecha de solicitud del proyecto:
+                  input.form-control(type='date', id='dueDate',name='dueDate')
+                .form-group
+                  label.col-form-label(for='startdate') Fecha de arranque del proyecto:
+                  input.form-control(type='date', id='startDate',name='startDate')
+                .form-group
+                  label.col-form-label(for='description') Descripcion del proyecto:
+                  textarea.form-control(id='description',name='description')
+                .form-group
+                  label.col-form-label(for='scrumMaster') Scrum master:
+                  input.form-control(type='text',id='scrumMaster',name='scrumMaster', value=usuario.fullName)
+                .form-group
+                  label.col-form-label(for='owner') Product Owner:
+                  input.form-control(type='text',id='owner',name='owner')
+                .form-group
+                  label.col-form-label(for='team') Equipo de desarrollo:
+                  input.form-control(type='text',id='team',name='team')
+                .form-group
+                  input.btn.btn-primary(type='submit')  
+                  button.btn.btn-secondary(type='button' data-dismiss='modal') Cerrar  
 
-        #myModal.modal(tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true')
-          .modal-dialog(role='document')
-            .modal-content
-              .modal-header
-                h5#exampleModalLabel.modal-title Crear proyecto
-                button.close(type='button' data-dismiss='modal' aria-label='Close')
-                  span(aria-hidden='true') &times;
-              .modal-body
-                form
-                  .form-group
-                    label.col-form-label(for='recipient-name') Nombre del proyecto:
-                    input#recipient-name.form-control(type='text')
-                  .form-group
-                    label.col-form-label(for='recipient-name') Fecha de solicitud del proyecto:
-                    input#recipient-name.form-control(type='date')
-                  .form-group
-                    label.col-form-label(for='recipient-name') Fecha de arranque del proyecto:
-                    input#recipient-name.form-control(type='date')
-                  .form-group
-                    label.col-form-label(for='message-text') Descripcion del proyecto:
-                    textarea#message-text.form-control
-                  .form-group
-                    label.col-form-label(for='recipient-name') Scrum master:
-                    input#recipient-name.form-control(type='text')
-                  .form-group
-                    label.col-form-label(for='recipient-name') Product Owner:
-                    input#recipient-name.form-control(type='text')
-                  .form-group
-                    label.col-form-label(for='recipient-name') Equipo de desarrollo:
-                    input#recipient-name.form-control(type='text')
-              .modal-footer
-                button.btn.btn-secondary(type='button' data-dismiss='modal') Cerrar
-                button.btn.btn-primary(type='button') Crear
 
-        // partial:../../partials/_footer.html
-        footer.footer
-          .container-fluid.clearfix
-            span.text-muted.d-block.text-center.text-sm-left.d-sm-inline-block
-              | Copyright &copy; 2018
-              a(href='http://www.bootstrapdash.com/' target='_blank') Bootstrapdash
-              | . All rights reserved.
-            span.float-none.float-sm-right.d-block.mt-1.mt-sm-0.text-center
-              | Hand-crafted &amp; made with
-              i.mdi.mdi-heart.text-danger
-        // partial
-      // main-panel ends
-    // page-body-wrapper ends
-  // container-scroller
-  // plugins:js
   script(src='../../vendors/js/vendor.bundle.base.js')
   script(src='../../vendors/js/vendor.bundle.addons.js')
-  // endinject
-  // Plugin js for this page
-  // End plugin js for this page
-  // inject:js
   script(src='../../js/off-canvas.js')
   script(src='../../js/misc.js')
-  // endinject
-  // Custom js for this page
-  // End custom js for this page

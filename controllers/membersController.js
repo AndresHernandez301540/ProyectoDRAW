@@ -1,40 +1,111 @@
 const express = require('express');
+const Member= require('../models/member');
+const {validationResult}=require('express-validator/check');
 
 function createMember(req, res, next){
-  res.send(`Nombre completo ${req.params.name},
-    Fecha de nacimiento ${req.params.date},
-    CURP ${req.params.curp},
-    RFC ${req.params.rfc},
-    Domicilio ${req.params.home},
-    Lista de habilidades ${req.params.abilities}`);
+    const errors=validationResult(req);
+    if(!errors.isEmpty()){
+      return res.status(422).json({ // El return rompe la funcion y ya no se ejecuta lo demas
+        errors:errors.array()
+      });
+    }
+    let member = new Member({
+      _fullName:req.body.fullName,
+      _birthdayDate:req.body.birthdayDate,
+      _curp:req.body.curp,
+      _rfc:req.body.rfc,
+      _home:req.body.home,
+      _abilities:req.body.abilities+'-'+req.body.rank
+    });
+    member.save()
+        .then((obj)=>{
+          res.redirect('/team/list');
+    /*        res.status(200).json({
+            errors:[],
+            data:obj
+          });
+    */    })
+        .catch((err)=>{
+            res.status(500).json({
+              errors:[{message:'Algo salio mal'}],
+              data:[]
+            });
+        });
+
+
 };
 
 function indexMember(req, res, next){
-  let name = req.params.name ? req.params.name :'Sin nombre';
-  let date = req.params.date ? req.params.date :'Sin fecha de nacimiento';
-  let curp = req.params.curp ? req.params.curp :'Sin CURP';
-  let rfc = req.params.rfc ? req.params.rfc :'Sin RFC';
-  let domicilio = req.params.home ? req.params.home :'Sin domicilio';
-  let abilities = req.params.abilities ? req.params.abilities :'Sin habilidades';
-  res.render('users/teams',{name:req.params.name,date:req.params.date,curp:req.params.curp,
-  rfc:req.params.rfc,domicilio:req.params.home,abilities:req.params.abilities});
+  Member.findById(req.params.id)
+      .then((obj)=>{
+        res.render('users/profile',{usuario:req.user,member:obj});
+
+     })
+      .catch((err)=>{
+        res.status(500).json({
+          errors:[{message:'Algo salio mal'}],
+          data:[]
+      });
+    });
 };
 
 function listMember(req, res, next){
-  res.send(`Nombre completo ${req.params.name},
-    Fecha de nacimiento ${req.params.date},
-    CURP ${req.params.curp},
-    RFC ${req.params.rfc},
-    Domicilio ${req.params.home},
-    Lista de habilidades ${req.params.abilities}`);
+  let page=req.params.page ? req.params.page : 1;
+
+  const options = {
+    page:page,
+    limit:5,
+    select :'_fullName _birthdayDate _curp _rfc _home _abilities'
+  };
+  Member.paginate({},options)
+  .then((objects)=>{
+      res.render('users/teams',{usuario:req.user,members:objects});
+  }).catch((err)=>{
+    res.status(500).json({
+      errors:[{message:'Algo salio mal'}],
+      data:[]
+    });
+  });
 };
 
 function updateMember(req, res, next){
-  res.send(`El miembro ${req.params.name} del equipo  ha sido actualizado `);
+  Member.findById(req.params.id)
+  .then((obj)=>{
+    obj.fullName=req.body.fullName ? req.body.fullName : obj.fullName;
+    obj.birthdayDate=req.body.birthdayDate ? req.body.birthdayDate : obj.birthdayDate;
+    obj.curp=req.body.curp ? req.body.curp : obj.curp;
+    obj.rfc=req.body.rfc ? req.body.rfc : obj.rfc;
+    obj.home=req.body.home ? req.body.home : obj.home;
+    obj.abilities=req.body.abilities ? req.body.abilities : obj.abilities;
+    obj.save()
+    .then((obj)=>{
+        console.log("Todo bien");
+    }).catch((err)=>{
+      res.status(500).json({
+        errors:[{message:'Algo salio mal en la actualización'}],
+        data:[]
+    });
+
+  });
+  }).catch((err)=>{
+
+  });
 };
 
 function deleteMember(req,res,next){
-  res.send(`El miembro del equipo ha sido eliminado`);
+  Member.remove({_id: req.params.id})
+  .then((obj)=>{
+    res.status(200).json({
+      errors:[],
+      data:obj
+    });
+  })
+  .catch((err)=>{
+    res.status(500).json({
+      errors:[{message:'Algo salio mal'}],
+      data:[]
+    });
+  });
 };
 
 module.exports={

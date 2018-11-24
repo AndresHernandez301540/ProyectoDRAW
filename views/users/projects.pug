@@ -10,12 +10,10 @@ block content
       .navbar-menu-wrapper.d-flex.align-items-center
 
         ul.navbar-nav.navbar-nav-right
-
-
           li.nav-item.dropdown.d-none.d-xl-inline-block
             a#UserDropdown.nav-link.dropdown-toggle(href='#' data-toggle='dropdown' aria-expanded='false')
-              span.profile-text Hola, Andrés Hernández !
-              img.img-xs.rounded-circle(src='/images/faces/face1.jpg' alt='Profile image')
+              span.profile-text Hola, #{usuario.fullName}!
+              img.img-xs.rounded.circle(src=usuario.thumbnail)
             .dropdown-menu.dropdown-menu-right.navbar-dropdown(aria-labelledby='UserDropdown')
               a.dropdown-item.p-0
                 .d-flex.border-bottom
@@ -31,37 +29,35 @@ block content
                 | Cambiar contraseña
               a.dropdown-item
                 | Revisar mensajes
-              a.dropdown-item
+              a.dropdown-item(href='/auth/logout')
                 | Salir
         button.navbar-toggler.navbar-toggler-right.d-lg-none.align-self-center(type='button' data-toggle='offcanvas')
           span.mdi.mdi-menu
-    // partial
+            
     .container-fluid.page-body-wrapper
-      // partial:partials/_sidebar.html
       nav#sidebar.sidebar.sidebar-offcanvas
         ul.nav
           li.nav-item.nav-profile
             .nav-link
               .user-wrapper
                 .profile-image
-                  img(src='/images/faces/face1.jpg' alt='profile image')
+                  img(src=usuario.thumbnail)
                 .text-wrapper
-                  p.profile-name Andrés Hernández
+                  p.profile-name #{usuario.fullName}
                   div
-                    small.designation.text-muted Manager
+                    small.designation.text-muted #{usuario.role}
                     span.status-indicator.online
               button.btn.btn-success.btn-block(type='button' data-toggle='modal' data-target='#myModal')
                 | Proyecto Nuevo
                 i.mdi.mdi-plus
           li.nav-item
-            a.nav-link(href='/team/Andres Hernandez/03-07-18/HEZA/HEZA970307/Calle Principal/JAVA-Junior')
+            a.nav-link(href='/team/list')
               i.menu-icon.mdi.mdi-television
               span.menu-title Equipo de trabajo
           li.nav-item
-            a.nav-link(href='/projects/DRAW/09-10-18/02-10-18/ProyectoMateriaDRAW/1/AndresHernandez/3')
+            a.nav-link(href='/projects/list')
               i.menu-icon.mdi.mdi-table
               span.menu-title Proyectos
-
       #myModal.modal(tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true')
         .modal-dialog(role='document')
           .modal-content
@@ -70,45 +66,34 @@ block content
               button.close(type='button' data-dismiss='modal' aria-label='Close')
                 span(aria-hidden='true') &times;
             .modal-body
-              form
+              form(action='/projects/',method='POST')
                 .form-group
-                  label.col-form-label(for='recipient-name') Nombre del proyecto:
-                  input#recipient-name.form-control(type='text')
+                  label.col-form-label(for='nombre') Nombre del proyecto:
+                  input.form-control(type='text', id='name', name='name')
                   .form-group
-                  label.col-form-label(for='recipient-name') Fecha de solicitud del proyecto:
-                  input#recipient-name.form-control(type='date')
+                  label.col-form-label(for='duedate') Fecha de solicitud del proyecto:
+                  input.form-control(type='date', id='dueDate',name='dueDate')
                 .form-group
-                  label.col-form-label(for='recipient-name') Fecha de arranque del proyecto:
-                  input#recipient-name.form-control(type='date')
+                  label.col-form-label(for='startdate') Fecha de arranque del proyecto:
+                  input.form-control(type='date', id='startDate',name='startDate')
                 .form-group
-                  label.col-form-label(for='message-text') Descripcion del proyecto:
-                  textarea#message-text.form-control
+                  label.col-form-label(for='description') Descripcion del proyecto:
+                  textarea.form-control(id='description',name='description')
                 .form-group
-                  label.col-form-label(for='recipient-name') Scrum master:
-                  input#recipient-name.form-control(type='text')
+                  label.col-form-label(for='scrumMaster') Scrum master:
+                  input.form-control(type='text',id='scrumMaster',name='scrumMaster', value=usuario.fullName)
                 .form-group
-                  label.col-form-label(for='recipient-name') Product Owner:
-                  input#recipient-name.form-control(type='text')
+                  label.col-form-label(for='owner') Product Owner:
+                  input.form-control(type='text',id='owner',name='owner')
                 .form-group
-                  label.col-form-label(for='recipient-name') Equipo de desarrollo:
-                  input#recipient-name.form-control(type='text')
-            .modal-footer
-              button.btn.btn-secondary(type='button' data-dismiss='modal') Cerrar
-              button.btn.btn-primary(type='button') Crear
-
-
-            #auth.collapse
-              ul.nav.flex-column.sub-menu
-                li.nav-item
-                  a.nav-link(href='/pages/samples/blank-page.html')  Blank Page
-                li.nav-item
-                  a.nav-link(href='/pages/samples/login.html')  Login
-                li.nav-item
-                  a.nav-link(href='/pages/samples/register.html')  Register
-                li.nav-item
-                  a.nav-link(href='/pages/samples/error-404.html')  404
-                li.nav-item
-                  a.nav-link(href='/pages/samples/error-500.html')  500
+                  label.col-form-label(for='team') Equipo de desarrollo:
+                  input.form-control(type='text',id='team',name='team')
+                .form-group
+                  input.btn.btn-primary(type='submit')  
+                  button.btn.btn-secondary(type='button' data-dismiss='modal') Cerrar  
+      
+      
+      
       .content-wrapper
         .row
           .col-lg-10.grid-margin.stretch-card
@@ -116,22 +101,38 @@ block content
               .card-body
                 h4.card-title Tabla de proyectos
                 .table-responsive
-                  table.table
-                    thead
-                      tr
-                        th Nombre del proyecto
-                        th Fecha de solicitud del proyecto
-                        th Fecha de arranque del proyecto
-                        th Descripcion del proyecto
-                        th Scrum Master
-                        th Product owner
-                        th Equipo de desarrollo
-                    tbody
-                      tr
-                        td #{name}
-                        td #{duedate}
-                        td #{startdate}
-                        td #{description}
-                        td #{scrum}
-                        td #{owner}
-                        td #{team}
+                  div(ip='app')
+                    table.table
+                      thead
+                        tr
+                          th Nombre del proyecto
+                          th Fecha de solicitud del proyecto
+                          th Fecha de arranque del proyecto
+                          th Descripcion del proyecto
+                          th Scrum Master
+                          th Product owner
+                          th Equipo de desarrollo
+                          th Editar
+                          th Eliminar
+                      tbody
+                        each project in projects.docs
+                          tr
+                            td #{project.name}
+                            td #{project.dueDate}
+                            td #{project.startDate}
+                            td #{project.description}
+                            td #{project.scrumMaster}
+                            td #{project.owner}
+                            td #{project.team}
+                            td                       
+                              button.btn.btn-primary.btn-xs
+                                span.glyphicon.glyphicon-pencil
+                            td                              
+                              button.btn.btn-danger.btn-xs
+                                span.glyphicon.glyphicon-trash
+                                  
+                                  
+  script(src='../../vendors/js/vendor.bundle.base.js')
+  script(src='../../vendors/js/vendor.bundle.addons.js')
+  script(src='../../js/off-canvas.js')
+  script(src='../../js/misc.js')

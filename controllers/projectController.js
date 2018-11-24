@@ -1,43 +1,112 @@
 const express = require('express');
+const Project= require('../models/project');
+const {validationResult}=require('express-validator/check');
 
 function createProject(req, res, next){
-  res.send(`Nombre del proyecto ${req.params.name},
-    Fecha de solicitud del proyecto ${req.params.duedate},
-    Fecha de arranque del proyecto ${req.params.startdate},
-    Descripción del proyecto ${req.params.description},
-    Scrum Master ${req.params.scrum},
-    Product owner ${req.params.owner},
-    Equipo de desarrollo ${req.params.team}`);
+    const errors=validationResult(req);
+    if(!errors.isEmpty()){
+      return res.status(422).json({ // El return rompe la funcion y ya no se ejecuta lo demas
+        errors:errors.array()
+      });
+    }
+
+    let project = new Project({
+      _name:req.body.name,
+      _dueDate:req.body.dueDate,
+      _startDate:req.body.startDate,
+      _description:req.body.description,
+      _scrumMaster:req.body.scrumMaster,
+      _owner:req.body.owner,
+      _team:req.body.team
+    });
+    project.save()
+        .then((obj)=>{
+            res.redirect('/projects/list');
+        })
+        .catch((err)=>{
+            res.status(500).json({
+              errors:[{message:'Algo salio mal'}],
+              data:[]
+            });
+        });
 };
 
 function indexProject(req, res, next){
-  let name = req.params.name ? req.params.name :'Sin nombre del proyecto';
-  let duedate = req.params.duedate ? req.params.duedate :'Sin fecha de entrega'
-  let startdate=req.params.startdate ? req.params.startdate :'Sin fecha de arranque'
-  let description=req.params.description ? req.params.description :'Sin descripción'
-  let scrum=req.params.scrum ? req.params.scrum :'Sin Scrum master'
-  let owner=req.params.owner ? req.params.owner :'Sin product owner'
-  let team=req.params.team ? req.params.team :'Sin equipo de desarrollo'
-  res.render('users/projects',{name:req.params.name,duedate:req.params.duedate,startdate:req.params.startdate,
-    description:req.params.description,scrum:req.params.scrum,owner:req.params.owner,team:req.params.team});
-};
+  Project.findById(req.params.id)
+      .then((obj)=>{
+        res.render('users/projects',{usuario:req.user});
+      /*  res.status(200).json({
+          errors:[],
+          data:obj,
+
+        });
+    */ })
+      .catch((err)=>{
+        res.status(500).json({
+          errors:[{message:'Algo salio mal'}],
+          data:[]
+      });
+    });
+  };
 
 function listProject(req, res, next){
-  res.send(`El proyecto con el nombre - ${req.params.name},
-    Fecha de solicitud del proyecto - ${req.params.duedate},
-    Fecha de arranque del proyecto - ${req.params.startdate},
-    Descripción del proyecto - ${req.params.description},
-    Scrum master -  ${req.params.scrum},
-    Product owner - ${req.params.owner},
-    Equipo de desarrollo -  ${req.params.team}`);
+  let page=req.params.page ? req.params.page : 1;
+
+  const options = {
+    page:page,
+    limit:5,
+    select :' _name _dueDate _startDate _description _scrumMaster _owner _team'
+  };
+  Project.paginate({},options)
+  .then((objects)=>{
+    res.render('users/projects',{usuario:req.user,projects:objects});
+  }).catch((err)=>{
+    res.status(500).json({
+      errors:[{message:'Algo salio mal'}],
+      data:[]
+    });
+  });
 };
 
 function updateProject(req, res, next){
-  res.send(`Los datos del proyecto ${req.params.name} han sido actualizados`);
+  Project.findById(req.params.id)
+  .then((obj)=>{
+    obj.name=req.body.name ? req.body.name : obj.name;
+    obj.dueDate=req.body.dueDate ? req.body.dueDate : obj.dueDate;
+    obj.startDate=req.body.startDate ? req.body.startDate : obj.startDate;
+    obj.description=req.body.description ? req.body.description : obj.description;
+    obj.scrum=req.body.scrum ? req.body.scrum : obj.scrum;
+    obj.owner=req.body.owner ? req.body.owner : obj.owner;
+    obj.team=req.body.team ? req.body.team : obj.team;
+    obj.save()
+    .then((obj)=>{
+        console.log("Todo bien");
+    }).catch((err)=>{
+      res.status(500).json({
+        errors:[{message:'Algo salio mal en la actualización'}],
+        data:[]
+    });
+
+  });
+  }).catch((err)=>{
+
+  });
 };
 
 function deleteProject(req,res,next){
-  res.send('El proyecto ha sido eliminado de manera exitosa');
+  Project.remove({_id: req.params.id})
+  .then((obj)=>{
+    res.status(200).json({
+      errors:[],
+      data:obj
+    });
+  })
+  .catch((err)=>{
+    res.status(500).json({
+      errors:[{message:'Algo salio mal'}],
+      data:[]
+    });
+  });
 };
 
 module.exports={
