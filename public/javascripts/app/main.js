@@ -5,15 +5,7 @@ const app = new Vue({
     projects:[],
     members:[],
     selected: '',
-    check:'0',
-    editmember:{
-      fullName:'',
-      birthdayDate:'',
-      curp:'',
-      rfc:'',
-      home:'',
-      abilities:''
-    }
+    check:'0'
   },
   methods:{
     // Todas las funciones comunes de la aplicacion
@@ -59,26 +51,51 @@ const app = new Vue({
         }
       }
     },
-    updateUser: function(id,name,lastName,age){
-      const datos ={
-        id:id,
-        name:name,
-        lastName:lastName,
-        age:age
-      };
-      const options={
-        method:'PUT',
-        body:JSON.stringify(datos),
-        headers:{
-          'Content-Type': 'application/json'
+    editarUsuario(){
+      if(this.check=='0'){
+        this.check='1';
+        var editableElements = document.querySelectorAll("[contentEditable=false]");
+        var iconos=document.getElementsByClassName("glyphicon-pencil");
+        document.getElementById("btneditar").classList.add('glyphicon-ok');
+        document.getElementById("btneditar").classList.remove('glyphicon-pencil');
+        for (var i = 0; i < editableElements.length; ++i) {
+            editableElements[i].setAttribute("contentEditable", true);
         }
-      };
-      fetch("/users/edit/"+id,options)
-      .then(response => response.json())
-      .then(json => {
-        this.users = json.data.docs;
-        document.location.replace('/products/blank');
-      });
+      }else if(this.check=='1'){
+        this.check='0';
+        var editableElements = document.querySelectorAll("[contentEditable=true]");
+        var iconos=document.getElementsByClassName("glyphicon-ok");
+        document.getElementById("btneditar").classList.add('glyphicon-pencil');
+        document.getElementById("btneditar").classList.remove('glyphicon-ok');
+        for (var i = 0; i < editableElements.length; ++i) {
+            editableElements[i].setAttribute("contentEditable", false);
+        }
+
+      }
+    },
+    updateUser: function(id,fullName,birthdayDate,curp,rfc,home,abilities){
+        const datos ={
+          id:id,
+          fullName:fullName,
+          birthdayDate:birthdayDate,
+          curp:curp,
+          rfc:rfc,
+          home:home,
+          abilities:abilities
+        };
+        const options={
+          method:'PUT',
+          body:JSON.stringify(datos),
+          headers:{
+            'Content-Type': 'application/json'
+          }
+        };
+        fetch("/team/update/id/"+id,options)
+        .then(response => response.json())
+        .then(json => {
+          this.members = json.data.docs;
+          document.location.replace("/team/id/"+id);
+        });
     },
     deleteUser:function(id){
       const options={

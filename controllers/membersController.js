@@ -31,15 +31,13 @@ function createMember(req, res, next){
               data:[]
             });
         });
-
-
 };
 
 function indexMember(req, res, next){
   Member.findById(req.params.id)
       .then((obj)=>{
+        console.log(obj);
         res.render('users/profile',{usuario:req.user,member:obj});
-
      })
       .catch((err)=>{
         res.status(500).json({
@@ -51,11 +49,10 @@ function indexMember(req, res, next){
 
 function listMember(req, res, next){
   let page=req.params.page ? req.params.page : 1;
-
   const options = {
     page:page,
     limit:5,
-    select :'_fullName _birthdayDate _curp _rfc _home _abilities'
+    select :'_id _fullName _birthdayDate _curp _rfc _home _abilities'
   };
   Member.paginate({},options)
   .then((objects)=>{

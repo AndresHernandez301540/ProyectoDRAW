@@ -15,13 +15,12 @@ const authCheck=(req,res,next)=>{
 router.post('/',
 authCheck,membersController.createMember);
 /* GET users listing. */
-router.get('/id/:id?',
-authCheck,membersController.indexMember);
+router.get('/id/:id?',authCheck,membersController.indexMember);
 
 router.get('/list/:page?',authCheck,membersController.listMember);
 
 
-router.put('/:id',authCheck,membersController.updateMember);
+router.put('/update/:id',authCheck,membersController.updateMember);
 
 router.delete('/:id',authCheck,membersController.deleteMember);
 
