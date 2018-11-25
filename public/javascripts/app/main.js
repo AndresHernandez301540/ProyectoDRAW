@@ -4,6 +4,7 @@ const app = new Vue({
     //Objetos que contengan informacion de la app (modelos)
     projects:[],
     members:[],
+    memberedit:[],
     selected: '',
     check:'0'
   },
@@ -22,33 +23,17 @@ const app = new Vue({
         this.check='1';
         var getIDRow=$(event.target).closest('tr').data('id');
         var indextabla=document.querySelector("#row"+getIDRow);
-        var editableElements = indextabla.querySelectorAll("[contentEditable=false]");
         var iconos=indextabla.getElementsByClassName("glyphicon-pencil");
         document.getElementById("btneditar"+getIDRow).classList.add('glyphicon-ok');
         document.getElementById("btneditar"+getIDRow).classList.remove('glyphicon-pencil');
 
-        document.getElementById("edfullName").value=document.getElementById("tblnombre"+getIDRow).innerHTML;
-        document.getElementById("edbirthdayDate").value=document.getElementById("tblbirthday"+getIDRow).innerHTML;
-        console.log(document.getElementById("tblbirthday"+getIDRow).innerHTML);
-        document.getElementById("edcurp").value=document.getElementById("tblcurp"+getIDRow).innerHTML;
-        document.getElementById("edrfc").value=document.getElementById("tblrfc"+getIDRow).innerHTML;
-        document.getElementById("edhome").value=document.getElementById("tblhome"+getIDRow).innerHTML;
-        document.getElementById("edabilities").value=document.getElementById("tblabilities"+getIDRow).innerHTML;
-
-        for (var i = 0; i < editableElements.length; ++i) {
-            editableElements[i].setAttribute("contentEditable", true);
-        }
       }else if(this.check=='1'){
 
         this.check='0';
         var getIDRow=$(event.target).closest('tr').data('id');
         var indextabla=document.querySelector("#row"+getIDRow);
-        var editableElements = indextabla.querySelectorAll("[contentEditable=true]");
         document.getElementById("btneditar"+getIDRow).classList.add('glyphicon-pencil');
         document.getElementById("btneditar"+getIDRow).classList.remove('glyphicon-ok');
-        for (var i = 0; i < editableElements.length; ++i) {
-            editableElements[i].setAttribute("contentEditable", false);
-        }
       }
     },
     editarUsuario(){
@@ -90,12 +75,61 @@ const app = new Vue({
             'Content-Type': 'application/json'
           }
         };
-        fetch("/team/update/id/"+id,options)
+        fetch("/team/update/"+id,options)
         .then(response => response.json())
         .then(json => {
           this.members = json.data.docs;
           document.location.replace("/team/id/"+id);
         });
+    },
+
+    updatemiembro(){
+      id=document.getElementById("edid").value;
+      fullName=document.getElementById("edfullName").value;
+      console.log(fullName);
+      birthdayDate=document.getElementById("edbirthdayDate").value;
+      curp=document.getElementById("edcurp").value;
+      rfc=document.getElementById("edrfc").value;
+      home=document.getElementById("edhome").value;
+      abilities=document.getElementById("edabilities").value;
+      const datos ={
+        id:id,
+        _fullName:fullName,
+        birthdayDate:birthdayDate,
+        curp:curp,
+        rfc:rfc,
+        home:home,
+        abilities:abilities
+      };
+      const options={
+        method:'PUT',
+        body:JSON.stringify(datos),
+        headers:{
+          'Content-Type': 'application/json'
+        }
+      };
+      fetch("/team/update/"+id,options)
+      .then(response => response.json())
+      .then(json => {
+        this.members = json.data.docs;
+        document.location.replace("/team/id/"+id);
+      });
+    },
+    buscar:function(id){
+      const idmiembro=id;
+      fetch("/team/buscar/"+idmiembro)
+      .then((response) => {return response.json()})
+      .then((data) => {
+        this.memberedit = data;
+        document.getElementById("edid").value=new String(this.memberedit.data._id);
+        document.getElementById("edfullName").value=new String(this.memberedit.data._fullName);
+      //  document.getElementById("edbirthdayDate").value=fechanueva;
+        document.getElementById("edcurp").value=new String(this.memberedit.data._curp);
+        document.getElementById("edrfc").value=new String(this.memberedit.data._rfc);
+        document.getElementById("edhome").value=new String(this.memberedit.data._home);
+        document.getElementById("edabilities").value=new String(this.memberedit.data._abilities);
+      });
+
     },
     deleteUser:function(id){
       const options={
@@ -121,7 +155,7 @@ const app = new Vue({
   },
   created(){
     // Aqui se ejecuta codigo al inicializar la aplicacion, como si fuera el constructor
-    fetch('/team/list/')
+    fetch('/team/obtener/')
     .then(response => response.json())
     .then(json =>{
       this.members=json.data.docs

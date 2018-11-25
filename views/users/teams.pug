@@ -101,11 +101,12 @@ block content
           .modal-dialog(role='document')
             .modal-content
               .modal-header
-                h5#exampleModalLabel.modal-title Editar Miembro
+                h5#exampleModalLabel.modal-title Editar Miembro del equipo
                 button.close(type='button' data-dismiss='modal' aria-label='Close')
                   span(aria-hidden='true') &times;
               .modal-body
-                form(action='/team/',method='PUT')
+                  .form-group
+                    input.form-control(type='text',id='edid',name='edid', hidden='true')
                   .form-group
                     label.col-form-label(for='fullName') Nombre del empleado:
                     input.form-control(type='text',id='edfullName',name='edfullName')
@@ -131,7 +132,7 @@ block content
                       option(value='Master') Master 
                     input.form-control(hidden='true',type='text',id='rank',name='rank')                     
                   .form-group                 
-                    input.btn.btn-primary(type='submit')  
+                    button.btn.btn-primary(type='button', @click='updatemiembro') Actualizar 
                     button.btn.btn-secondary(type='button' data-dismiss='modal') Cerrar 
 
         .content-wrapper
@@ -153,20 +154,19 @@ block content
                             th Editar
                             th Eliminar
                         tbody
-                          each member,index in members.docs  
-                            tr(data-id=index, id="row"+index)
+                            tr(data-id=index, id="row"+index, v-for="member,index in members")
                               td(id='tblnombre'+index, contenteditable='false') 
-                                a(href='/team/id/'+ member._id) #{member._fullName}
-                              td(id='tblbirthday'+index, contenteditable='false') #{member.birthdayDate}
-                              td(id='tblcurp'+index, contenteditable='false') #{member.curp}
-                              td(id='tblrfc'+index, contenteditable='false') #{member.rfc}
-                              td(id='tblhome'+index, contenteditable='false') #{member.home}
-                              td(id='tblabilities'+index, contenteditable='false') #{member.abilities}
+                                a(v-bind:href="'/team/id/'+member._id") {{member._fullName}}
+                              td(id='tblbirthday'+index, contenteditable='false') {{member._birthdayDate}}
+                              td(id='tblcurp'+index, contenteditable='false') {{member._curp}}
+                              td(id='tblrfc'+index, contenteditable='false') {{member._rfc}}
+                              td(id='tblhome'+index, contenteditable='false') {{member._home}}
+                              td(id='tblabilities'+index, contenteditable='false') {{member._abilities}}
                               td                       
-                                button.btn.btn-primary.btn-xs(data-toggle='modal',data-target='#editar', @click='cambiarpropiedad')
+                                button.btn.btn-primary.btn-xs(data-toggle='modal',data-target='#editar', @click='buscar(member._id); cambiarpropiedad()')
                                   span.glyphicon.glyphicon-pencil(id="btneditar"+index, data-toogle='modal', data-target='#editar')
                               td                              
                                 button.btn.btn-danger.btn-xs(id='btneliminar')
                                   span.glyphicon.glyphicon-trash
-                              
+                            
   

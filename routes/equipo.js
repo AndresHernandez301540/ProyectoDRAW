@@ -18,6 +18,8 @@ authCheck,membersController.createMember);
 router.get('/id/:id?',authCheck,membersController.indexMember);
 
 router.get('/list/:page?',authCheck,membersController.listMember);
+router.get('/buscar/:id',authCheck,membersController.BuscarMiembro);
+router.get('/obtener/:page?',authCheck,membersController.getAll);
 
 
 router.put('/update/:id',authCheck,membersController.updateMember);

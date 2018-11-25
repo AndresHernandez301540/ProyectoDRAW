@@ -1,0 +1,28 @@
+extends ../layout
+block content
+  h1 Usuarios
+  div(id='app')
+    table(id='table')
+      thead
+        tr
+          th Nombre
+          th Apellido
+          th Edad
+      tbody    
+        tr(v-for="member in members")
+          td {{member._id}}
+          td {{member._fullName}}
+          td {{member._rfc}}
+          td 
+            input(type='text', id='name', name='name',v-model='member._id')
+            br
+            input(type='text', id='lastName', name='lastName',v-model='member._id')
+            br
+            input(type='number', id='age', name='age',v-model='member._id')   
+          td
+            button(@click='updateUser(member._id,member._id,member._id,member._id)') Actualizar
+          td
+            button(@click='deleteUser(member._id)') Eliminar
+      tfoot
+        tr
+          td Copyright

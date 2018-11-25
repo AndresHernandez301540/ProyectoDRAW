@@ -36,7 +36,6 @@ function createMember(req, res, next){
 function indexMember(req, res, next){
   Member.findById(req.params.id)
       .then((obj)=>{
-        console.log(obj);
         res.render('users/profile',{usuario:req.user,member:obj});
      })
       .catch((err)=>{
@@ -65,10 +64,52 @@ function listMember(req, res, next){
   });
 };
 
+function getAll(req, res, next){
+
+  let page=req.params.page ? req.params.page : 1;
+
+  const options = {
+    page:page,
+    limit:10,
+    select :'_id _fullName _birthdayDate _curp _rfc _home _abilities'
+  };
+  Member.paginate({},options)
+  .then((objects)=>{
+    res.status(200).json({
+      errors:[],
+      data:objects
+    });
+  }).catch((err)=>{
+    res.status(500).json({
+      errors:[{message:'Algo salio mal'}],
+      data:[]
+    });
+  });
+};
+
+function BuscarMiembro(req, res, next){
+  Member.findById(req.params.id)
+      .then((obj)=>{
+        res.status(200).json({
+          errors:[],
+          data:obj
+        });
+     })
+      .catch((err)=>{
+        res.status(500).json({
+          errors:[{message:'Algo salio mal'}],
+          data:[]
+      });
+    });
+};
+
+
+
+
 function updateMember(req, res, next){
   Member.findById(req.params.id)
   .then((obj)=>{
-    obj.fullName=req.body.fullName ? req.body.fullName : obj.fullName;
+    obj._fullName=req.body._fullName ? req.body._fullName : obj.fullName;
     obj.birthdayDate=req.body.birthdayDate ? req.body.birthdayDate : obj.birthdayDate;
     obj.curp=req.body.curp ? req.body.curp : obj.curp;
     obj.rfc=req.body.rfc ? req.body.rfc : obj.rfc;
@@ -78,16 +119,18 @@ function updateMember(req, res, next){
     .then((obj)=>{
         console.log("Todo bien");
     }).catch((err)=>{
+      console.log(err);
       res.status(500).json({
         errors:[{message:'Algo salio mal en la actualización'}],
         data:[]
     });
-
   });
   }).catch((err)=>{
 
   });
 };
+
+
 
 function deleteMember(req,res,next){
   Member.remove({_id: req.params.id})
@@ -110,5 +153,7 @@ module.exports={
   indexMember,
   listMember,
   updateMember,
+  BuscarMiembro,
+  getAll,
   deleteMember
 };
