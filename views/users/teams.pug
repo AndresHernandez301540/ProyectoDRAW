@@ -160,7 +160,7 @@ block content
                                 button.btn.btn-primary.btn-xs(data-toggle='modal',data-target='#editar', @click='buscar(member._id)')
                                   span.glyphicon.glyphicon-pencil(id="btneditar"+index, data-toogle='modal', data-target='#editar')
                               td                              
-                                button.btn.btn-danger.btn-xs(id='btneliminar')
+                                button.btn.btn-danger.btn-xs(id='btneliminar', @click='deleteUser(member._id)')
                                   span.glyphicon.glyphicon-trash
                             
   

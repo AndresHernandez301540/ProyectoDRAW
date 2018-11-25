@@ -5,6 +5,7 @@ const app = new Vue({
       projects:[],
       members:[],
       memberedit:[],
+      projectedit:[],
       selected: '',
       check:'0'
     },
@@ -13,24 +14,7 @@ const app = new Vue({
       valor(){
         document.getElementById("rank").value=this.selected;
         return this.selected;
-      },/*
-      cambiarpropiedad(){
-
-        if(this.check=='0'){
-          this.check='1';
-          var getIDRow=$(event.target).closest('tr').data('id');
-          var indextabla=document.querySelector("#row"+getIDRow);
-          var iconos=indextabla.getElementsByClassName("glyphicon-pencil");
-          document.getElementById("btneditar"+getIDRow).classList.add('glyphicon-ok');
-          document.getElementById("btneditar"+getIDRow).classList.remove('glyphicon-pencil');
-        }else if(this.check=='1'){
-          this.check='0';
-          var getIDRow=$(event.target).closest('tr').data('id');
-          var indextabla=document.querySelector("#row"+getIDRow);
-          document.getElementById("btneditar"+getIDRow).classList.add('glyphicon-pencil');
-          document.getElementById("btneditar"+getIDRow).classList.remove('glyphicon-ok');
-        }
-      },*/
+      },
       updatemiembro(){
         id=document.getElementById("edid").value;
         fullName=document.getElementById("edfullName").value;
@@ -79,7 +63,6 @@ const app = new Vue({
         });
 
       },
-
       deleteUser:function(id){
         const options={
           method:'DELETE',
@@ -87,13 +70,64 @@ const app = new Vue({
             'Content-Type': 'application/json'
           }
         };
-        fetch("/users/delete/"+id,options)
+        fetch("/team/delete/"+id,options)
         .then(response => response.json())
         .then(json => {
-          this.users = json.data.docs;
-
+          this.members = json.data.docs;
         });
-      }
+        (window.location="/team/list")
+      },
+
+      buscarproyecto:function(id){
+        fetch("/projects/buscar/"+id)
+        .then((response) => {return response.json()})
+        .then((data) =>{
+          this.projectedit=data;
+          document.getElementById("edid").value=new String(this.projectedit.data._id);
+          document.getElementById("edname").value=new String(this.projectedit.data._name);
+        //  document.getElementById("edbirthdayDate").value=fechanueva;
+          document.getElementById("eddescription").value=new String(this.projectedit.data._description);
+          document.getElementById("edscrumMaster").value=new String(this.projectedit.data._scrumMaster);
+          document.getElementById("edowner").value=new String(this.projectedit.data._owner);
+          document.getElementById("edteam").value=new String(this.projectedit.data._team);
+        });
+      },
+      updateproyecto(){
+        console.log("asdasd");
+        id=document.getElementById("edid").value;
+        name=document.getElementById("edname").value;
+        dueDate=document.getElementById("eddueDate").value;
+        startDate=document.getElementById("edstartDate").value;
+        description=document.getElementById("eddescription").value;
+        master=document.getElementById("edscrumMaster").value;
+        owner=document.getElementById("edowner").value;
+        team=document.getElementById("edteam").value;
+        const datos ={
+          id:id,
+          name:name,
+          dueDate:dueDate,
+          startDate:startDate,
+          description:description,
+          master:master,
+          owner:owner,
+          team:team
+        };
+        console.log(datos);
+        const options={
+          method:'PUT',
+          body:JSON.stringify(datos),
+          headers:{
+            'Content-Type': 'application/json'
+          }
+        };
+        fetch("/projects/update/"+id,options)
+        .then(response => response.json())
+        .then(json => {
+          this.projects = json.data.docs;
+        });
+        (window.location="/projects/list")
+      },
+
     },
     computed:{
       // Funciones que podran ser desplegables en las vistas
@@ -107,6 +141,11 @@ const app = new Vue({
       .then(response => response.json())
       .then(json =>{
         this.members=json.data.docs
+      });
+      fetch('/projects/obtener/')
+      .then(response => response.json())
+      .then(json =>{
+        this.projects=json.data.docs
       });
     }
   });

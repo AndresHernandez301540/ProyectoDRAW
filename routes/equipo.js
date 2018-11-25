@@ -24,6 +24,6 @@ router.get('/obtener/:page?',authCheck,membersController.getAll);
 
 router.put('/update/:id',authCheck,membersController.updateMember);
 
-router.delete('/:id',authCheck,membersController.deleteMember);
+router.delete('/delete/:id',authCheck,membersController.deleteMember);
 
 module.exports = router;

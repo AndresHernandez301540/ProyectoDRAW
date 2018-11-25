@@ -103,12 +103,10 @@ function BuscarMiembro(req, res, next){
     });
 };
 
-
-
-
 function updateMember(req, res, next){
   Member.findById(req.params.id)
   .then((obj)=>{
+    console.log(obj);
     obj._fullName=req.body._fullName ? req.body._fullName : obj.fullName;
     obj.birthdayDate=req.body.birthdayDate ? req.body.birthdayDate : obj.birthdayDate;
     obj.curp=req.body.curp ? req.body.curp : obj.curp;
@@ -117,6 +115,7 @@ function updateMember(req, res, next){
     obj.abilities=req.body.abilities ? req.body.abilities : obj.abilities;
     obj.save()
     .then((obj)=>{
+      console.log(obj);
       res.status(200).json({
         errors:[],
         data:obj

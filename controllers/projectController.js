@@ -34,13 +34,8 @@ function createProject(req, res, next){
 function indexProject(req, res, next){
   Project.findById(req.params.id)
       .then((obj)=>{
-        res.render('users/projects',{usuario:req.user});
-      /*  res.status(200).json({
-          errors:[],
-          data:obj,
-
-        });
-    */ })
+        res.render('users/projects',{usuario:req.user,projects:obj});
+      })
       .catch((err)=>{
         res.status(500).json({
           errors:[{message:'Algo salio mal'}],
@@ -66,6 +61,43 @@ function listProject(req, res, next){
       data:[]
     });
   });
+};
+
+function getAll(req, res, next){
+  let page=req.params.page ? req.params.page : 1;
+  const options = {
+    page:page,
+    limit:10,
+    select :'_id _name _dueDate _startDate _description _scrumMaster _owner _team'
+  };
+  Project.paginate({},options)
+  .then((objects)=>{
+    res.status(200).json({
+      errors:[],
+      data:objects
+    });
+  }).catch((err)=>{
+    res.status(500).json({
+      errors:[{message:'Algo salio mal'}],
+      data:[]
+    });
+  });
+};
+
+function BuscarProject(req, res, next){
+  Project.findById(req.params.id)
+      .then((obj)=>{
+        res.status(200).json({
+          errors:[],
+          data:obj
+        });
+     })
+      .catch((err)=>{
+        res.status(500).json({
+          errors:[{message:'Algo salio mal'}],
+          data:[]
+      });
+    });
 };
 
 function updateProject(req, res, next){
@@ -113,6 +145,8 @@ module.exports={
   createProject,
   indexProject,
   listProject,
+  BuscarProject,
+  getAll,
   updateProject,
   deleteProject
 };

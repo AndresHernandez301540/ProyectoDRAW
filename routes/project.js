@@ -16,15 +16,12 @@ const authCheck=(req,res,next)=>{
 router.post('/',
 authCheck,projectController.createProject);
 /* GET users listing. */
-router.get('/id/:id?',
-authCheck,projectController.indexProject);
-
+router.get('/id/:id?',authCheck,projectController.indexProject);
 router.get('/list/:page?',authCheck,projectController.listProject);
+router.get('/obtener/:page?',authCheck,projectController.getAll);
+router.get('/buscar/:id',authCheck,projectController.BuscarProject);
+router.put('/update/:id',authCheck,projectController.updateProject);
 
-
-
-router.put('/:id',authCheck,projectController.updateProject);
-
-router.delete('/:id',authCheck,projectController.deleteProject);
+router.delete('/delete/:id',authCheck,projectController.deleteProject);
 
 module.exports = router;
