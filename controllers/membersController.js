@@ -117,7 +117,10 @@ function updateMember(req, res, next){
     obj.abilities=req.body.abilities ? req.body.abilities : obj.abilities;
     obj.save()
     .then((obj)=>{
-        console.log("Todo bien");
+      res.status(200).json({
+        errors:[],
+        data:obj
+    });
     }).catch((err)=>{
       console.log(err);
       res.status(500).json({

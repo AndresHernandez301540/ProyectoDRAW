@@ -98,36 +98,3 @@ block content
                                   
                     .col-xs-12.col-sm-12.col-md-6.col-lg-6.col-xs-offset-0.col-sm-offset-0.col-md-offset-3.col-lg-offset-3.toppad                                          
                       input(type='submit')
-
-
-                      table.table.table-user-information
-                        tbody
-                          tr(v-for="member in members")
-                            td {{member._fullName}}
-                            td 
-                              input.form-control(type='text',id='fullName',name='fullName' value=member._fullName)
-                          tr  
-                            td Fecha de cumpleaños
-                            td 
-                              input.form-control(type='text',id='birthdayDate',name='birthdayDate', value=member.birthdayDate)
-                          tr
-                            td Curp
-                            td
-                              input.form-control(type='text',id='curp',name='curp', value=member.curp)
-                          tr
-                            td RFC
-                            td
-                              input.form-control(type='text',id='rfc',name='rfc', value=member.rfc)
-                          tr
-                            td Dirección
-                            td
-                              input.form-control(type='text',id='home',name='home', value=member.home)
-                            td(hidden='true')
-                              input.form-control(type='text',id='id',name='id', value=member.id)
-                          tr
-                            td Habilidades
-                            td
-                              input.form-control(type='text',id='abilities',name='abilities', value=member.abilities)
-                            
-              .col-xs-12.col-sm-12.col-md-6.col-lg-6.col-xs-offset-0.col-sm-offset-0.col-md-offset-3.col-lg-offset-3.toppad                                          
-                input(type='submit')
