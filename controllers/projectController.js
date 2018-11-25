@@ -19,6 +19,7 @@ function createProject(req, res, next){
       _owner:req.body.owner,
       _team:req.body.team
     });
+
     project.save()
         .then((obj)=>{
             res.redirect('/projects/list');

@@ -10,17 +10,32 @@ function createFrente(req, res, next){
       });
     }
 
-    let frente = new Frente({
+    let frente = new Tarjeta({
       _nombre:req.body.nombre,
       _como:req.body.como,
       _quiero:req.body.quiero,
       _manera:req.body.manera,
       _prioridad:req.body.prioridad,
-      _tamaño:req.body.tamaño
+      _tamaño:req.body.tamaño,
+
+      _dado:req.body.dado,
+      _cuando:req.body.cuando,
+      _entonces:req.body.entonces
     });
+
+    project.save()
+        .then((obj)=>{
+            res.redirect('/dashboard');
+        })
+        .catch((err)=>{
+            res.status(500).json({
+              errors:[{message:'Algo salio mal'}],
+              data:[]
+            });
+        });
 
   };
 
   module.exports={
-    
+
   };

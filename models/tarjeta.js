@@ -8,7 +8,10 @@ const schema = Schema({
   _quiero:String,
   _manera:String,
   _prioridad:String,
-  _tamaño:String
+  _tamaño:String,
+  _dado:String,
+  _cuando:String,
+  _entonces:String
 });
 
 class Frente {
@@ -19,6 +22,10 @@ class Frente {
     _manera=manera;
     _prioridad=prioridad;
     _tamaño=tamaño;
+
+    _dado=dado;
+    _cuando=cuando;
+    _entonces=entonces;
   }
 
   get nombre(){
@@ -59,7 +66,26 @@ class Frente {
     this._tamaño=v;
   }
 
+  get dado(){
+    return this._dado;
+  }
+  set dado(v){
+    this._dado=v;
+  }
+  get cuando(){
+    return this._cuando;
+  }
+  set cuando(v){
+    this._cuando=v;
+  }
+  get entonces(){
+    return this._entonces;
+  }
+  set entonces(v){
+    this._entonces=v;
+  }
+
 }
 schema.plugin(mongoosePaginate);
-schema.loadClass(Frente);
-module.exports=mongoose.model('Frente', schema);
+schema.loadClass(Tarjeta);
+module.exports=mongoose.model('Tarjeta', schema);
