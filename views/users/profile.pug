@@ -1,6 +1,5 @@
 extends ../layout
 block content
-  form(action="/team/update/",method='PUT')
     div(id='app')
       .container-scroller
         nav.navbar.default-layout.col-lg-12.col-12.p-0.fixed-top.d-flex.flex-row
@@ -69,7 +68,7 @@ block content
                           .col-md-9.col-lg-9
                             table.table.table-user-information
                               tbody
-                                trbaby
+                                tr
                                   td Nombre completo:
                                   td 
                                     input.form-control(type='text',id='fullName',name='fullName' value=member._fullName)
@@ -97,4 +96,5 @@ block content
                                     input.form-control(type='text',id='abilities',name='abilities', value=member.abilities)
                                   
                     .col-xs-12.col-sm-12.col-md-6.col-lg-6.col-xs-offset-0.col-sm-offset-0.col-md-offset-3.col-lg-offset-3.toppad                                          
-                      input(type='submit')
+                    button.btn.btn-primary.btn-xs(@click='profile')
+                      span.glyphicon.glyphicon-pencil(id="btneditar"+index)

@@ -35,7 +35,7 @@ function createMember(req, res, next){
 
 function indexMember(req, res, next){
   Member.findById(req.params.id)
-      .then((obj)=>{
+      .then((obj)=>{        
         res.render('users/profile',{usuario:req.user,member:obj});
      })
       .catch((err)=>{
