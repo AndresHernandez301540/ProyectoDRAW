@@ -11,6 +11,7 @@ function createFrente(req, res, next){
     }
 
     let frente = new Frente({
+      _nombre:req.body.nombre,
       _como:req.body.como,
       _quiero:req.body.quiero,
       _manera:req.body.manera,
@@ -18,4 +19,8 @@ function createFrente(req, res, next){
       _tamaño:req.body.tamaño
     });
 
+  };
+
+  module.exports={
+    
   };

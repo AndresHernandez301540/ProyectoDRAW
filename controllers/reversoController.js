@@ -11,6 +11,7 @@ function createReverso(req, res, next){
     }
 
     let frente = new Frente({
+      _nombre:req.body.nombre,
       _dado:req.body.dado,
       _cuando:req.body.cuando,
       _entonces:req.body.entonces

@@ -170,6 +170,9 @@ block content
               .modal-body
                 form(action='/projects/',method='POST')
                   .form-group
+                    label.col-form-label(for='nombre') Nombre de la historia:
+                    input.form-control(type='text', id='name', name='name')
+                  .form-group
                     label.col-form-label(for='como') Como:
                     textarea.form-control(id='como',name='como')
                     label.col-form-label(for='quiero') Quiero:

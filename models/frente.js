@@ -3,6 +3,7 @@ const Schema = mongoose.Schema; // MODELO ES5 DE MONGOOSE
 const mongoosePaginate = require('mongoose-paginate-v2');
 
 const schema = Schema({
+  _nombre: String,
   _como:String,
   _quiero:String,
   _manera:String,
@@ -12,11 +13,19 @@ const schema = Schema({
 
 class Frente {
   constructor(como,quiero,manera,prioridad,tamaño) {
+    _nombre=nombre;
     _como=como;
     _quiero=quiero;
     _manera=manera;
     _prioridad=prioridad;
     _tamaño=tamaño;
+  }
+
+  get nombre(){
+    return this._nombre;
+  }
+  set nombre(v){
+    this._nombre=v;
   }
 
   get como(){
