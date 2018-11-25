@@ -150,7 +150,7 @@ block content
                         tbody
                             tr(data-id=index, id="row"+index, v-for="member,index in members")
                               td(id='tblnombre'+index, contenteditable='false') 
-                                a(v-bind:href="'/team/id/'+member._id") {{member._fullName}}
+                                a(@click='profile(member._id)', v-bind:href="'/team/id/'+member._id") {{member._fullName}}
                               td(id='tblbirthday'+index, contenteditable='false') {{member._birthdayDate}}
                               td(id='tblcurp'+index, contenteditable='false') {{member._curp}}
                               td(id='tblrfc'+index, contenteditable='false') {{member._rfc}}

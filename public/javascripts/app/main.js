@@ -5,7 +5,7 @@ const app = new Vue({
       projects:[],
       members:[],
       memberedit:[],
-      projectedit:[],
+      membereditprof:[],
       selected: '',
       check:'0'
     },
@@ -137,8 +137,33 @@ const app = new Vue({
           this.projects = json.data.docs;
         });
         (window.location="/projects/list")
-      }
+      },
 
+      profile(){
+        var idprofile=document.getElementById("id").value;
+        const datos={
+          id:document.getElementById("id").value,
+          _fullName:document.getElementById("fullName").value,
+          birthdayDate:document.getElementById("birthdayDate").value,
+          curp:document.getElementById("curp").value,
+          rfc:document.getElementById("rfc").value,
+          home:document.getElementById("home").value,
+          abilities:document.getElementById("abilities").value
+        }
+        const options={
+          method:'PUT',
+          body:JSON.stringify(datos),
+          headers:{
+            'Content-Type': 'application/json'
+          }
+        };
+        fetch("/team/update/"+idprofile,options)
+        .then(response => response.json())
+        .then(json => {
+          this.members = json.data.docs;
+        });
+        (window.location="/team/list")
+      }
 
     },
     computed:{
