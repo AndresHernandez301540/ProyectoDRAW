@@ -85,7 +85,6 @@ const app = new Vue({
           this.projectedit=data;
           document.getElementById("edid").value=new String(this.projectedit.data._id);
           document.getElementById("edname").value=new String(this.projectedit.data._name);
-        //  document.getElementById("edbirthdayDate").value=fechanueva;
           document.getElementById("eddescription").value=new String(this.projectedit.data._description);
           document.getElementById("edscrumMaster").value=new String(this.projectedit.data._scrumMaster);
           document.getElementById("edowner").value=new String(this.projectedit.data._owner);
@@ -93,7 +92,6 @@ const app = new Vue({
         });
       },
       updateproyecto(){
-        console.log("asdasd");
         id=document.getElementById("edid").value;
         name=document.getElementById("edname").value;
         dueDate=document.getElementById("eddueDate").value;
@@ -112,7 +110,6 @@ const app = new Vue({
           owner:owner,
           team:team
         };
-        console.log(datos);
         const options={
           method:'PUT',
           body:JSON.stringify(datos),
@@ -127,6 +124,21 @@ const app = new Vue({
         });
         (window.location="/projects/list")
       },
+      deleteproyecto:function(id){
+        const options={
+          method:'DELETE',
+          headers:{
+            'Content-Type': 'application/json'
+          }
+        };
+        fetch("/projects/delete/"+id,options)
+        .then(response => response.json())
+        .then(json => {
+          this.projects = json.data.docs;
+        });
+        (window.location="/projects/list")
+      }
+
 
     },
     computed:{
