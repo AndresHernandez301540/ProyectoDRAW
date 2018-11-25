@@ -9,6 +9,7 @@ const schema = Schema({
   _manera:String,
   _prioridad:String,
   _tamaño:String,
+  _unidad:String,
   _dado:String,
   _cuando:String,
   _entonces:String
@@ -22,6 +23,7 @@ class Frente {
     _manera=manera;
     _prioridad=prioridad;
     _tamaño=tamaño;
+    _unidad=unidad;
 
     _dado=dado;
     _cuando=cuando;
@@ -64,6 +66,12 @@ class Frente {
   }
   set tamaño(v){
     this._tamaño=v;
+  }
+  get unidad(){
+    return this._unidad;
+  }
+  set unidad(v){
+    this._unidad=v;
   }
 
   get dado(){

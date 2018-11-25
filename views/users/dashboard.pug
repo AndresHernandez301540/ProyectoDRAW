@@ -72,35 +72,29 @@ block content
                       table.table
                         thead
                           tr
-                            th Tarea
+                            th Nombre
+                            th Como
+                            th Quiero
+                            th De tal manera
                             th Prioridad
-                            th Tiempo Est.
-                            th Estado
+                            th Tamaño
+                            th
                         tbody
-                          tr
-                            td Enlazar a la base de datos
-                            td 4
-                            td 1 hr
-                            td
-                              label.badge.badge-danger Pending
-                          tr
-                            td Creacion de tarjetas
-                            td 5
-                            td 10 hrs
-                            td
-                              label.badge.badge-danger Pending
-                          tr
-                            td Conectar con redes sociales
-                            td 2
-                            td 10 hrs.
-                            td
-                              label.badge.badge-danger Pending
-                          tr
-                            td Estimaciones de tiempo
-                            td 2
-                            td 8 hrs
-                            td
-                              label.badge.badge-danger Pending
+                          tr(data-id=index, id="row"+index, v-for="project,index in projects")
+                            td(id='tblnombre'+index) 
+                              a(v-bind:href="'/dashboard'") {{tarjeta._nombre}}
+                            td(id='tblcomo'+index)  {{tarjeta._como}}
+                            td(id='tblquiero'+index)  {{tarjeta._quiero}}
+                            td(id='tblmanera'+index)  {{tarjeta._manera}}
+                            td(id='tblprioridad'+index)  {{tarjeta._prioridad}}
+                            td(id='tbltamaño'+index)  {{tarjeta._tamaño}}
+                            td(id='tblunidad'+index)  {{tarjeta._unidad}}
+                            td                       
+                              button.btn.btn-primary.btn-xs(data-toggle='modal',data-target='#editar', @click='buscarproyecto(project._id)')
+                                span.glyphicon.glyphicon-pencil
+                            td                              
+                              button.btn.btn-danger.btn-xs(@click='deleteproyecto(project._id)')
+                                span.glyphicon.glyphicon-trash
 
               .col-lg-6.grid-margin.stretch-card
                 .card
@@ -171,7 +165,7 @@ block content
                 form(action='/projects/',method='POST')
                   .form-group
                     label.col-form-label(for='nombre') Nombre de la historia:
-                    input.form-control(type='text', id='name', name='name')
+                    input.form-control(type='text', id='nombre', name='nombre')
                   .form-group
                     label.col-form-label(for='como') Como:
                     textarea.form-control(id='como',name='como')
@@ -209,11 +203,11 @@ block content
                       option(value='21') 21
                       option(value='34') 34
                       
-                    label.col-form-label(for= 'tamaño') Tipo:
-                    select.form-control(id='tamaño', name='tamaño')
+                    label.col-form-label(for= 'unidad') Tipo:
+                    select.form-control(id='unidad', name='unidad')
                       option(value='hrs') horas
                       option(value='dias') dias
-                      option(value='mes') meses
+                      option(value='meses') meses
                   .form-group
                     input.btn.btn-primary(type='submit')
                     button.btn.btn-secondary(type='button' data-dismiss='modal') Cerrar

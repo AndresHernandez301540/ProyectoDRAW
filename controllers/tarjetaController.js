@@ -17,6 +17,7 @@ function createTarjeta(req, res, next){
       _manera:req.body.manera,
       _prioridad:req.body.prioridad,
       _tamaño:req.body.tamaño,
+      _unidad:req.body.unidad,
 
       _dado:req.body.dado,
       _cuando:req.body.cuando,
@@ -55,7 +56,7 @@ function listTarjeta(req, res, next){
   const options = {
     page:page,
     limit:5,
-    select :' _nombre _como _quiero _manera _prioridad _tamaño _dado _cuando _entonces'
+    select :' _nombre _como _quiero _manera _prioridad _tamaño _unidad _dado _cuando _entonces'
   };
   Project.paginate({},options)
   .then((objects)=>{
@@ -73,7 +74,7 @@ function getAll(req, res, next){
   const options = {
     page:page,
     limit:10,
-    select :'_id _nombre _como _quiero _manera _prioridad _tamaño _dado _cuando _entonces'
+    select :'_id _nombre _como _quiero _manera _prioridad _tamaño _unidad _dado _cuando _entonces'
   };
   Project.paginate({},options)
   .then((objects)=>{
@@ -98,6 +99,7 @@ function updateTarjeta(req, res, next){
     obj.manera=req.body.manera ? req.body.manera : obj.manera;
     obj.prioridad=req.body.prioridad ? req.body.prioridad : obj.prioridad;
     obj.tamaño=req.body.tamaño ? req.body.tamaño : obj.tamaño;
+    obj.unidad=req.body.unidad ? req.body.unidad : obj.unidad;
     obj.dado=req.body.dado ? req.body.dado : obj.dado;
     obj.cuando=req.body.cuando ? req.body.cuando : obj.cuando;
     obj.entonces=req.body.entonces ? req.body.entonces : obj.entonces;
