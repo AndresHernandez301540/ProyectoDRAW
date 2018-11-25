@@ -49,7 +49,7 @@ block content
                       small.designation.text-muted #{usuario.role}
                       span.status-indicator.online
                 button.btn.btn-success.btn-block(type='button' data-toggle='modal' data-target='#myModal')
-                  | Proyecto Nuevo
+                  | Crear Tarjeta
                   i.mdi.mdi-plus
             li.nav-item
               a.nav-link(href='/team/list')
@@ -62,7 +62,7 @@ block content
 
         .main-panel
           .content-wrapper
-            strong NOMBRE DEL PROYECTO
+            strong PROYECTO DE PRUEBA
             .row
               .col-lg-6.grid-margin.stretch-card
                 .card
@@ -164,32 +164,53 @@ block content
           .modal-dialog(role='document')
             .modal-content
               .modal-header
-                h5#exampleModalLabel.modal-title Crear proyecto
+                h5#exampleModalLabel.modal-title Crear historia de usuario
                 button.close(type='button' data-dismiss='modal' aria-label='Close')
                   span(aria-hidden='true') &times;
               .modal-body
                 form(action='/projects/',method='POST')
                   .form-group
-                    label.col-form-label(for='nombre') Nombre del proyecto:
-                    input.form-control(type='text', id='name', name='name')
-                    .form-group
-                    label.col-form-label(for='duedate') Fecha de solicitud del proyecto:
-                    input.form-control(type='date', id='dueDate',name='dueDate')
+                    label.col-form-label(for='como') Como:
+                    textarea.form-control(id='como',name='como')
+                    label.col-form-label(for='quiero') Quiero:
+                    textarea.form-control(id='quiero',name='quiero')
                   .form-group
-                    label.col-form-label(for='startdate') Fecha de arranque del proyecto:
-                    input.form-control(type='date', id='startDate',name='startDate')
+                    label.col-form-label(for='manera') De tal manera:
+                    textarea.form-control(id='manera',name='manera')
                   .form-group
-                    label.col-form-label(for='description') Descripcion del proyecto:
-                    textarea.form-control(id='description',name='description')
+                    label.col-form-label(for='dado') Dado:
+                    textarea.form-control(id='dado',name='dado')
                   .form-group
-                    label.col-form-label(for='scrumMaster') Scrum master:
-                    input.form-control(type='text',id='scrumMaster',name='scrumMaster', value=usuario.fullName)
+                    label.col-form-label(for='cuando') Cuando:
+                    textarea.form-control(id='cuando',name='cuando')
                   .form-group
-                    label.col-form-label(for='owner') Product Owner:
-                    input.form-control(type='text',id='owner',name='owner')
+                    label.col-form-label(for='entonces') Entonces:
+                    textarea.form-control(id='entonces',name='entonces')
+              
                   .form-group
-                    label.col-form-label(for='team') Equipo de desarrollo:
-                    input.form-control(type='text',id='team',name='team')
+                    label.col-form-label(for= 'prioridad') Prioridad:
+                    select.form-control(id='prioridad', name='prioridad')
+                      option(value='1') 1
+                      option(value='2') 2
+                      option(value='3') 3
+                      
                   .form-group
-                    input.btn.btn-primary(type='submit')  
-                    button.btn.btn-secondary(type='button' data-dismiss='modal') Cerrar  
+                    label.col-form-label(for= 'tamaño') Tamaño:
+                    select.form-control(id='tamaño', name='tamaño')
+                      option(value='1') 1
+                      option(value='2') 2
+                      option(value='3') 3
+                      option(value='5') 5
+                      option(value='8') 8
+                      option(value='13') 13
+                      option(value='21') 21
+                      option(value='34') 34
+                      
+                    label.col-form-label(for= 'tamaño') Tipo:
+                    select.form-control(id='tamaño', name='tamaño')
+                      option(value='hrs') horas
+                      option(value='dias') dias
+                      option(value='mes') meses
+                  .form-group
+                    input.btn.btn-primary(type='submit')
+                    button.btn.btn-secondary(type='button' data-dismiss='modal') Cerrar
