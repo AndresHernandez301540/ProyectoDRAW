@@ -73,11 +73,14 @@ function getAll(req, res, next){
   };
   Project.paginate({},options)
   .then((objects)=>{
+    console.log(objects);
+    console.log("asd");
     res.status(200).json({
       errors:[],
       data:objects
     });
   }).catch((err)=>{
+    console.log(err);
     res.status(500).json({
       errors:[{message:'Algo salio mal'}],
       data:[]

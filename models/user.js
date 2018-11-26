@@ -4,23 +4,33 @@ const mongoosePaginate = require('mongoose-paginate-v2');
 
 const schema = Schema({
   _fullName:String,
-  _birthdayDate:Date,
+  _birthdayDate:String,
+  _email:String,
+  _password:String,
   _role:String,
   _socialId:String,
+  _googleId:String,
+  _facebookId:String,
+  _twitterId:String,
   _thumbnail:String,
   _curp:String,
   _rfc:String,
   _home:String,
   _completeprof:String,
-  _abilities:String
+  _abilities:[]
 });
 
 class User{
- constructor(fullName,birthdayDate,role,socialId,thumbnail,curp,rfc,home,completeprof,abilities){
+ constructor(fullName,email,password,birthdayDate,role,socialId,googleId,facebookId,twitterId,thumbnail,curp,rfc,home,completeprof,abilities){
    _fullName=fullName;
+   _email:email;
+   _password:password;
    _birthdayDate=birthdayDate;
    _role=role;
    _socialId:socialId;
+   _googleId:googleId;
+   _facebookId:facebookId;
+   _twitterId:twitterId;
    _thumbnail:thumbnail;
    _curp=curp;
    _rfc=rfc;
@@ -34,6 +44,18 @@ class User{
  }
  set fullName(v){
    this._fullName=v;
+ }
+ get email(){
+   return this._email;
+ }
+ set email(v){
+   this._email=v;
+ }
+ get password(){
+   return this._password;
+ }
+ set password(v){
+   this._password=v;
  }
  get birthdayDate(){
    return this._birthdayDate;
@@ -52,6 +74,24 @@ class User{
  }
  set socialId(v){
    this._socialId=v;
+ }
+ get googleId(){
+   return this._googleId;
+ }
+ set googleId(v){
+   this._googleId=v;
+ }
+ get facebookId(){
+   return this._facebookId;
+ }
+ set facebookId(v){
+   this._facebookId=v;
+ }
+ get twitterId(){
+   return this._twitterId;
+ }
+ set twitterId(v){
+   this._twitterId=v;
  }
  get thumbnail(){
    return this._thumbnail;

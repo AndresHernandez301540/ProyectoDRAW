@@ -6,6 +6,7 @@ const app = new Vue({
       users:[],
       useredit:[],
       usereditprof:[],
+      stories:[],
       selected: '',
       miembro:'',
       check:'0'
@@ -23,7 +24,6 @@ const app = new Vue({
       updatemiembro(){
         id=document.getElementById("edid").value;
         fullName=document.getElementById("edfullName").value;
-        console.log(fullName);
         birthdayDate=document.getElementById("edbirthdayDate").value;
         curp=document.getElementById("edcurp").value;
         rfc=document.getElementById("edrfc").value;
@@ -60,7 +60,7 @@ const app = new Vue({
           this.useredit = data;
           document.getElementById("edid").value=new String(this.useredit.data._id);
           document.getElementById("edfullName").value=new String(this.useredit.data._fullName);
-        //  document.getElementById("edbirthdayDate").value=fechanueva;
+          document.getElementById("edbirthdayDate").value=new String(this.useredit.data._birthdayDate);
           document.getElementById("edcurp").value=new String(this.useredit.data._curp);
           document.getElementById("edrfc").value=new String(this.useredit.data._rfc);
           document.getElementById("edhome").value=new String(this.useredit.data._home);
@@ -89,6 +89,8 @@ const app = new Vue({
         .then((data) =>{
           this.projectedit=data;
           document.getElementById("edid").value=new String(this.projectedit.data._id);
+          document.getElementById("eddueDate").value=new String(this.projectedit.data._startDate);
+          document.getElementById("edstartDate").value=new String(this.projectedit.data._dueDate);
           document.getElementById("edname").value=new String(this.projectedit.data._name);
           document.getElementById("eddescription").value=new String(this.projectedit.data._description);
           document.getElementById("edscrumMaster").value=new String(this.projectedit.data._scrumMaster);
@@ -189,5 +191,10 @@ const app = new Vue({
       .then(json =>{
         this.projects=json.data.docs
       });
+      fetch('/projects/stoall')
+      .then(response => response.json())
+      .then(json =>{
+        this.stories=json.data.docs
+      })
     }
   });

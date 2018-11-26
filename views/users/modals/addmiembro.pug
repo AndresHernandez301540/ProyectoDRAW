@@ -1,0 +1,36 @@
+#myModal.modal(tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true')
+  .modal-dialog(role='document')
+    .modal-content
+      .modal-header
+        h5#exampleModalLabel.modal-title Añadir Miembro
+        button.close(type='button' data-dismiss='modal' aria-label='Close')
+          span(aria-hidden='true') &times;
+      .modal-body
+        form(action='/team/',method='POST')
+          .form-group
+            label.col-form-label(for='fullName') Nombre del empleado:
+            input.form-control(type='text',id='fullName',name='fullName')
+          .form-group
+            label.col-form-label(for='birthdayDate') Fecha de nacimiento:
+            input.form-control(type='date',id='birthdayDate',name='birthdayDate')
+          .form-group
+            label.col-form-label(for='curp') CURP:
+            input.form-control(type='text',id='curp',name='curp')
+          .form-group
+            label.col-form-label(for='rfc') RFC:
+            input.form-control(type='text',id='rfc',name='rfc')
+          .form-group
+            label.col-form-label(for='home') Domicilio:
+            input.form-control(type='text',id='home',name='home')
+          .form-group
+            label.col-form-label(for='recipient-name') Lista de habilidades:
+            textarea.form-control(id='abilities',name='abilities')
+          .form-group
+            select.custom-select(id='rank2', @change='valor' v-model='selected')
+              option(value='Junior') Junior
+              option(Value='Senior') Senior
+              option(value='Master') Master 
+            input.form-control(hidden='true',type='text',id='rank',name='rank')                     
+          .form-group                 
+            input.btn.btn-primary(type='submit')  
+            button.btn.btn-secondary(type='button' data-dismiss='modal') Cerrar  

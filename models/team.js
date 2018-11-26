@@ -4,7 +4,7 @@ const mongoosePaginate = require('mongoose-paginate-v2');
 
 const schema = Schema({
   _developmentTeam:String,
-  _memberTeam:String
+  _memberTeam:[]
 });
 
 class Team{

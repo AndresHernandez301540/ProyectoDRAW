@@ -1,5 +1,5 @@
 const express = require('express');
-const Frente = require('../models/frente');
+const Tarjeta = require('../models/tarjeta');
 const {validationResult}=require('express-validator/check');
 
 function createTarjeta(req, res, next){
@@ -10,7 +10,7 @@ function createTarjeta(req, res, next){
       });
     }
 
-    let frente = new Tarjeta({
+    let tarjeta = new Tarjeta({
       _nombre:req.body.nombre,
       _como:req.body.como,
       _quiero:req.body.quiero,
@@ -24,7 +24,7 @@ function createTarjeta(req, res, next){
       _entonces:req.body.entonces
     });
 
-    project.save()
+    tarjeta.save()
         .then((obj)=>{
             res.redirect('/dashboard');
         })
@@ -38,7 +38,7 @@ function createTarjeta(req, res, next){
   };
 
 function indexTarjeta(req, res, next){
-    Project.findById(req.params.id)
+    Tarjeta.findById(req.params.id)
         .then((obj)=>{
           res.render('users/dashboard',{usuario:req.user,dashboard:obj});
         })
@@ -58,7 +58,7 @@ function listTarjeta(req, res, next){
     limit:5,
     select :' _nombre _como _quiero _manera _prioridad _tamaño _unidad _dado _cuando _entonces'
   };
-  Project.paginate({},options)
+  Tarjeta.paginate({},options)
   .then((objects)=>{
     res.render('users/dashboard',{usuario:req.user,projects:objects});
   }).catch((err)=>{
@@ -69,20 +69,22 @@ function listTarjeta(req, res, next){
   });
 };
 
-function getAll(req, res, next){
+function obtenerTarjetas(req, res, next){
   let page=req.params.page ? req.params.page : 1;
   const options = {
     page:page,
     limit:10,
     select :'_id _nombre _como _quiero _manera _prioridad _tamaño _unidad _dado _cuando _entonces'
   };
-  Project.paginate({},options)
+  Tarjeta.paginate({},options)
   .then((objects)=>{
+    console.log(objects);
     res.status(200).json({
       errors:[],
       data:objects
     });
   }).catch((err)=>{
+    console.log(err);
     res.status(500).json({
       errors:[{message:'Algo salio mal'}],
       data:[]
@@ -91,7 +93,7 @@ function getAll(req, res, next){
 };
 
 function updateTarjeta(req, res, next){
-  Project.findById(req.params.id)
+  Tarjeta.findById(req.params.id)
   .then((obj)=>{
     obj.nombre=req.body.nombre ? req.body.nombre : obj.nombre;
     obj.como=req.body.como ? req.body.como : obj.como;
@@ -120,7 +122,7 @@ function updateTarjeta(req, res, next){
 };
 
 function deleteTarjeta(req,res,next){
-  Project.remove({_id: req.params.id})
+  Tarjeta.remove({_id: req.params.id})
   .then((obj)=>{
     res.status(200).json({
       errors:[],
@@ -139,7 +141,7 @@ module.exports={
   createTarjeta,
   indexTarjeta,
   listTarjeta,
-  getAll,
+  obtenerTarjetas,
   updateTarjeta,
   deleteTarjeta
 };

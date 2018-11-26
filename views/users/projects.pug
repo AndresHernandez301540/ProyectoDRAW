@@ -53,74 +53,8 @@ block content
               a.nav-link(href='/projects/list')
                 i.menu-icon.mdi.mdi-table
                 span.menu-title Proyectos
-        #myModal.modal(tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true')
-          .modal-dialog(role='document')
-            .modal-content
-              .modal-header
-                h5#exampleModalLabel.modal-title Crear proyecto
-                button.close(type='button' data-dismiss='modal' aria-label='Close')
-                  span(aria-hidden='true') &times;
-              .modal-body
-                form(action='/projects/',method='POST')
-                  .form-group
-                    label.col-form-label(for='nombre') Nombre del proyecto:
-                    input.form-control(type='text', id='name', name='name')
-                    .form-group
-                    label.col-form-label(for='duedate') Fecha de solicitud del proyecto:
-                    input.form-control(type='date', id='dueDate',name='dueDate')
-                  .form-group
-                    label.col-form-label(for='startdate') Fecha de arranque del proyecto:
-                    input.form-control(type='date', id='startDate',name='startDate')
-                  .form-group
-                    label.col-form-label(for='description') Descripcion del proyecto:
-                    textarea.form-control(id='description',name='description')
-                  .form-group
-                    label.col-form-label(for='scrumMaster') Scrum master:
-                    input.form-control(type='text',id='scrumMaster',name='scrumMaster', value=usuario.fullName)
-                  .form-group
-                    label.col-form-label(for='owner') Product Owner:
-                    input.form-control(type='text',id='owner',name='owner')
-                  .form-group
-                    label.col-form-label(for='team') Equipo de desarrollo:
-                    input.form-control(type='text',id='team',name='team')
-                  .form-group
-                    input.btn.btn-primary(type='submit')  
-                    button.btn.btn-secondary(type='button' data-dismiss='modal') Cerrar        
-                    
-        #editar.modal(tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true')
-          .modal-dialog(role='document')
-            .modal-content
-              .modal-header
-                h5#exampleModalLabel.modal-title Editar Miembro del equipo
-                button.close(type='button' data-dismiss='modal' aria-label='Close')
-                  span(aria-hidden='true') &times;
-              .modal-body
-                  .form-group
-                    input.form-control(type='text',id='edid',name='edid', hidden='true')
-                  .form-group
-                    label.col-form-label(for='edname') Nombre del proyecto:
-                    input.form-control(type='text', id='edname', name='edname')
-                    .form-group
-                    label.col-form-label(for='edduedate') Fecha de solicitud del proyecto:
-                    input.form-control(type='date', id='eddueDate',name='eddueDate')
-                  .form-group
-                    label.col-form-label(for='edstartdate') Fecha de arranque del proyecto:
-                    input.form-control(type='date', id='edstartDate',name='edstartDate')
-                  .form-group
-                    label.col-form-label(for='eddescription') Descripcion del proyecto:
-                    textarea.form-control(id='eddescription',name='eddescription')
-                  .form-group
-                    label.col-form-label(for='edscrumMaster') Scrum master:
-                    input.form-control(type='text',id='edscrumMaster',name='edscrumMaster', value=usuario.fullName)
-                  .form-group
-                    label.col-form-label(for='edowner') Product Owner:
-                    input.form-control(type='text',id='edowner',name='edowner')
-                  .form-group
-                    label.col-form-label(for='edteam') Equipo de desarrollo:
-                    input.form-control(type='text',id='edteam',name='edteam')                    
-                  .form-group                 
-                    button.btn.btn-primary(type='button', @click='updateproyecto' data-dismiss='modal') Actualizar 
-                    button.btn.btn-secondary(type='button' data-dismiss='modal') Cerrar 
+      
+      
         .content-wrapper
           .row
             .col-lg-10.grid-margin.stretch-card
@@ -143,7 +77,7 @@ block content
                         tbody
                             tr(data-id=index, id="row"+index, v-for="project,index in projects")
                               td(id='tblnombre'+index) 
-                                a(v-bind:href="'/dashboard'") {{project._name}}
+                                a(v-bind:href="'/projects/dashboard/'+project._id") {{project._name}}
                               td(id='tblduedate'+index)  {{project._dueDate}}
                               td(id='tblstartdate'+index)  {{project._startDate}}
                               td(id='tbldescripcion'+index)  {{project._description}}
@@ -157,4 +91,5 @@ block content
                                 button.btn.btn-danger.btn-xs(@click='deleteproyecto(project._id)')
                                   span.glyphicon.glyphicon-trash
                                     
-                                
+    include modals/addproyecto.pug  
+    include modals/editarproyecto.pug                              

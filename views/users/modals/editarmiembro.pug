@@ -1,0 +1,31 @@
+#editar.modal(tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true')
+  .modal-dialog(role='document')
+    .modal-content
+      .modal-header
+        h5#exampleModalLabel.modal-title Editar Miembro del equipo
+        button.close(type='button' data-dismiss='modal' aria-label='Close')
+          span(aria-hidden='true') &times;
+      .modal-body
+          .form-group
+            input.form-control(type='text',id='edid',name='edid', hidden='true')
+          .form-group
+            label.col-form-label(for='fullName') Nombre del empleado:
+            input.form-control(type='text',id='edfullName',name='edfullName')
+          .form-group
+            label.col-form-label(for='birthdayDate') Fecha de nacimiento:
+            input.form-control(type='date',id='edbirthdayDate',name='edbirthdayDate')
+          .form-group
+            label.col-form-label(for='curp') CURP:
+            input.form-control(type='text',id='edcurp',name='edcurp')
+          .form-group
+            label.col-form-label(for='rfc') RFC:
+            input.form-control(type='text',id='edrfc',name='edrfc')
+          .form-group
+            label.col-form-label(for='home') Domicilio:
+            input.form-control(type='text',id='edhome',name='edhome')
+          .form-group
+            label.col-form-label(for='recipient-name') Lista de habilidades:
+            textarea.form-control(id='edabilities',name='edabilities')                    
+          .form-group                 
+            button.btn.btn-primary(type='button', @click='updatemiembro' data-dismiss='modal') Actualizar 
+            button.btn.btn-secondary(type='button' data-dismiss='modal') Cerrar 

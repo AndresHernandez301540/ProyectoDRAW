@@ -1,0 +1,33 @@
+#myModal.modal(tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true')
+  .modal-dialog(role='document')
+    .modal-content
+      .modal-header
+        h5#exampleModalLabel.modal-title Crear proyecto
+        button.close(type='button' data-dismiss='modal' aria-label='Close')
+          span(aria-hidden='true') &times;
+      .modal-body
+        form(action='/projects/',method='POST')
+          .form-group
+            label.col-form-label(for='nombre') Nombre del proyecto:
+            input.form-control(type='text', id='name', name='name')
+            .form-group
+            label.col-form-label(for='duedate') Fecha de solicitud del proyecto:
+            input.form-control(type='date', id='dueDate',name='dueDate')
+          .form-group
+            label.col-form-label(for='startdate') Fecha de arranque del proyecto:
+            input.form-control(type='date', id='startDate',name='startDate')
+          .form-group
+            label.col-form-label(for='description') Descripcion del proyecto:
+            textarea.form-control(id='description',name='description')
+          .form-group
+            label.col-form-label(for='scrumMaster') Scrum master:
+            input.form-control(type='text',id='scrumMaster',name='scrumMaster', value=usuario.fullName)
+          .form-group
+            label.col-form-label(for='owner') Product Owner:
+            input.form-control(type='text',id='owner',name='owner')
+          .form-group
+            label.col-form-label(for='team') Equipo de desarrollo:
+            input.form-control(type='text',id='team',name='team')
+          .form-group
+            input.btn.btn-primary(type='submit')  
+            button.btn.btn-secondary(type='button' data-dismiss='modal') Cerrar  

@@ -12,12 +12,13 @@ function createUser(req, res, next){
 
     let user = new User({
       _fullName:req.body.fullName,
+      _email:req.body.email,
       _birthdayDate:req.body.birthdayDate,
       _role:req.body.role,
       _curp:req.body.curp,
       _rfc:req.body.rfc,
       _home:req.body.home,
-      _abilities:req.body.abilities+'-'+req.body.rank
+      _abilities:req.body.abilities//+'-'+req.body.rank
     });
     user.save()
         .then((obj)=>{
@@ -104,47 +105,69 @@ function BuscarUsuario(req, res, next){
 };
 
 function updateUser(req, res, next){
-  User.findById(req.params.id)
-  .then((obj)=>{
-    obj._fullName=req.body.fullName ? req.body.fullName : obj.fullName;
-    obj.birthdayDate=req.body.birthdayDate ? req.body.birthdayDate : obj.birthdayDate;
-    obj.role=req.body.role ? req.body.role : obj.role;
-    obj.curp=req.body.curp ? req.body.curp : obj.curp;
-    obj.rfc=req.body.rfc ? req.body.rfc : obj.rfc;
-    obj.home=req.body.home ? req.body.home : obj.home;
-    obj.completeprof='1';
-    obj.abilities=req.body.abilities ? req.body.abilities : obj.abilities;
-    obj.save()
+  if(req.user.id==req.params.id){
+
+      User.findById(req.params.id)
+      .then((obj)=>{
+        obj._fullName=req.body.fullName ? req.body.fullName : obj.fullName;
+        obj.birthdayDate=req.body.birthdayDate ? req.body.birthdayDate : obj.birthdayDate;
+        obj.email=req.body.email ? req.body.email : obj.email;
+        obj.password=req.body.password ? req.body.password : obj.password;
+        obj.role=req.body.role ? req.body.role : obj.role;
+        obj.curp=req.body.curp ? req.body.curp : obj.curp;
+        obj.rfc=req.body.rfc ? req.body.rfc : obj.rfc;
+        obj.home=req.body.home ? req.body.home : obj.home;
+        obj.completeprof='1';
+        obj.abilities=req.body.abilities;
+        obj.save()
+        .then((obj)=>{
+          res.status(200).json({
+            errors:[],
+            data:obj
+        });
+        }).catch((err)=>{
+          res.status(500).json({
+            errors:[{message:'Algo salio mal en la actualización'}],
+            data:[]
+        });
+      });
+      }).catch((err)=>{
+
+      });
+  }else{
+    res.status(500).json({
+      errors:[{message:'Algo salio mal en la actualización'}],
+      data:[]
+  });
+  }
+
+
+};
+
+function deleteUser(req,res,next){
+
+  if(req.user.id==req.body.id){
+    User.remove({_id: req.params.id})
     .then((obj)=>{
       res.status(200).json({
         errors:[],
         data:obj
+      });
+    })
+    .catch((err)=>{
+      res.status(500).json({
+        errors:[{message:'Algo salio mal'}],
+        data:[]
+      });
     });
-    }).catch((err)=>{
+  }else{
       res.status(500).json({
         errors:[{message:'Algo salio mal en la actualización'}],
         data:[]
-    });
-  });
-  }).catch((err)=>{
+      });
+  }
 
-  });
-};
 
-function deleteUser(req,res,next){
-  User.remove({_id: req.params.id})
-  .then((obj)=>{
-    res.status(200).json({
-      errors:[],
-      data:obj
-    });
-  })
-  .catch((err)=>{
-    res.status(500).json({
-      errors:[{message:'Algo salio mal'}],
-      data:[]
-    });
-  });
 };
 
 module.exports={

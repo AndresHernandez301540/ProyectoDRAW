@@ -1,18 +1,18 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema; // MODELO ES5 DE MONGOOSE
 const mongoosePaginate = require('mongoose-paginate-v2');
-
+// type: Schema.Types.ObjectId,ref:'User'
 const schema = Schema({
   _name:String,
-  _dueDate:Date,
-  _startDate:Date,
+  _dueDate:String,
+  _startDate:String,
   _description:String,
   _scrumMaster:String,
   _owner:String,
   _team:String
 });
 
-class Proyect{
+class Project{
  constructor(name,dueDate,startDate,description,scrumMaster,owner,team){
    _name=name;
    _dueDate=dueDate;
@@ -68,5 +68,5 @@ class Proyect{
 
 }
 schema.plugin(mongoosePaginate);
-schema.loadClass(Proyect);
-module.exports=mongoose.model('Proyect', schema);
+schema.loadClass(Project);
+module.exports=mongoose.model('Project', schema);

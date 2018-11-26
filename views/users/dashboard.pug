@@ -74,23 +74,17 @@ block content
                             th De tal manera
                             th Prioridad
                             th Tamaño
-                            th
+                            th Unidad
                         tbody
-                          tr(data-id=index, id="row"+index, v-for="project,index in projects")
+                          tr(data-id=index, id="row"+index, v-for="storie,index in stories")
                             td(id='tblnombre'+index) 
-                              a(v-bind:href="'/dashboard'") {{tarjeta._nombre}}
-                            td(id='tblcomo'+index)  {{tarjeta._como}}
-                            td(id='tblquiero'+index)  {{tarjeta._quiero}}
-                            td(id='tblmanera'+index)  {{tarjeta._manera}}
-                            td(id='tblprioridad'+index)  {{tarjeta._prioridad}}
-                            td(id='tbltamaño'+index)  {{tarjeta._tamaño}}
-                            td(id='tblunidad'+index)  {{tarjeta._unidad}}
-                            td                       
-                              button.btn.btn-primary.btn-xs(data-toggle='modal',data-target='#editar', @click='buscarproyecto(project._id)')
-                                span.glyphicon.glyphicon-pencil
-                            td                              
-                              button.btn.btn-danger.btn-xs(@click='deleteproyecto(project._id)')
-                                span.glyphicon.glyphicon-trash
+                              a(v-bind:href="'/dashboard'") {{storie._nombre}}
+                            td(id='tblcomo'+index)  {{storie._como}}
+                            td(id='tblquiero'+index)  {{storie._quiero}}
+                            td(id='tblmanera'+index)  {{storie._manera}}
+                            td(id='tblprioridad'+index)  {{storie._prioridad}}
+                            td(id='tbltamaño'+index)  {{storie._tamaño}}
+                            td(id='tblunidad'+index)  {{storie._unidad}}
 
               .col-lg-6.grid-margin.stretch-card
                 .card
@@ -150,60 +144,4 @@ block content
                             td
                               label.badge.badge-success Completed
 
-        #myModal.modal(tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true')
-          .modal-dialog(role='document')
-            .modal-content
-              .modal-header
-                h5#exampleModalLabel.modal-title Crear historia de usuario
-                button.close(type='button' data-dismiss='modal' aria-label='Close')
-                  span(aria-hidden='true') &times;
-              .modal-body
-                form(action='/projects/',method='POST')
-                  .form-group
-                    label.col-form-label(for='nombre') Nombre de la historia:
-                    input.form-control(type='text', id='nombre', name='nombre')
-                  .form-group
-                    label.col-form-label(for='como') Como:
-                    textarea.form-control(id='como',name='como')
-                    label.col-form-label(for='quiero') Quiero:
-                    textarea.form-control(id='quiero',name='quiero')
-                  .form-group
-                    label.col-form-label(for='manera') De tal manera:
-                    textarea.form-control(id='manera',name='manera')
-                  .form-group
-                    label.col-form-label(for='dado') Dado:
-                    textarea.form-control(id='dado',name='dado')
-                  .form-group
-                    label.col-form-label(for='cuando') Cuando:
-                    textarea.form-control(id='cuando',name='cuando')
-                  .form-group
-                    label.col-form-label(for='entonces') Entonces:
-                    textarea.form-control(id='entonces',name='entonces')
-              
-                  .form-group
-                    label.col-form-label(for= 'prioridad') Prioridad:
-                    select.form-control(id='prioridad', name='prioridad')
-                      option(value='1') 1
-                      option(value='2') 2
-                      option(value='3') 3
-                      
-                  .form-group
-                    label.col-form-label(for= 'tamaño') Tamaño:
-                    select.form-control(id='tamaño', name='tamaño')
-                      option(value='1') 1
-                      option(value='2') 2
-                      option(value='3') 3
-                      option(value='5') 5
-                      option(value='8') 8
-                      option(value='13') 13
-                      option(value='21') 21
-                      option(value='34') 34
-                      
-                    label.col-form-label(for= 'unidad') Tipo:
-                    select.form-control(id='unidad', name='unidad')
-                      option(value='hrs') horas
-                      option(value='dias') dias
-                      option(value='meses') meses
-                  .form-group
-                    input.btn.btn-primary(type='submit')
-                    button.btn.btn-secondary(type='button' data-dismiss='modal') Cerrar
+      include modals/historias.pug  
