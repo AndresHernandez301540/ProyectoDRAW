@@ -19,6 +19,7 @@ router.get('/',authCheck,indexController.createPage,(req, res)=> {
 */
 router.get('/',authCheck,indexController.createPage);
 router.get('/home',authCheck,indexController.createPage);
+router.get('/profilecomplete',authCheck,indexController.completeprof);
 /*
 router.get('/home', authCheck,(req, res)=> {
   res.render('../views/index',{usuario:req.user});

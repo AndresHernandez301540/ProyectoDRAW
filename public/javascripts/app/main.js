@@ -3,9 +3,9 @@ const app = new Vue({
     data:{
       //Objetos que contengan informacion de la app (modelos)
       projects:[],
-      members:[],
-      memberedit:[],
-      membereditprof:[],
+      users:[],
+      useredit:[],
+      usereditprof:[],
       selected: '',
       check:'0'
     },
@@ -40,26 +40,26 @@ const app = new Vue({
             'Content-Type': 'application/json'
           }
         };
-        fetch("/team/update/"+id,options)
+        fetch("/users/update/"+id,options)
         .then(response => response.json())
         .then(json => {
-          this.members = json.data.docs;
+          this.users = json.data.docs;
         });
         (window.location="/team/list")
       },
       buscar:function(id){
         const idmiembro=id;
-        fetch("/team/buscar/"+idmiembro)
+        fetch("/users/buscar/"+idmiembro)
         .then((response) => {return response.json()})
         .then((data) => {
-          this.memberedit = data;
-          document.getElementById("edid").value=new String(this.memberedit.data._id);
-          document.getElementById("edfullName").value=new String(this.memberedit.data._fullName);
+          this.useredit = data;
+          document.getElementById("edid").value=new String(this.useredit.data._id);
+          document.getElementById("edfullName").value=new String(this.useredit.data._fullName);
         //  document.getElementById("edbirthdayDate").value=fechanueva;
-          document.getElementById("edcurp").value=new String(this.memberedit.data._curp);
-          document.getElementById("edrfc").value=new String(this.memberedit.data._rfc);
-          document.getElementById("edhome").value=new String(this.memberedit.data._home);
-          document.getElementById("edabilities").value=new String(this.memberedit.data._abilities);
+          document.getElementById("edcurp").value=new String(this.useredit.data._curp);
+          document.getElementById("edrfc").value=new String(this.useredit.data._rfc);
+          document.getElementById("edhome").value=new String(this.useredit.data._home);
+          document.getElementById("edabilities").value=new String(this.useredit.data._abilities);
         });
 
       },
@@ -70,10 +70,10 @@ const app = new Vue({
             'Content-Type': 'application/json'
           }
         };
-        fetch("/team/delete/"+id,options)
+        fetch("/users/delete/"+id,options)
         .then(response => response.json())
         .then(json => {
-          this.members = json.data.docs;
+          this.users = json.data.docs;
         });
         (window.location="/team/list")
       },
@@ -157,10 +157,10 @@ const app = new Vue({
             'Content-Type': 'application/json'
           }
         };
-        fetch("/team/update/"+idprofile,options)
+        fetch("/users/update/"+idprofile,options)
         .then(response => response.json())
         .then(json => {
-          this.members = json.data.docs;
+          this.users = json.data.docs;
         });
         (window.location="/team/list")
       }
@@ -174,10 +174,10 @@ const app = new Vue({
     },
     created(){
       // Aqui se ejecuta codigo al inicializar la aplicacion, como si fuera el constructor
-      fetch('/team/obtener/')
+      fetch('/users/obtener/')
       .then(response => response.json())
       .then(json =>{
-        this.members=json.data.docs
+        this.users=json.data.docs
       });
       fetch('/projects/obtener/')
       .then(response => response.json())

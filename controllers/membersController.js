@@ -12,6 +12,7 @@ function createMember(req, res, next){
     let member = new Member({
       _fullName:req.body.fullName,
       _birthdayDate:req.body.birthdayDate,
+      _role:req.body.role,
       _curp:req.body.curp,
       _rfc:req.body.rfc,
       _home:req.body.home,
@@ -35,7 +36,7 @@ function createMember(req, res, next){
 
 function indexMember(req, res, next){
   Member.findById(req.params.id)
-      .then((obj)=>{        
+      .then((obj)=>{
         res.render('users/profile',{usuario:req.user,member:obj});
      })
       .catch((err)=>{
@@ -50,8 +51,7 @@ function listMember(req, res, next){
   let page=req.params.page ? req.params.page : 1;
   const options = {
     page:page,
-    limit:5,
-    select :'_id _fullName _birthdayDate _curp _rfc _home _abilities'
+    select :'_id _fullName _birthdayDate _role _curp _rfc _home _abilities'
   };
   Member.paginate({},options)
   .then((objects)=>{
@@ -65,13 +65,11 @@ function listMember(req, res, next){
 };
 
 function getAll(req, res, next){
-
   let page=req.params.page ? req.params.page : 1;
-
   const options = {
     page:page,
     limit:10,
-    select :'_id _fullName _birthdayDate _curp _rfc _home _abilities'
+    select :'_id _fullName _birthdayDate _role _curp _rfc _home _abilities'
   };
   Member.paginate({},options)
   .then((objects)=>{
@@ -109,6 +107,7 @@ function updateMember(req, res, next){
     console.log(obj);
     obj._fullName=req.body._fullName ? req.body._fullName : obj.fullName;
     obj.birthdayDate=req.body.birthdayDate ? req.body.birthdayDate : obj.birthdayDate;
+    obj.role=req.body.role ? req.body.role : obj.role;
     obj.curp=req.body.curp ? req.body.curp : obj.curp;
     obj.rfc=req.body.rfc ? req.body.rfc : obj.rfc;
     obj.home=req.body.home ? req.body.home : obj.home;

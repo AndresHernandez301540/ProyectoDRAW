@@ -5,6 +5,9 @@ const mongoosePaginate = require('mongoose-paginate-v2');
 const schema = Schema({
   _fullName:String,
   _birthdayDate:Date,
+  _role:String,
+  _socialId:String,
+  _thumbnail:String,
   _curp:String,
   _rfc:String,
   _home:String,
@@ -12,9 +15,12 @@ const schema = Schema({
 });
 
 class Member{
- constructor(fullName,birthdayDate,curp,rfc,home,abilities){
+ constructor(fullName,birthdayDate,role,socialId,thumbnail,curp,rfc,home,abilities){
    _fullName=fullName;
    _birthdayDate=birthdayDate;
+   _role=role;
+   _socialId:socialId;
+   _thumbnail:thumbnail;
    _curp=curp;
    _rfc=rfc;
    _home=home;
@@ -32,6 +38,24 @@ class Member{
   }
   set birthdayDate(v){
     this._birthdayDate=v;
+  }
+  get role(){
+    return this._role;
+  }
+  set role(v){
+    this._role=v;
+  }
+  get socialId(){
+    return this._socialId;
+  }
+  set socialId(v){
+    this._socialId=v;
+  }
+  get thumbnail(){
+    return this._thumbnail;
+  }
+  set thumbnail(v){
+    this._thumbnail=v;
   }
   get curp(){
     return this._curp;

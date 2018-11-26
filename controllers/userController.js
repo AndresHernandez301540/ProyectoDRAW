@@ -13,7 +13,11 @@ function createUser(req, res, next){
     let user = new User({
       _fullName:req.body.fullName,
       _birthdayDate:req.body.birthdayDate,
-      _role:req.body.role
+      _role:req.body.role,
+      _curp:req.body.curp,
+      _rfc:req.body.rfc,
+      _home:req.body.home,
+      _abilities:req.body.abilities+'-'+req.body.rank
     });
     user.save()
         .then((obj)=>{
@@ -33,10 +37,7 @@ function createUser(req, res, next){
 function indexUser(req, res, next){
   User.findById(req.params.id)
       .then((obj)=>{
-        res.status(200).json({
-          errors:[],
-          data:obj
-        });
+        res.render('users/profile',{usuario:req.user,user:obj});
       })
       .catch((err)=>{
         res.status(500).json({
@@ -52,7 +53,25 @@ function listUser(req, res, next){
   const options = {
     page:page,
     limit:1,
-    select :'_fullName _birthdayDate _role'
+    select :'_id _fullName _birthdayDate _role _curp _rfc _home _abilities'
+  };
+  User.paginate({},options)
+  .then((objects)=>{
+    res.render('users/teams',{usuario:req.user,members:objects});
+  }).catch((err)=>{
+    res.status(500).json({
+      errors:[{message:'Algo salio mal'}],
+      data:[]
+    });
+  });
+};
+
+function getAll(req, res, next){
+  let page=req.params.page ? req.params.page : 1;
+  const options = {
+    page:page,
+    limit:10,
+    select :'_id _fullName _birthdayDate _role _curp _rfc _home _abilities'
   };
   User.paginate({},options)
   .then((objects)=>{
@@ -68,21 +87,44 @@ function listUser(req, res, next){
   });
 };
 
+function BuscarUsuario(req, res, next){
+  User.findById(req.params.id)
+      .then((obj)=>{
+        res.status(200).json({
+          errors:[],
+          data:obj
+        });
+     })
+      .catch((err)=>{
+        res.status(500).json({
+          errors:[{message:'Algo salio mal'}],
+          data:[]
+      });
+    });
+};
+
 function updateUser(req, res, next){
   User.findById(req.params.id)
   .then((obj)=>{
-    obj.fullName=req.body.fullName ? req.body.fullName : obj.fullName;
+    obj._fullName=req.body.fullName ? req.body.fullName : obj.fullName;
     obj.birthdayDate=req.body.birthdayDate ? req.body.birthdayDate : obj.birthdayDate;
     obj.role=req.body.role ? req.body.role : obj.role;
+    obj.curp=req.body.curp ? req.body.curp : obj.curp;
+    obj.rfc=req.body.rfc ? req.body.rfc : obj.rfc;
+    obj.home=req.body.home ? req.body.home : obj.home;
+    obj.completeprof='1';
+    obj.abilities=req.body.abilities ? req.body.abilities : obj.abilities;
     obj.save()
     .then((obj)=>{
-        console.log("Todo bien");
+      res.status(200).json({
+        errors:[],
+        data:obj
+    });
     }).catch((err)=>{
       res.status(500).json({
         errors:[{message:'Algo salio mal en la actualización'}],
         data:[]
     });
-
   });
   }).catch((err)=>{
 
@@ -109,6 +151,8 @@ module.exports={
   createUser,
   indexUser,
   listUser,
+  getAll,
+  BuscarUsuario,
   updateUser,
   deleteUser
 };

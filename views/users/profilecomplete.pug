@@ -62,7 +62,7 @@ block content
                   .col-xs-12.col-sm-12.col-md-6.col-lg-6.col-xs-offset-0.col-sm-offset-0.col-md-offset-3.col-lg-offset-3.toppad                        
                     .panel.panel-info
                       .panel-heading
-                        h3.panel-title #{user._fullName}
+                        h3.panel-title #{usuario._fullName}
                       .panel-body
                         .row
                           .col-md-9.col-lg-9
@@ -71,29 +71,29 @@ block content
                                 tr
                                   td Nombre completo:
                                   td 
-                                    input.form-control(type='text',id='fullName',name='fullName' value=user._fullName)
+                                    input.form-control(type='text',id='fullName',name='fullName' value=usuario.fullName)
                                 tr  
                                   td Fecha de cumpleaños
                                   td 
-                                    input.form-control(type='date',id='birthdayDate',name='birthdayDate', value=user._birthdayDate)
+                                    input.form-control(type='date',id='birthdayDate',name='birthdayDate', value=usuario.birthdayDate)
                                 tr
                                   td Curp
                                   td
-                                    input.form-control(type='text',id='curp',name='curp', value=user._curp)
+                                    input.form-control(type='text',id='curp',name='curp', value=usuario.curp)
                                 tr
                                   td RFC
                                   td
-                                    input.form-control(type='text',id='rfc',name='rfc', value=user._rfc)
+                                    input.form-control(type='text',id='rfc',name='rfc', value=usuario.rfc)
                                 tr
                                   td Dirección
                                   td
-                                    input.form-control(type='text',id='home',name='home', value=user._home)
+                                    input.form-control(type='text',id='home',name='home', value=usuario.home)
                                   td(hidden='true')
-                                    input.form-control(type='text',id='id',name='id', value=user.id)
+                                    input.form-control(type='text',id='id',name='id', value=usuario.id)
                                 tr
                                   td Habilidades
                                   td
-                                    input.form-control(type='text',id='abilities',name='abilities', value=user.abilities)
+                                    input.form-control(type='text',id='abilities',name='abilities', value=usuario.abilities)
                                   
                     .col-xs-12.col-sm-12.col-md-6.col-lg-6.col-xs-offset-0.col-sm-offset-0.col-md-offset-3.col-lg-offset-3.toppad                                          
                     button.btn.btn-primary.btn-xs(@click='profile')

@@ -36,7 +36,12 @@ passport.use(new GoogleStrategy({
           _birthdayDate:profile.birthday,
           _role:'Basico',
           _socialId:profile.id,
-          _thumbnail:profile._json.image.url
+          _thumbnail:profile._json.image.url,
+          _curp:'',
+          _rfc:'',
+          _home:'',
+          _completeprof:'0',    
+          _abilities:''
         }).save().then((newUser)=>{
           console.log('Usuario nuevo creado:'+newUser);
           done(null,newUser);
@@ -65,7 +70,12 @@ passport.use(new FacebookStrategy({
           _birthdayDate:profile.user_birthday,
           _role:'Basico',
           _socialId:profile.id,
-          _thumbnail:'https://graph.facebook.com/'+profile.id+'/picture?type=large'
+          _thumbnail:'https://graph.facebook.com/'+profile.id+'/picture?type=large',
+          _curp:'',
+          _rfc:'',
+          _home:'',
+          _completeprof:'0',
+          _abilities:''
         }).save().then((newUser)=>{
           console.log('Usuario nuevo creado:'+newUser);
           done(null,newUser);
@@ -95,7 +105,12 @@ passport.use(new TwitterStrategy({
           _birthdayDate:profile.birthdayDate,
           _role:'Basico',
           _socialId:profile.id,
-          _thumbnail:profile._json.profile_image_url
+          _thumbnail:profile._json.profile_image_url,
+          _curp:'',
+          _rfc:'',
+          _home:'',
+          _completeprof:'0',
+          _abilities:''
         }).save().then((newUser)=>{
           console.log('Usuario nuevo creado:'+newUser);
           done(null,newUser);
