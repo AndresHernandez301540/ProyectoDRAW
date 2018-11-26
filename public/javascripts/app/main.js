@@ -7,6 +7,7 @@ const app = new Vue({
       useredit:[],
       usereditprof:[],
       selected: '',
+      miembro:'',
       check:'0'
     },
     methods:{
@@ -14,6 +15,10 @@ const app = new Vue({
       valor(){
         document.getElementById("rank").value=this.selected;
         return this.selected;
+      },
+      valormember(){
+        document.getElementById("memberTeam").value=this.miembro;
+        return this.miembro;
       },
       updatemiembro(){
         id=document.getElementById("edid").value;
@@ -162,7 +167,7 @@ const app = new Vue({
         .then(json => {
           this.users = json.data.docs;
         });
-        (window.location="/team/list")
+        (window.location="/")
       }
 
     },

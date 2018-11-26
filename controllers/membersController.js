@@ -149,6 +149,10 @@ function deleteMember(req,res,next){
   });
 };
 
+function equipos(req, res, next){
+  res.render('users/equipos',{usuario:req.user});
+};
+
 module.exports={
   createMember,
   indexMember,
@@ -156,5 +160,6 @@ module.exports={
   updateMember,
   BuscarMiembro,
   getAll,
+  equipos,
   deleteMember
 };

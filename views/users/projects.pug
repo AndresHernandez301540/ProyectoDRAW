@@ -23,12 +23,8 @@ block content
                       i.mdi.mdi-account-outline.mr-0.text-gray
                     .py-3.px-4.d-flex.align-items-center.justify-content-center
                       i.mdi.mdi-alarm-check.mr-0.text-gray
-                a.dropdown-item.mt-2
-                  | Administrar cuentas
-                a.dropdown-item
-                  | Cambiar contraseña
-                a.dropdown-item
-                  | Revisar mensajes
+                a.dropdown-item(@click='profile(usuario.id)', href="/users/id/"+usuario.id)
+                  | Mi Perfil
                 a.dropdown-item(href='/auth/logout')
                   | Salir
           button.navbar-toggler.navbar-toggler-right.d-lg-none.align-self-center(type='button' data-toggle='offcanvas')

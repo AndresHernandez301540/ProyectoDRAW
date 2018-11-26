@@ -3,27 +3,27 @@ const Schema = mongoose.Schema; // MODELO ES5 DE MONGOOSE
 const mongoosePaginate = require('mongoose-paginate-v2');
 
 const schema = Schema({
-  _teamName:String,
-  _members:String
+  _developmentTeam:String,
+  _memberTeam:String
 });
 
 class Team{
- constructor(teamName, members){
-   _teamName=teamName;
-   _members=members;
+ constructor(developmentTeam, memberTeam){
+   _developmentTeam=developmentTeam;
+   _memberTeam=memberTeam;
  }
 
- get teamName(){
+ get developmentTeam(){
    return this._teamName;
  }
- set teamName(v){
+ set developmentTeam(v){
    this._teamName=v;
  }
- get members(){
-   return this._members;
+ get memberTeam(){
+   return this._memberTeam;
  }
- set members(v){
-   this._members=v;
+ set memberTeam(v){
+   this._memberTeam=v;
  }
 
 }

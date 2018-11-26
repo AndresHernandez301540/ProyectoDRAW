@@ -1,5 +1,6 @@
-extends layout
-block content 
+extends ../layout
+block content
+  div(id='app')  
     .container-scroller
       nav.navbar.default-layout.col-lg-12.col-12.p-0.fixed-top.d-flex.flex-row
         .text-center.navbar-brand-wrapper.d-flex.align-items-top.justify-content-center
@@ -10,6 +11,7 @@ block content
         .navbar-menu-wrapper.d-flex.align-items-center
 
           ul.navbar-nav.navbar-nav-right
+
             li.nav-item.dropdown.d-none.d-xl-inline-block
               a#UserDropdown.nav-link.dropdown-toggle(href='#' data-toggle='dropdown' aria-expanded='false')
                 span.profile-text Hola, #{usuario.fullName}!
@@ -18,18 +20,17 @@ block content
                 a.dropdown-item.p-0
                   .d-flex.border-bottom
                     .py-3.px-4.d-flex.align-items-center.justify-content-center
-                      i.mdi.mdi-bookmark-plus-outline.mr-0.text-gray  
+                      i.mdi.mdi-bookmark-plus-outline.mr-0.text-gray
                     .py-3.px-4.d-flex.align-items-center.justify-content-center.border-left.border-right
-                      i.mdi.mdi-account-outline.mr-0.text-gray 
+                      i.mdi.mdi-account-outline.mr-0.text-gray
                     .py-3.px-4.d-flex.align-items-center.justify-content-center
-                      i.mdi.mdi-alarm-check.mr-0.text-gray 
+                      i.mdi.mdi-alarm-check.mr-0.text-gray
                 a.dropdown-item(@click='profile(usuario.id)', href="/users/id/"+usuario.id)
                   | Mi Perfil
                 a.dropdown-item(href='/auth/logout')
                   | Salir
           button.navbar-toggler.navbar-toggler-right.d-lg-none.align-self-center(type='button' data-toggle='offcanvas')
             span.mdi.mdi-menu
-
       .container-fluid.page-body-wrapper
         nav#sidebar.sidebar.sidebar-offcanvas
           ul.nav
@@ -44,69 +45,48 @@ block content
                       small.designation.text-muted #{usuario.role}
                       span.status-indicator.online
                 button.btn.btn-success.btn-block(type='button' data-toggle='modal' data-target='#myModal')
-                  | Proyecto Nuevo
+                  | Añadir Equipo
                   i.mdi.mdi-plus
             li.nav-item
-              a.nav-link(href='/team/teams')
-                i.menu-icon.mdi.mdi-folder-account
-                span.menu-title Equipos de trabajo
+              a.nav-link(href='/team/list')
+                i.menu-icon.mdi.mdi-television
+                span.menu-title Equipo de trabajo
             li.nav-item
+              
               a.nav-link(href='/projects/list')
                 i.menu-icon.mdi.mdi-table
                 span.menu-title Proyectos
-            li.nav-item
-              a.nav-link(href='/team/list')
-                i.menu-icon.mdi.mdi-account-multiple
-                span.menu-title Miembros
-                     
+
         #myModal.modal(tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true')
           .modal-dialog(role='document')
             .modal-content
               .modal-header
-                h5#exampleModalLabel.modal-title Crear proyecto
+                h5#exampleModalLabel.modal-title Añadir Equipo
                 button.close(type='button' data-dismiss='modal' aria-label='Close')
                   span(aria-hidden='true') &times;
               .modal-body
-                form(action='/projects/',method='POST')
+                form(action='/team/add/',method='POST')
                   .form-group
-                    label.col-form-label(for='nombre') Nombre del proyecto:
-                    input.form-control(type='text', id='name', name='name')
-                    .form-group
-                    label.col-form-label(for='duedate') Fecha de solicitud del proyecto:
-                    input.form-control(type='date', id='dueDate',name='dueDate')
-                  .form-group
-                    label.col-form-label(for='startdate') Fecha de arranque del proyecto:
-                    input.form-control(type='date', id='startDate',name='startDate')
-                  .form-group
-                    label.col-form-label(for='description') Descripcion del proyecto:
-                    textarea.form-control(id='description',name='description')
-                  .form-group
-                    label.col-form-label(for='scrumMaster') Scrum master:
-                    input.form-control(type='text',id='scrumMaster',name='scrumMaster', value=usuario.fullName)
-                  .form-group
-                    label.col-form-label(for='owner') Product Owner:
-                    input.form-control(type='text',id='owner',name='owner')
-                  .form-group
-                    label.col-form-label(for='team') Equipo de desarrollo:
-                    input.form-control(type='text',id='team',name='team')
-                  .form-group
+                    label.col-form-label(for='developmentTeam') Equipo de desarrollo
+                    input.form-control(type='text',id='developmentTeam',name='developmentTeam')
+                  .form-group                  
+                    select.custom-select(id='memberTeam1', @change='valormember' v-model='miembro')
+                      option(v-for='user in users') {{user._fullName}}
+                    input.form-control(hidden='true',type='text',id='memberTeam',name='memberTeam')                     
+                  .form-group                 
                     input.btn.btn-primary(type='submit')  
                     button.btn.btn-secondary(type='button' data-dismiss='modal') Cerrar  
-
+      
         .content-wrapper
-                  .row
-                    div(id='app')
-                      each project in projects.docs
-                        .col-xl-3.col-lg-3.col-md-3.col-sm-6.grid-margin.stretch-card
-                            a(href='/dashboard')
-                              .card.card-statistics
-                                .card-body
-                                  .clearfix
-                                    .float-left
-                                      i.mdi.mdi-receipt.text-warning.icon-lg
-                                    .float-right
-                                      p.mb-0.text-right #{project.name}
-                                      .fluid-container
-                                        h3.font-weight-medium.text-right.mb-0 #{project.scrumMaster}
-                                  p.text-muted.mt-3.mb-0
-                    
+          .row
+            .col-lg-10.grid-margin.stretch-card
+              .card
+                .card-body
+                  h4.card-title Equipos de desarrollo
+                  .table-responsive
+                      table.table
+                        thead
+                          tr
+                            th Nombre del equipo de desarrollo
+
+  
