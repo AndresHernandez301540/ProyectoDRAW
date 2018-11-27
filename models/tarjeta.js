@@ -9,11 +9,13 @@ const schema = Schema({
   _quiero:String,
   _manera:String,
   _prioridad:String,
-  _tamaño:String,
+  _tamaño:Number,
   _unidad:String,
   _dado:String,
   _cuando:String,
-  _entonces:String
+  _entonces:String,
+  _hrsTrab:Number,
+  _backlog:String
 });
 
 class Tarjeta {
@@ -30,6 +32,9 @@ class Tarjeta {
     _dado=dado;
     _cuando=cuando;
     _entonces=entonces;
+
+    _hrsTrab=hrsTrab;
+    _backlog=backlog;
   }
   get projectId(){
     return this._projectId;
@@ -98,6 +103,19 @@ class Tarjeta {
   }
   set entonces(v){
     this._entonces=v;
+  }
+
+  get hrsTrab(){
+    return this._hrsTrab;
+  }
+  set hrsTrab(v){
+    this._hrsTrab=v;
+  }
+  get backlog(){
+    return this._backlog;
+  }
+  set backlog(v){
+    this._backlog=v;
   }
 
 }

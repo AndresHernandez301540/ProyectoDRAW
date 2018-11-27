@@ -49,11 +49,17 @@
               option(value='21') 21
               option(value='34') 34
               
+              
             label.col-form-label(for= 'unidad') Tipo:
             select.form-control(id='unidad', name='unidad')
               option(value='hrs') horas
               option(value='dias') dias
               option(value='meses') meses
+          .form-group
+            input(hidden='true' id='hrsTrab' name='hrsTrab',value="0")
+            input(hidden='true' id='backlog' name='backlog',value="0")
+            
+          
           .form-group
             input.btn.btn-primary(type='submit')
             button.btn.btn-secondary(type='button' data-dismiss='modal') Cerrar
