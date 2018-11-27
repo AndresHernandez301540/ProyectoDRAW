@@ -18,7 +18,9 @@ function createProject(req, res, next){
       _scrumMaster:req.body.scrumMaster,
       _scrumMastername:req.body.scrumMastername,
       _owner:req.body.owner,
-      _team:req.body.team
+      _ownerName:req.body.ownerName,
+      _team:req.body.team,
+      _teamNames:req.body.teamName
     });
     project.save()
         .then((obj)=>{
@@ -26,6 +28,7 @@ function createProject(req, res, next){
               res.redirect('back');
         })
         .catch((err)=>{
+          console.log(err);
             res.status(500).json({
               errors:[{message:'Algo salio mal'}],
               data:[]
@@ -52,7 +55,7 @@ function listProject(req, res, next){
   const options = {
     page:page,
     limit:5,
-    select :' _name _dueDate _startDate _description _scrumMaster _scrumMastername _owner _team'
+    select :' _name _dueDate _startDate _description _scrumMaster _scrumMastername _owner _ownerName _team _teamNames'
   };
   Project.paginate({},options)
   .then((objects)=>{
@@ -70,7 +73,7 @@ function getAll(req, res, next){
   const options = {
     page:page,
     limit:10,
-    select :'_id _name _dueDate _startDate _description _scrumMaster _scrumMastername _owner _team'
+    select :'_id _name _dueDate _startDate _description _scrumMaster _scrumMastername _owner _ownerName _team _teamNames'
   };
   Project.paginate({},options)
   .then((objects)=>{

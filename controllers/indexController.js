@@ -21,6 +21,9 @@ function createPage(req, res, next){
   });
 };
 
+
+
+
 function completeprof(req, res, next){
     res.render('users/profilecomplete',{usuario:req.user});
 };

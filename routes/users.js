@@ -20,6 +20,7 @@ router.get('/id/:id?',authCheck,userController.indexUser);
 router.get('/list/:page?',authCheck,userController.listUser);
 router.get('/buscar/:id',authCheck,userController.BuscarUsuario);
 router.get('/obtener/:page?',authCheck,userController.getAll);
+router.get('/nombres/:page?',authCheck,userController.obtenernombres);
 router.put('/update/:id',authCheck,userController.updateUser);
 router.delete('/delete/:id',authCheck,userController.deleteUser);
 

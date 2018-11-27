@@ -9,12 +9,14 @@ const schema = Schema({
   _description:String,
   _scrumMaster:{type: Schema.Types.ObjectId,ref:'User'},
   _scrumMastername:String,
-  _owner:String,
-  _team:String
+  _owner:{type:Schema.Types.ObjectId,ref:'User'},
+  _ownerName:String,
+  _team:[],
+  _teamNames:[]
 });
 
 class Project{
- constructor(name,dueDate,startDate,description,scrumMaster,scrumMastername,owner,team){
+ constructor(name,dueDate,startDate,description,scrumMaster,scrumMastername,owner,ownerName,team,teamNames){
    _name=name;
    _dueDate=dueDate;
    _startDate=startDate;
@@ -22,7 +24,9 @@ class Project{
    _scrumMaster=scrumMaster;
    _scrumMastername=scrumMastername;
    _owner=owner;
+   _ownerName=ownerName;
    _team=team;
+   _teamNames=teamNames;
  }
 
   get name(){
@@ -67,13 +71,24 @@ class Project{
   set owner(v){
     this._owner=v;
   }
+  get ownerName(){
+    return this._ownerName;
+  }
+  set ownerName(v){
+    this._ownerName=v;
+  }
    get team(){
      return this._team;
    }
    set team(v){
      this._team=v;
    }
-
+   get teamNames(){
+     return this._teamNames;
+   }
+   set teamNames(v){
+     this._teamNames=v;
+   }
 }
 schema.plugin(mongoosePaginate);
 schema.loadClass(Project);

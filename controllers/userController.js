@@ -68,11 +68,33 @@ function listUser(req, res, next){
 };
 
 function getAll(req, res, next){
+
   let page=req.params.page ? req.params.page : 1;
   const options = {
     page:page,
     limit:10,
     select :'_id _fullName _birthdayDate _role _curp _rfc _home _abilities'
+  };
+  User.paginate({},options)
+  .then((objects)=>{
+    res.status(200).json({
+      errors:[],
+      data:objects
+    });
+  }).catch((err)=>{
+    res.status(500).json({
+      errors:[{message:'Algo salio mal'}],
+      data:[]
+    });
+  });
+};
+
+function obtenernombres(req, res, next){
+  let page=req.params.page ? req.params.page : 1;
+  const options = {
+    page:page,
+    limit:10,
+    select :'_id _fullName'
   };
   User.paginate({},options)
   .then((objects)=>{
@@ -175,6 +197,7 @@ module.exports={
   indexUser,
   listUser,
   getAll,
+  obtenernombres,
   BuscarUsuario,
   updateUser,
   deleteUser

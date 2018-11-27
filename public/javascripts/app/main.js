@@ -5,23 +5,25 @@ const app = new Vue({
       //Objetos que contengan informacion de la app (modelos)
       projects:[],
       users:[],
+      usersoptions:[],
       useredit:[],
       usereditprof:[],
+      usuariosseleccionados: [],
+      ownerseleccionados:[],
       stories:[],
       mostrar:[],
       selected: '',
       miembro:'',
-      value: [],
       check:'0'
     },
     methods:{
       addTag (newTag) {
         const tag = {
-          _fullName: this.users.fullName,
-          _id: this.users.id
+          _fullName: this.usersoptions.fullName,
+          _id: this.usersoptions.id
         }
-        this.users.push(tag)
-        this.value.push(tag)
+        this.usersoptions.push(tag)
+        this.usuariosseleccionados.push(tag)
       },
       // Todas las funciones comunes de la aplicacion
       valor(){
@@ -207,6 +209,11 @@ const app = new Vue({
       .then(response => response.json())
       .then(json =>{
         this.stories=json.data.docs
+      })
+      fetch('/users/nombres/')
+      .then(response => response.json())
+      .then(json =>{
+        this.usersoptions=json.data.docs
       })
     }
   });

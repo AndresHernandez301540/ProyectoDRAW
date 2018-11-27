@@ -1,4 +1,3 @@
-
 #myModal.modal(tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true')
   .modal-dialog(role='document')
     .modal-content
@@ -24,27 +23,39 @@
             label.col-form-label(for='scrumMaster1') Scrum master:
             input(hidden='true' id='scrumMaster' name='scrumMaster',value=usuario.id)
             input.form-control(readonly='true',type='text',id='scrumMastername' name='scrumMastername' value=usuario.fullName)
-          .form-group
-            label.col-form-label(for='owner') Dueño de productos:
-            br
-            select.custom-select(name='owner',id='owner')
-              option(v-for='user,index in users') {{user._fullName}}
-          .form-group
-            label.col-form-label(for='team') Equipo de trabajo:
+          .form-group 
+            label.col-form-label(for='owners') Dueño del producto:   
             vue-multiselect(
-              id='team',
-              name='team',
-              v-model="value",
+              id='owners',
+              name='owners',
+              v-model="ownerseleccionados",
+              deselect-label="Can't remove this value",
+              track-by="_id",
+              label="_fullName",
+              placeholder="Agrega a un dueño del producto",
+              :options="usersoptions",
+              :searchable="false",
+              :allow-empty="false"
+            )
+            input(hidden='true',id='owner',name='owner' :value="ownerseleccionados._id")
+            input(hidden='true',id='ownerName',name='ownerName' :value="ownerseleccionados._fullName")
+          .form-group
+            label.col-form-label(for='members') Equipo de trabajo:
+            vue-multiselect(
+              id='members',
+              name='members',
+              v-model="usuariosseleccionados",
               tag-placeholder="Add this as new tag",
               placeholder="Agrega a un miembro de trabajo",
               label="_fullName",
               track-by="_id",
-              :options="users",
+              :options="usersoptions",
               :multiple="true",
               :taggable="true",
               @tag="addTag"
             )
-
+            input(hidden='true',id='team',name='team', v-for="usuariosseleccionado in usuariosseleccionados" :value="usuariosseleccionado._id")
+            input(hidden='true',id='teamName',name='teamName', v-for="usuariosseleccionado in usuariosseleccionados" :value="usuariosseleccionado._fullName")
           .form-group
             input.btn.btn-primary(type='submit')  
             button.btn.btn-secondary(type='button' data-dismiss='modal') Cerrar  
