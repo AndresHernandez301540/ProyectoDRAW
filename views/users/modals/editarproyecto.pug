@@ -23,7 +23,7 @@
           .form-group
             label.col-form-label(for='edscrumMaster1') Scrum master:
             input(hidden='true' id='edscrumMaster' name='edscrumMaster',value=usuario.id)
-            input.form-control(readonly='true',type='text',id='scrumMastername' name='scrumMastername' value=usuario.fullName)
+            input.form-control(readonly='true',type='text',id='edscrumMastername' name='edscrumMastername' value=usuario.fullName)
           .form-group 
             label.col-form-label(for='owners') Dueño del producto:   
             vue-multiselect(
@@ -56,7 +56,7 @@
               @tag="addTag"
             )
             input(hidden='true',id='edteam',name='edteam', v-for="usuariosseleccionado in usuariosseleccionados" :value="usuariosseleccionado._id")
-            input(hidden='true',id='edteamName',name='edteamName', v-for="usuariosseleccionado in usuariosseleccionados" :value="usuariosseleccionado._fullName")                         
+            input(id='edteamName',name='edteamName', v-for="usuariosseleccionado in usuariosseleccionados" :value="usuariosseleccionado._fullName")                         
           .form-group                 
             button.btn.btn-primary(type='button', @click='updateproyecto' data-dismiss='modal') Actualizar 
             button.btn.btn-secondary(type='button' data-dismiss='modal') Cerrar 

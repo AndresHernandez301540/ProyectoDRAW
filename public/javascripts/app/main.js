@@ -101,15 +101,20 @@ const app = new Vue({
         .then((response) => {return response.json()})
         .then((data) =>{
           this.projectedit=data;
+          console.log(this.projectedit.data._id);
           document.getElementById("edid").value=new String(this.projectedit.data._id);
           document.getElementById("eddueDate").value=new String(this.projectedit.data._startDate);
           document.getElementById("edstartDate").value=new String(this.projectedit.data._dueDate);
           document.getElementById("edname").value=new String(this.projectedit.data._name);
           document.getElementById("eddescription").value=new String(this.projectedit.data._description);
           document.getElementById("edscrumMaster").value=new String(this.projectedit.data._scrumMaster);
+          document.getElementById("edscrumMastername").value=new String(this.projectedit.data._scrumMastername);
           document.getElementById("edowner").value=new String(this.projectedit.data._owner);
+          document.getElementById("edownerName").value=new String(this.projectedit.data._ownerName);
           document.getElementById("edteam").value=new String(this.projectedit.data._team);
+          document.getElementById("edteamName").value=new String(this.projectedit.data._teamNames);
         });
+
       },
       updateproyecto(){
         id=document.getElementById("edid").value;
@@ -117,18 +122,24 @@ const app = new Vue({
         dueDate=document.getElementById("eddueDate").value;
         startDate=document.getElementById("edstartDate").value;
         description=document.getElementById("eddescription").value;
-        master=document.getElementById("edscrumMaster").value;
+        scrumMaster=document.getElementById("edscrumMaster").value;
+        scrumMasterName=document.getElementById("edscrumMastername").value;
         owner=document.getElementById("edowner").value;
+        ownerName=document.getElementById("edownerName").value;
         team=document.getElementById("edteam").value;
+        teamName=document.getElementById("edteamName").value;
         const datos ={
           id:id,
           name:name,
           dueDate:dueDate,
           startDate:startDate,
           description:description,
-          master:master,
+          scrumMaster:scrumMaster,
+          scrumMastername:scrumMasterName,
           owner:owner,
-          team:team
+          ownerName:ownerName,
+          team:team,
+          teamNames:teamName,
         };
         const options={
           method:'PUT',

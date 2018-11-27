@@ -118,7 +118,9 @@ function updateProject(req, res, next){
     obj.scrumMaster=req.body.scrumMaster ? req.body.scrumMaster : obj.scrumMaster;
     obj.scrumMastername=req.body.scrumMastername ? req.body.scrumMastername : obj.scrumMastername;
     obj.owner=req.body.owner ? req.body.owner : obj.owner;
+    obj.ownerName=req.body.ownerName ? req.body.ownerName : obj.ownerName;
     obj.team=req.body.team ? req.body.team : obj.team;
+    obj.teamNames=req.body.teamNames ? req.body.teamNames : obj.teamNames;
     obj.save()
     .then((obj)=>{
         console.log("Todo bien");
