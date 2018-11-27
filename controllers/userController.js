@@ -140,7 +140,7 @@ function updateUser(req, res, next){
         obj.rfc=req.body.rfc ? req.body.rfc : obj.rfc;
         obj.home=req.body.home ? req.body.home : obj.home;
         obj.completeprof='1';
-        obj.abilities=req.body.abilities;
+        obj.abilities=req.body.abilities ? req.body.abilities : obj.abilities;
         obj.save()
         .then((obj)=>{
           res.status(200).json({
