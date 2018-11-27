@@ -59,7 +59,7 @@ block content
         .content-wrapper
           h1 Mis proyectos
             .row
-              .col-xl-3.col-lg-3.col-md-3.col-sm-6.grid-margin.stretch-card(v-for='project in projects',v-if=`project._scrumMaster=="${usuario.id}" || project._team == "${usuario.id}"`)            
+              .col-xl-3.col-lg-3.col-md-3.col-sm-6.grid-margin.stretch-card(v-for='project in projects',v-if=`project._scrumMaster=="${usuario.id}" || project._team =="${usuario.id}" || project._owner=="${usuario.id}"`)            
                   a(v-bind:href="'/projects/dashboard/'+project._id")
                     .card.card-statistics
                       .card-body

@@ -75,15 +75,15 @@ block content
                             th Editar
                             th Eliminar
                         tbody
-                            tr(data-id=index, id="row"+index, v-for="project,index in projects")
+                            tr(data-id=index, id="row"+index, v-for='project in projects',v-if=`project._scrumMaster=="${usuario.id}" || project._team =="${usuario.id}" || project._owner=="${usuario.id}"`)
                               td(id='tblnombre'+index) 
                                 a(v-bind:href="'/projects/dashboard/'+project._id") {{project._name}}
                               td(id='tblduedate'+index)  {{project._dueDate}}
                               td(id='tblstartdate'+index)  {{project._startDate}}
                               td(id='tbldescripcion'+index)  {{project._description}}
                               td(id='tblscrum'+index)  {{project._scrumMastername}}
-                              td(id='tblowner'+index)  {{project._owner}}
-                              td(id='tblteam'+index)  {{project._team}}
+                              td(id='tblowner'+index)  {{project._ownerName}}
+                              td(id='tblteam'+index)  {{project._teamNames}}
                               td                       
                                 button.btn.btn-primary.btn-xs(data-toggle='modal',data-target='#editar', @click='buscarproyecto(project._id)')
                                   span.glyphicon.glyphicon-pencil

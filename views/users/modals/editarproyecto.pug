@@ -21,14 +21,42 @@
             label.col-form-label(for='eddescription') Descripcion del proyecto:
             textarea.form-control(id='eddescription',name='eddescription')
           .form-group
-            label.col-form-label(for='edscrumMaster') Scrum master:
-            input.form-control(type='text',id='edscrumMaster',name='edscrumMasterm', value=usuario.fullName)
+            label.col-form-label(for='edscrumMaster1') Scrum master:
+            input(hidden='true' id='edscrumMaster' name='edscrumMaster',value=usuario.id)
+            input.form-control(readonly='true',type='text',id='scrumMastername' name='scrumMastername' value=usuario.fullName)
+          .form-group 
+            label.col-form-label(for='owners') Dueño del producto:   
+            vue-multiselect(
+              id='edowners',
+              name='edowners',
+              v-model="ownerseleccionados",
+              deselect-label="Can't remove this value",
+              track-by="_id",
+              label="_fullName",
+              placeholder="Agrega a un dueño del producto",
+              :options="usersoptions",
+              :searchable="false",
+              :allow-empty="false"
+            )
+            input(hidden='true',id='edowner',name='edowner' :value="ownerseleccionados._id")
+            input(hidden='true',id='edownerName',name='edownerName' :value="ownerseleccionados._fullName")
           .form-group
-            label.col-form-label(for='edowner') Product Owner:
-            input.form-control(type='text',id='edowner',name='edowner')
-          .form-group
-            label.col-form-label(for='edteam') Equipo de desarrollo:
-            input.form-control(type='text',id='edteam',name='edteam')                    
+            label.col-form-label(for='members') Equipo de trabajo:
+            vue-multiselect(
+              id='members',
+              name='members',
+              v-model="usuariosseleccionados",
+              tag-placeholder="Add this as new tag",
+              placeholder="Agrega a un miembro de trabajo",
+              label="_fullName",
+              track-by="_id",
+              :options="usersoptions",
+              :multiple="true",
+              :taggable="true",
+              @tag="addTag"
+            )
+            input(hidden='true',id='edteam',name='edteam', v-for="usuariosseleccionado in usuariosseleccionados" :value="usuariosseleccionado._id")
+            input(hidden='true',id='edteamName',name='edteamName', v-for="usuariosseleccionado in usuariosseleccionados" :value="usuariosseleccionado._fullName")                         
           .form-group                 
             button.btn.btn-primary(type='button', @click='updateproyecto' data-dismiss='modal') Actualizar 
             button.btn.btn-secondary(type='button' data-dismiss='modal') Cerrar 
