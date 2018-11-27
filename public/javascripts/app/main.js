@@ -7,6 +7,7 @@ const app = new Vue({
       useredit:[],
       usereditprof:[],
       stories:[],
+      mostrar:[],
       selected: '',
       miembro:'',
       check:'0'
@@ -177,6 +178,7 @@ const app = new Vue({
       // Funciones que podran ser desplegables en las vistas
       // solo si regresan un resultado
       result(){
+
       }
     },
     created(){

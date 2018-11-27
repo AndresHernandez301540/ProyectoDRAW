@@ -58,7 +58,7 @@ block content
 
         .main-panel
           .content-wrapper
-            strong PROYECTO DE PRUEBA
+            strong #{projects._name}
             .row
               .col-lg-6.grid-margin.stretch-card
                 .card
@@ -68,23 +68,23 @@ block content
                       table.table
                         thead
                           tr
-                            th Nombre
+                            th Nombre 
                             th Como
                             th Quiero
                             th De tal manera
                             th Prioridad
                             th Tamaño
                             th Unidad
-                        tbody
-                          tr(data-id=index, id="row"+index, v-for="storie,index in stories")
-                            td(id='tblnombre'+index) 
-                              a(v-bind:href="'/dashboard'") {{storie._nombre}}
-                            td(id='tblcomo'+index)  {{storie._como}}
-                            td(id='tblquiero'+index)  {{storie._quiero}}
-                            td(id='tblmanera'+index)  {{storie._manera}}
-                            td(id='tblprioridad'+index)  {{storie._prioridad}}
-                            td(id='tbltamaño'+index)  {{storie._tamaño}}
-                            td(id='tblunidad'+index)  {{storie._unidad}}
+                          tbody(data-id=index, id="row"+index, v-for="storie,index in stories")    
+                              tr(v-if=`storie._projectId == "${projects._id}"`)
+                                    td(id='tblnombre'+index) 
+                                      a(v-bind:href="'/dashboard'") {{storie._nombre}}
+                                    td(id='tblcomo'+index)  {{storie._como}}
+                                    td(id='tblquiero'+index)  {{storie._quiero}}
+                                    td(id='tblmanera'+index)  {{storie._manera}}
+                                    td(id='tblprioridad'+index)  {{storie._prioridad}}
+                                    td(id='tbltamaño'+index)  {{storie._tamaño}}
+                                    td(id='tblunidad'+index)  {{storie._unidad}}
 
               .col-lg-6.grid-margin.stretch-card
                 .card

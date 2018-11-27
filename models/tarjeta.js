@@ -3,7 +3,7 @@ const Schema = mongoose.Schema; // MODELO ES5 DE MONGOOSE
 const mongoosePaginate = require('mongoose-paginate-v2');
 
 const schema = Schema({
-//  _projectId:{type: Schema.Types.ObjectId,ref:'Project'},
+  _projectId:{type: Schema.Types.ObjectId,ref:'Project'},
   _nombre: String,
   _como:String,
   _quiero:String,
@@ -17,8 +17,8 @@ const schema = Schema({
 });
 
 class Tarjeta {
-  constructor(como,quiero,manera,prioridad,tamaño) {
-  //  _projectId=projectId;
+  constructor(projectId,como,quiero,manera,prioridad,tamaño) {
+    _projectId=projectId;
     _nombre=nombre;
     _como=como;
     _quiero=quiero;
@@ -31,7 +31,12 @@ class Tarjeta {
     _cuando=cuando;
     _entonces=entonces;
   }
-
+  get projectId(){
+    return this._projectId;
+  }
+  set projectId(v){
+    this._projectId=v;
+  }
   get nombre(){
     return this._nombre;
   }

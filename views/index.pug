@@ -1,5 +1,6 @@
 extends layout
 block content 
+  div(id='app')
     .container-scroller
       nav.navbar.default-layout.col-lg-12.col-12.p-0.fixed-top.d-flex.flex-row
         .text-center.navbar-brand-wrapper.d-flex.align-items-top.justify-content-center
@@ -61,18 +62,16 @@ block content
         
         .content-wrapper
                   .row
-                    div(id='app')
-                      each project in projects.docs
-                        .col-xl-3.col-lg-3.col-md-3.col-sm-6.grid-margin.stretch-card
-                            a(href='/projects/dashboard/')
-                              .card.card-statistics
-                                .card-body
-                                  .clearfix
-                                    .float-left
-                                      i.mdi.mdi-receipt.text-warning.icon-lg
-                                    .float-right
-                                      p.mb-0.text-right #{project.name}
-                                      .fluid-container
-                                        h3.font-weight-medium.text-right.mb-0 #{project.scrumMaster}
-                                  p.text-muted.mt-3.mb-0
+                    .col-xl-3.col-lg-3.col-md-3.col-sm-6.grid-margin.stretch-card(v-for='project in projects')
+                        a(v-bind:href="'/projects/dashboard/'+project._id")
+                          .card.card-statistics
+                            .card-body
+                              .clearfix
+                                .float-left
+                                  i.mdi.mdi-receipt.text-warning.icon-lg
+                                .float-right
+                                  p.mb-0.text-right {{project._name}}
+                                  .fluid-container
+                                    h3.font-weight-medium.text-right.mb-0 {{project._scrumMaster}}
+                              p.text-muted.mt-3.mb-0
     include modal.pug                

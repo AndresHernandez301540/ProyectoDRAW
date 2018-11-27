@@ -21,7 +21,7 @@ router.get('/stoall/:page?',authCheck,storieController.obtenerTarjetas);
 
 //Dashboard
 router.get('/dashboard',authCheck,dashboardController.createPage);
-router.get('/dashboard/:id',authCheck,dashboardController.createPage);
+router.get('/dashboard/:id',authCheck,dashboardController.indexDashboard);
 
 //Proyecto
 router.post('/',authCheck,projectController.createProject);

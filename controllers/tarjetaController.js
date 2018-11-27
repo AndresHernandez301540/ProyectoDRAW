@@ -11,6 +11,7 @@ function createTarjeta(req, res, next){
     }
 
     let tarjeta = new Tarjeta({
+      _projectId:req.body.projectId,
       _nombre:req.body.nombre,
       _como:req.body.como,
       _quiero:req.body.quiero,
@@ -18,7 +19,6 @@ function createTarjeta(req, res, next){
       _prioridad:req.body.prioridad,
       _tamaño:req.body.tamaño,
       _unidad:req.body.unidad,
-
       _dado:req.body.dado,
       _cuando:req.body.cuando,
       _entonces:req.body.entonces
@@ -26,7 +26,7 @@ function createTarjeta(req, res, next){
 
     tarjeta.save()
         .then((obj)=>{
-            res.redirect('/dashboard');
+            res.redirect('back');
         })
         .catch((err)=>{
             res.status(500).json({
@@ -56,7 +56,7 @@ function listTarjeta(req, res, next){
   const options = {
     page:page,
     limit:5,
-    select :' _nombre _como _quiero _manera _prioridad _tamaño _unidad _dado _cuando _entonces'
+    select :'_id _projectId _nombre _como _quiero _manera _prioridad _tamaño _unidad _dado _cuando _entonces'
   };
   Tarjeta.paginate({},options)
   .then((objects)=>{
@@ -74,7 +74,7 @@ function obtenerTarjetas(req, res, next){
   const options = {
     page:page,
     limit:10,
-    select :'_id _nombre _como _quiero _manera _prioridad _tamaño _unidad _dado _cuando _entonces'
+    select :'_id _projectId _nombre _como _quiero _manera _prioridad _tamaño _unidad _dado _cuando _entonces'
   };
   Tarjeta.paginate({},options)
   .then((objects)=>{
