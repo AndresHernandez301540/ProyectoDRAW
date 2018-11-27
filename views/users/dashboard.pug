@@ -60,7 +60,7 @@ block content
           .content-wrapper
             strong #{projects._name}
             .row
-              .col-lg-6.grid-margin.stretch-card
+              .col-lg-12.grid-margin.stretch-card
                 .card
                   .card-body
                     h4.card-title Backlog
@@ -75,6 +75,9 @@ block content
                             th Prioridad
                             th Tamaño
                             th Unidad
+                            th Dado
+                            th Cuando
+                            th Entonces
                           tbody(data-id=index, id="row"+index, v-for="storie,index in stories")    
                               tr(v-if=`storie._projectId == "${projects._id}"`)
                                     td(id='tblnombre'+index) 
@@ -85,63 +88,9 @@ block content
                                     td(id='tblprioridad'+index)  {{storie._prioridad}}
                                     td(id='tbltamaño'+index)  {{storie._tamaño}}
                                     td(id='tblunidad'+index)  {{storie._unidad}}
+                                    td(id='tbldado'+index)  {{storie._dado}}
+                                    td(id='tblcuando'+index)  {{storie._cuando}}
+                                    td(id='tblentonces'+index)  {{storie._entonces}}
 
-              .col-lg-6.grid-margin.stretch-card
-                .card
-                  .card-body
-                    h4.card-title Sprint Backlog
-                    .table-responsive
-                      table.table
-                        thead
-                          tr
-                            th Tarea
-                            th Prioridad
-                            th Tiempo Est.
-                            th Estado
-                        tbody
-                          tr
-                            td Conectar ventanas
-                            td 5
-                            td 1 hr
-                            td
-                              label.badge.badge-warning In progress
-                          tr
-                            td Diseño de formularios
-                            td 2
-                            td 2 hrs.
-                            td
-                              label.badge.badge-warning In progress
-                          tr
-                            td Mover tarjetas entre tablas
-                            td 5
-                            td 10 hrs.
-                            td
-                              label.badge.badge-warning In progress
-
-              .col-lg-6.grid-margin.stretch-card
-                .card
-                  .card-body
-                    h4.card-title Sprint Backlog
-                    .table-responsive
-                      table.table
-                        thead
-                          tr
-                            th Tarea
-                            th Prioridad
-                            th Tiempo Est.
-                            th Estado
-                        tbody
-                          tr
-                            td Vistas
-                            td 3
-                            td 10 hrs
-                            td
-                              label.badge.badge-success Completed
-                          tr
-                            td Controladores
-                            td 3
-                            td 10 hrs.
-                            td
-                              label.badge.badge-success Completed
-
+              
       include modals/historias.pug  
