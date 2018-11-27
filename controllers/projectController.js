@@ -16,13 +16,14 @@ function createProject(req, res, next){
       _startDate:req.body.startDate,
       _description:req.body.description,
       _scrumMaster:req.body.scrumMaster,
+      _scrumMastername:req.body.scrumMastername,
       _owner:req.body.owner,
       _team:req.body.team
     });
-
     project.save()
         .then((obj)=>{
-            res.redirect('/projects/list');
+          console.log(obj)
+              res.redirect('back');
         })
         .catch((err)=>{
             res.status(500).json({
@@ -51,7 +52,7 @@ function listProject(req, res, next){
   const options = {
     page:page,
     limit:5,
-    select :' _name _dueDate _startDate _description _scrumMaster _owner _team'
+    select :' _name _dueDate _startDate _description _scrumMaster _scrumMastername _owner _team'
   };
   Project.paginate({},options)
   .then((objects)=>{
@@ -69,7 +70,7 @@ function getAll(req, res, next){
   const options = {
     page:page,
     limit:10,
-    select :'_id _name _dueDate _startDate _description _scrumMaster _owner _team'
+    select :'_id _name _dueDate _startDate _description _scrumMaster _scrumMastername _owner _team'
   };
   Project.paginate({},options)
   .then((objects)=>{
@@ -111,7 +112,8 @@ function updateProject(req, res, next){
     obj.dueDate=req.body.dueDate ? req.body.dueDate : obj.dueDate;
     obj.startDate=req.body.startDate ? req.body.startDate : obj.startDate;
     obj.description=req.body.description ? req.body.description : obj.description;
-    obj.scrum=req.body.scrum ? req.body.scrum : obj.scrum;
+    obj.scrumMaster=req.body.scrumMaster ? req.body.scrumMaster : obj.scrumMaster;
+    obj.scrumMastername=req.body.scrumMastername ? req.body.scrumMastername : obj.scrumMastername;
     obj.owner=req.body.owner ? req.body.owner : obj.owner;
     obj.team=req.body.team ? req.body.team : obj.team;
     obj.save()

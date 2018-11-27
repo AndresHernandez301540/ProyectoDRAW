@@ -131,8 +131,6 @@ function updateMember(req, res, next){
   });
 };
 
-
-
 function deleteMember(req,res,next){
   Member.remove({_id: req.params.id})
   .then((obj)=>{

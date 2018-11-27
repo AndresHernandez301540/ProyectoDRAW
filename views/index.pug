@@ -48,30 +48,29 @@ block content
                   | Proyecto Nuevo
                   i.mdi.mdi-plus
             li.nav-item
-              a.nav-link(href='/team/teams')
-                i.menu-icon.mdi.mdi-folder-account
-                span.menu-title Equipos de trabajo
+              a.nav-link(href='/team/list')
+                i.menu-icon.mdi.mdi-account-multiple
+                span.menu-title Miembros
             li.nav-item
               a.nav-link(href='/projects/list')
                 i.menu-icon.mdi.mdi-table
                 span.menu-title Proyectos
-            li.nav-item
-              a.nav-link(href='/team/list')
-                i.menu-icon.mdi.mdi-account-multiple
-                span.menu-title Miembros
-        
+                
         .content-wrapper
-                  .row
-                    .col-xl-3.col-lg-3.col-md-3.col-sm-6.grid-margin.stretch-card(v-for='project in projects')
-                        a(v-bind:href="'/projects/dashboard/'+project._id")
-                          .card.card-statistics
-                            .card-body
-                              .clearfix
-                                .float-left
-                                  i.mdi.mdi-receipt.text-warning.icon-lg
-                                .float-right
-                                  p.mb-0.text-right {{project._name}}
-                                  .fluid-container
-                                    h3.font-weight-medium.text-right.mb-0 {{project._scrumMaster}}
-                              p.text-muted.mt-3.mb-0
+          h1 Mis proyectos
+            .row
+              .col-xl-3.col-lg-3.col-md-3.col-sm-6.grid-margin.stretch-card(v-for='project in projects',v-if=`project._scrumMaster=="${usuario.id}"`  )
+                  a(v-bind:href="'/projects/dashboard/'+project._id")
+                    .card.card-statistics
+                      .card-body
+                        .clearfix
+                          .float-left
+                            i.mdi.mdi-receipt.text-warning.icon-lg
+                          .float-right
+                            p.font-weight-medium.mb-0.text-left Nombre del proyecto:
+                            p {{project._name}}
+                            .fluid-container
+                              p.font-weight-medium.text-left.mb-0 Scrum Master: 
+                              p {{project._scrumMastername}}
+                        p.text-muted.mt-3.mb-0
     include modal.pug                

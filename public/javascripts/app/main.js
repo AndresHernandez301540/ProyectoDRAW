@@ -1,3 +1,4 @@
+Vue.component('vue-multiselect', window.VueMultiselect.default)
 const app = new Vue({
     el:'#app',
     data:{
@@ -10,9 +11,18 @@ const app = new Vue({
       mostrar:[],
       selected: '',
       miembro:'',
+      value: [],
       check:'0'
     },
     methods:{
+      addTag (newTag) {
+        const tag = {
+          _fullName: this.users.fullName,
+          _id: this.users.id
+        }
+        this.users.push(tag)
+        this.value.push(tag)
+      },
       // Todas las funciones comunes de la aplicacion
       valor(){
         document.getElementById("rank").value=this.selected;

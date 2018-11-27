@@ -1,3 +1,4 @@
+
 #myModal.modal(tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true')
   .modal-dialog(role='document')
     .modal-content
@@ -20,14 +21,30 @@
             label.col-form-label(for='description') Descripcion del proyecto:
             textarea.form-control(id='description',name='description')
           .form-group
-            label.col-form-label(for='scrumMaster') Scrum master:
-            input.form-control(type='text',id='scrumMaster',name='scrumMaster', value=usuario.fullName)
+            label.col-form-label(for='scrumMaster1') Scrum master:
+            input(hidden='true' id='scrumMaster' name='scrumMaster',value=usuario.id)
+            input.form-control(readonly='true',type='text',id='scrumMastername' name='scrumMastername' value=usuario.fullName)
           .form-group
-            label.col-form-label(for='owner') Product Owner:
-            input.form-control(type='text',id='owner',name='owner')
+            label.col-form-label(for='owner') Dueño de productos:
+            br
+            select.custom-select(name='owner',id='owner')
+              option(v-for='user,index in users') {{user._fullName}}
           .form-group
-            label.col-form-label(for='team') Equipo de desarrollo:
-            input.form-control(type='text',id='team',name='team')
+            label.col-form-label(for='team') Equipo de trabajo:
+            vue-multiselect(
+              id='team',
+              name='team',
+              v-model="value",
+              tag-placeholder="Add this as new tag",
+              placeholder="Agrega a un miembro de trabajo",
+              label="_fullName",
+              track-by="_id",
+              :options="users",
+              :multiple="true",
+              :taggable="true",
+              @tag="addTag"
+            )
+
           .form-group
             input.btn.btn-primary(type='submit')  
             button.btn.btn-secondary(type='button' data-dismiss='modal') Cerrar  
