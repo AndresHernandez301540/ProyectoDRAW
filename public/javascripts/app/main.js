@@ -37,6 +37,9 @@ const app = new Vue({
           {name:'PHP - Master',code:'PHP'}
       ],
       selected: '',
+      prioridad:'',
+      backlog:'',
+      terminada:'',
       miembro:'',
       check:'0'
     },
@@ -196,6 +199,70 @@ const app = new Vue({
           this.projects = json.data.docs;
         });
         (window.location="/projects/list")
+      },
+
+      buscarhistoria:function(id){
+        fetch("/projects/storie/"+id)
+        .then((response) => {return response.json()})
+        .then((data) =>{
+          this.storyedit=data;
+          console.log(this.storyedit.data._nombre);
+          document.getElementById("storieid").value=new String(this.storyedit.data._id);
+          document.getElementById("nameid").value=new String(this.storyedit.data._nombre);
+          document.getElementById("howid").value=new String(this.storyedit.data._como);
+          document.getElementById("wantid").value=new String(this.storyedit.data._quiero);
+          document.getElementById("thatid").value=new String(this.storyedit.data._manera);
+          document.getElementById("givenid").value=new String(this.storyedit.data._dado);
+          document.getElementById("whenid").value=new String(this.storyedit.data._cuando);
+          document.getElementById("thenid").value=new String(this.storyedit.data._entonces);
+          document.getElementById("backlogid").value=new String(this.storyedit.data._backlog);
+          document.getElementById("finishedid").value=new String(this.storyedit.data._terminado);
+          document.getElementById("hrsTrabid").value=new String(this.storyedit.data._hrsTrab);
+
+        });
+
+      },
+      updatehistoria(){
+        idproyecto=document.getElementById("proyectoid").value;
+        id=document.getElementById("storieid").value;
+        nombre=document.getElementById("nameid").value;
+        como=document.getElementById("howid").value;
+        quiero=document.getElementById("wantid").value;
+        manera=document.getElementById("thatid").value;
+        dado=document.getElementById("givenid").value;
+        cuando=document.getElementById("whenid").value;
+        entonces=document.getElementById("thenid").value;
+        prioridad=this.prioridad;
+        hrsTrab=document.getElementById("hrsTrab").value;
+        backlog=this.backlog;
+        terminado=this.terminada;
+        const datos ={
+          id:id,
+          nombre:nombre,
+          como:como,
+          quiero:quiero,
+          manera:manera,
+          prioridad:prioridad,
+          dado:dado,
+          cuando:cuando,
+          entonces:entonces,
+          hrsTrab:hrsTrab,
+          backlog:backlog,
+          terminado:terminado
+        };
+        const options={
+          method:'PUT',
+          body:JSON.stringify(datos),
+          headers:{
+            'Content-Type': 'application/json'
+          }
+        };
+        fetch("/projects/update/"+id,options)
+        .then(response => response.json())
+        .then(json => {
+          this.stories = json.data.docs;
+        });
+        (window.location="/projects/dashboard/"+idproyecto);
       },
 
       profile(){

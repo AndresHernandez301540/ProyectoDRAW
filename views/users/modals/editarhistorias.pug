@@ -7,31 +7,32 @@
           span(aria-hidden='true') &times;
       .modal-body
           .form-group
-            label.col-form-label(for='nombre') Nombre de la historia:
-            input.form-control(type='text', id='nombre', name='nombre')
+            label.col-form-label(for='nameid') Nombre de la historia:
+            input.form-control(type='text', id='nameid', name='nameid')
           .form-group
-            input.form-control(hidden='true',type='text', id='projectId', name='projectId', value=projects._id)
+            input.form-control(hidden='true',type='text', id='storieid', name='storieid')
           .form-group
-            label.col-form-label(for='como') Como:
-            textarea.form-control(id='como',name='como')
-            label.col-form-label(for='quiero') Quiero:
-            textarea.form-control(id='quiero',name='quiero')
+            label.col-form-label(for='howid') Como:
+            textarea.form-control(type='text',id='howid',name='howid')
+          .form-group    
+            label.col-form-label(for='wantid') Quiero:
+            textarea.form-control(id='wantid',name='wantid')
           .form-group
-            label.col-form-label(for='manera') De tal manera:
-            textarea.form-control(id='manera',name='manera')
+            label.col-form-label(for='thatid') De tal manera:
+            textarea.form-control(id='thatid',name='thatid')
           .form-group
-            label.col-form-label(for='dado') Dado:
-            textarea.form-control(id='dado',name='dado')
+            label.col-form-label(for='givenid') Dado:
+            textarea.form-control(id='givenid',name='givenid')
           .form-group
-            label.col-form-label(for='cuando') Cuando:
-            textarea.form-control(id='cuando',name='cuando')
+            label.col-form-label(for='whenid') Cuando:
+            textarea.form-control(id='whenid',name='whenid')
           .form-group
-            label.col-form-label(for='entonces') Entonces:
-            textarea.form-control(id='entonces',name='entonces')
+            label.col-form-label(for='thenid') Entonces:
+            textarea.form-control(id='thenid',name='thenid')
       
           .form-group
-            label.col-form-label(for= 'prioridad') Prioridad:
-            select.form-control(id='prioridad', name='prioridad')
+            label.col-form-label(for= 'priorityid') Prioridad:
+            select.form-control(id='priorityid', name='priorityid' v-model='prioridad')
               option(value='1') 1
               option(value='2') 2
               option(value='3') 3
@@ -41,23 +42,22 @@
             textarea.form-control(id='hrsTrab',name='hrsTrab')
           
           .form-group
-            label.col-form-label(for= 'backlog') Cambiar de tablero:
-            select.form-control(id='backlog', name='backlog')
+            label.col-form-label(for= 'backlogid') Cambiar de tablero:
+            select.form-control(id='backlogid', name='backlogid' v-model='backlog')
               option(value='1') Release 1
               option(value='2') Release 2
               
           .form-group
-            label.col-form-label(for= 'terminado') ¿Historia terminada?:
-            select.form-control(id='terminado', name='terminado')
+            label.col-form-label(for= 'finishedid') ¿Historia terminada?:
+            select.form-control(id='finishedid', name='finishedid' v-model='terminada')
               option(value='false') No
               option(value='true') Si
               
-              
-          
+                    
           .form-group
-            input(hidden='true' id='hrsTrab' name='hrsTrab',value="0")
+            input(hidden='true' id='hrsTrabid' name='hrsTrabid',value="0")
             input(hidden='true' id='backlog' name='backlog',value="0")
                              
           .form-group                 
-            button.btn.btn-primary(type='button', @click='updatemiembro' data-dismiss='modal') Actualizar 
+            button.btn.btn-primary(type='button', @click='updatehistoria' data-dismiss='modal') Actualizar 
             button.btn.btn-secondary(type='button' data-dismiss='modal') Cerrar 

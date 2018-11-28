@@ -41,16 +41,19 @@ function createTarjeta(req, res, next){
   };
 
 function indexTarjeta(req, res, next){
-    Tarjeta.findById(req.params.id)
-        .then((obj)=>{
-          res.render('users/dashboard',{usuario:req.user,dashboard:obj});
-        })
-        .catch((err)=>{
-          res.status(500).json({
-            errors:[{message:'Algo salio mal'}],
-            data:[]
+  Tarjeta.findById(req.params.id)
+      .then((obj)=>{
+        res.status(200).json({
+          errors:[],
+          data:obj
         });
+     })
+      .catch((err)=>{
+        res.status(500).json({
+          errors:[{message:'Algo salio mal'}],
+          data:[]
       });
+    });
     };
 
 function listTarjeta(req, res, next){

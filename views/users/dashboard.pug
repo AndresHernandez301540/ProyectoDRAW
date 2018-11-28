@@ -59,6 +59,7 @@ block content
         .main-panel
           .content-wrapper
             strong #{projects._name}
+            input(hidden='true', id='proyectoid', name='proyectoid' value=projects._id) 
             .row
               .col-lg-12.grid-margin.stretch-card
                 .card
@@ -81,7 +82,7 @@ block content
                           tbody(data-id=index, id="row"+index, v-for="storie,index in stories")    
                               tr(v-if=`storie._projectId == "${projects._id}"`)
                                     td(id='tblnombre'+index) 
-                                      a(v-bind:href="'./dashboard'") {{storie._nombre}}
+                                      button(data-toggle='modal',data-target='#editar',@click='buscarhistoria(storie._id)') {{storie._nombre}}
                                     td(id='tblcomo'+index)  {{storie._como}}
                                     td(id='tblquiero'+index)  {{storie._quiero}}
                                     td(id='tblmanera'+index)  {{storie._manera}}
@@ -357,4 +358,5 @@ block content
                                     td(id='tblcuando'+index)  {{storie._cuando}}
                                     td(id='tblentonces'+index)  {{storie._entonces}}
               
-      include modals/historias.pug  
+      include modals/historias.pug
+      include modals/editarhistorias.pug  
