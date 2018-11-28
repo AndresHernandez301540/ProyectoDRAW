@@ -84,7 +84,6 @@ function obtenerTarjetas(req, res, next){
   };
   Tarjeta.paginate({},options)
   .then((objects)=>{
-    console.log(objects);
     res.status(200).json({
       errors:[],
       data:objects

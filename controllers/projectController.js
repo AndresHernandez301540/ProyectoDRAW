@@ -75,10 +75,15 @@ function getAll(req, res, next){
     limit:10,
     select :'_id _name _dueDate _startDate _description _scrumMaster _scrumMastername _owner _ownerName _team _teamNames'
   };
-  Project.paginate({},options)
+  Project.paginate({
+    $or:[
+      {_scrumMaster:req.user.id},
+      {_owner:req.user.id},
+      {_team:req.user.id}
+    ]
+  },options)
   .then((objects)=>{
     console.log(objects);
-    console.log("asd");
     res.status(200).json({
       errors:[],
       data:objects
