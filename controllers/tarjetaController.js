@@ -61,11 +61,11 @@ function listTarjeta(req, res, next){
 
   const options = {
     page:page,
-    limit:5,
     select :'_id _projectId _nombre _como _quiero _manera _prioridad _tamaño _unidad _dado _cuando _entonces _hrsTrab _backlog _terminado'
   };
   Tarjeta.paginate({},options)
   .then((objects)=>{
+    console.log(objects);
     res.render('users/dashboard',{usuario:req.user,projects:objects});
   }).catch((err)=>{
     res.status(500).json({
@@ -79,11 +79,12 @@ function obtenerTarjetas(req, res, next){
   let page=req.params.page ? req.params.page : 1;
   const options = {
     page:page,
-    limit:10,
+    limit:50,
     select :'_id _projectId _nombre _como _quiero _manera _prioridad _tamaño _unidad _dado _cuando _entonces _hrsTrab _backlog _terminado'
   };
   Tarjeta.paginate({},options)
   .then((objects)=>{
+    console.log(objects)
     res.status(200).json({
       errors:[],
       data:objects

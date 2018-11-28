@@ -16,7 +16,7 @@ const authCheck=(req,res,next)=>{
 };
 
 //Historias
-router.post('/stories/',authCheck,storieController.createTarjeta);
+router.post('/add/stories/',authCheck,storieController.createTarjeta);
 router.get('/stoall/:page?',authCheck,storieController.obtenerTarjetas);
 router.get('/storie/:id?',authCheck,storieController.indexTarjeta);
 router.put('/updatestorie/:id',authCheck,storieController.updateTarjeta);

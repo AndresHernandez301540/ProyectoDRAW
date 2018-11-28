@@ -61,13 +61,15 @@ block content
         .main-panel
           .content-wrapper
             strong #{projects._name}
-            br
-            if projects._open
-              button(@click='cambiarEstado') Cerrar Proyecto
-            else 
-              button(@click='cambiarEstado') Abrir Proyecto  
-            input(hidden='true', id='proyectoid', name='proyectoid' value=projects._id)
-            br
+            div
+              if usuario.id==projects._scrumMaster
+                br
+                if projects._open
+                  button(@click='cambiarEstado') Cerrar Proyecto
+                else 
+                  button(@click='cambiarEstado') Abrir Proyecto  
+                input(hidden='true', id='proyectoid', name='proyectoid' value=projects._id)
+                br
             .row
               .col-lg-12.grid-margin.stretch-card
                 .card
