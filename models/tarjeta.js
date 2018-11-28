@@ -15,7 +15,8 @@ const schema = Schema({
   _cuando:String,
   _entonces:String,
   _hrsTrab:Number,
-  _backlog:String
+  _backlog:String,
+  _terminado:Boolean
 });
 
 class Tarjeta {
@@ -35,6 +36,7 @@ class Tarjeta {
 
     _hrsTrab=hrsTrab;
     _backlog=backlog;
+    _terminado=terminado;
   }
   get projectId(){
     return this._projectId;
@@ -116,6 +118,12 @@ class Tarjeta {
   }
   set backlog(v){
     this._backlog=v;
+  }
+  get terminado(){
+    return this._terminado;
+  }
+  set terminado(v){
+    this._terminado=v;
   }
 
 }

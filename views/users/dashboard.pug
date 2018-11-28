@@ -81,7 +81,7 @@ block content
                           tbody(data-id=index, id="row"+index, v-for="storie,index in stories")    
                               tr(v-if=`storie._projectId == "${projects._id}"`)
                                     td(id='tblnombre'+index) 
-                                      a(v-bind:href="'/dashboard'") {{storie._nombre}}
+                                      a(v-bind:href="'./dashboard'") {{storie._nombre}}
                                     td(id='tblcomo'+index)  {{storie._como}}
                                     td(id='tblquiero'+index)  {{storie._quiero}}
                                     td(id='tblmanera'+index)  {{storie._manera}}

@@ -1,12 +1,11 @@
-#myModal.modal(tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true')
+#editar.modal(tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true')
   .modal-dialog(role='document')
     .modal-content
       .modal-header
-        h5#exampleModalLabel.modal-title Crear historia de usuario
+        h5#exampleModalLabel.modal-title Editar Historia
         button.close(type='button' data-dismiss='modal' aria-label='Close')
           span(aria-hidden='true') &times;
       .modal-body
-        form(action='/projects/stories/',method='POST')
           .form-group
             label.col-form-label(for='nombre') Nombre de la historia:
             input.form-control(type='text', id='nombre', name='nombre')
@@ -38,29 +37,28 @@
               option(value='3') 3
               
           .form-group
-            label.col-form-label(for= 'tamaño') Tamaño:
-            select.form-control(id='tamaño', name='tamaño')
-              option(value='1') 1
-              option(value='2') 2
-              option(value='3') 3
-              option(value='5') 5
-              option(value='8') 8
-              option(value='13') 13
-              option(value='21') 21
-              option(value='34') 34
+            label.col-form-label(for='hrsTrab') Horas trabajadas hoy:
+            textarea.form-control(id='hrsTrab',name='hrsTrab')
+          
+          .form-group
+            label.col-form-label(for= 'backlog') Cambiar de tablero:
+            select.form-control(id='backlog', name='backlog')
+              option(value='value +.1') Sprint 1
+              option(value='value +.2') Sprint 2
+              option(value='value +.3') Sprint 3
+              
+          .form-group
+            label.col-form-label(for= 'terminado') ¿Historia terminada?:
+            select.form-control(id='terminado', name='terminado')
+              option(value='false') No
+              option(value='true') Si
               
               
-            label.col-form-label(for= 'unidad') Tipo:
-            select.form-control(id='unidad', name='unidad')
-              option(value='hrs') horas
-              option(value='dias') dias
-              option(value='meses') meses
+          
           .form-group
             input(hidden='true' id='hrsTrab' name='hrsTrab',value="0")
             input(hidden='true' id='backlog' name='backlog',value="0")
-            input(hidden='true' id='terminado' name='terminado',value="false")
-            
-          
-          .form-group
-            input.btn.btn-primary(type='submit')
-            button.btn.btn-secondary(type='button' data-dismiss='modal') Cerrar
+                             
+          .form-group                 
+            button.btn.btn-primary(type='button', @click='updatemiembro' data-dismiss='modal') Actualizar 
+            button.btn.btn-secondary(type='button' data-dismiss='modal') Cerrar 
