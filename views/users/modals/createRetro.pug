@@ -1,0 +1,22 @@
+#retro.modal(tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true')
+  .modal-dialog(role='document')
+    .modal-content
+      .modal-header
+        h5#exampleModalLabel.modal-title Crear una retrospectiva
+        button.close(type='button' data-dismiss='modal' aria-label='Close')
+          span(aria-hidden='true') &times;
+      .modal-body
+        form(action='/projects/add/stories/',method='POST')
+          .form-group
+            label.col-form-label(for='bien') ¿Qué hice bien?
+            input.form-control(type='text', id='bien', name='bien')
+          .form-group
+            label.col-form-label(for='mal') ¿Qué hice mal?
+            textarea.form-control(id='mal',name='mal')
+          .form-group
+            label.col-form-label(for='mejorar') ¿Qué debo mejorar?
+            textarea.form-control(id='mejorar',name='mejorar')            
+          
+          .form-group
+            input.btn.btn-primary(type='submit')
+            button.btn.btn-secondary(type='button' data-dismiss='modal') Cerrar
