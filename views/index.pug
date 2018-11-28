@@ -5,7 +5,7 @@ block content
       nav.navbar.default-layout.col-lg-12.col-12.p-0.fixed-top.d-flex.flex-row
         .text-center.navbar-brand-wrapper.d-flex.align-items-top.justify-content-center
           a.navbar-brand.brand-logo(href='/')
-            strong SCRUMPage
+            strong Prueba
           a.navbar-brand.brand-logo-mini(href='/')
             img(src='/images/logo-mini.svg' alt='logo')
         .navbar-menu-wrapper.d-flex.align-items-center
@@ -71,18 +71,24 @@ block content
                           .float-right
                             p.font-weight-medium.mb-0.text-left Nombre del proyecto:
                             p {{project._name}}
+                            .fluid.container
+                            p.font-weight-medium.text-left.mb-0 Estado del proyecto:
+                            div(v-if=`project._open`)
+                              p Abierto
+                            div(v-else)
+                              p Cerrado
                             .fluid-container
-                              p.font-weight-medium.text-left.mb-0 Scrum Master: 
-                              p {{project._scrumMastername}}
-                              .fluid-container
-                              p.font-weight-medium.text-left.mb-0 Dueño del proyecto: 
-                              p {{project._ownerName}}
-                              .fluid-container
-                              p.font-weight-medium.text-left.mb-0 Miembros del equipo: 
-                              p {{project._teamNames}}  
-                              .fluid-container
-                              p.font-weight-medium.text-left.mb-0 Fecha de arranque:
-                              p {{project._startDate}}  
+                            p.font-weight-medium.text-left.mb-0 Scrum Master: 
+                            p {{project._scrumMastername}}
+                            .fluid-container
+                            p.font-weight-medium.text-left.mb-0 Dueño del proyecto: 
+                            p {{project._ownerName}}
+                            .fluid-container
+                            p.font-weight-medium.text-left.mb-0 Miembros del equipo: 
+                            p {{project._teamNames}}  
+                            .fluid-container
+                            p.font-weight-medium.text-left.mb-0 Fecha de arranque:
+                            p {{project._startDate}}  
                                
                         p.text-muted.mt-3.mb-0
     include modal.pug                

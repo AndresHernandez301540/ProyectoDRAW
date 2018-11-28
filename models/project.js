@@ -7,6 +7,7 @@ const schema = Schema({
   _dueDate:String,
   _startDate:String,
   _description:String,
+  _open:Boolean,
   _scrumMaster:{type: Schema.Types.ObjectId,ref:'User'},
   _scrumMastername:String,
   _owner:{type:Schema.Types.ObjectId,ref:'User'},
@@ -16,11 +17,12 @@ const schema = Schema({
 });
 
 class Project{
- constructor(name,dueDate,startDate,description,scrumMaster,scrumMastername,owner,ownerName,team,teamNames){
+ constructor(name,dueDate,startDate,description,open,scrumMaster,scrumMastername,owner,ownerName,team,teamNames){
    _name=name;
    _dueDate=dueDate;
    _startDate=startDate;
    _description=description;
+   _open=open
    _scrumMaster=scrumMaster;
    _scrumMastername=scrumMastername;
    _owner=owner;
@@ -52,6 +54,12 @@ class Project{
   }
   set description(v){
     this._description=v;
+  }
+  get open(){
+    return this._open;
+  }
+  set open(v){
+    this._open=v;
   }
   get scrumMaster(){
     return this ._scrumMaster;

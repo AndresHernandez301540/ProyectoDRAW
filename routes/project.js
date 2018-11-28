@@ -32,6 +32,7 @@ router.get('/list/:page?',authCheck,projectController.listProject);
 router.get('/obtener/:page?',authCheck,projectController.getAll);
 router.get('/buscar/:id',authCheck,projectController.BuscarProject);
 router.put('/update/:id',authCheck,projectController.updateProject);
+router.put('/updatestate/:id',authCheck,projectController.cambiarEstado);
 router.delete('/delete/:id',authCheck,projectController.deleteProject);
 
 module.exports = router;

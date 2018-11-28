@@ -61,7 +61,9 @@ block content
         .main-panel
           .content-wrapper
             strong #{projects._name}
-            input(hidden='true', id='proyectoid', name='proyectoid' value=projects._id) 
+            input(hidden='true', id='proyectoid', name='proyectoid' value=projects._id)
+            br
+            input#toggle-one(checked='' type='checkbox')
             .row
               .col-lg-12.grid-margin.stretch-card
                 .card

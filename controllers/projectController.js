@@ -15,6 +15,7 @@ function createProject(req, res, next){
       _dueDate:req.body.dueDate,
       _startDate:req.body.startDate,
       _description:req.body.description,
+      _open:true,
       _scrumMaster:req.body.scrumMaster,
       _scrumMastername:req.body.scrumMastername,
       _owner:req.body.owner,
@@ -55,7 +56,7 @@ function listProject(req, res, next){
   const options = {
     page:page,
     limit:5,
-    select :' _name _dueDate _startDate _description _scrumMaster _scrumMastername _owner _ownerName _team _teamNames'
+    select :' _name _dueDate _startDate _description _open _scrumMaster _scrumMastername _owner _ownerName _team _teamNames'
   };
   Project.paginate({
     $or:[
@@ -79,7 +80,7 @@ function getAll(req, res, next){
   const options = {
     page:page,
     limit:10,
-    select :'_id _name _dueDate _startDate _description _scrumMaster _scrumMastername _owner _ownerName _team _teamNames'
+    select :'_id _name _dueDate _startDate _description _open _scrumMaster _scrumMastername _owner _ownerName _team _teamNames'
   };
   Project.paginate({
     $or:[
@@ -148,6 +149,31 @@ function updateProject(req, res, next){
   });
 };
 
+function cambiarEstado(req, res, next){
+  Project.findById(req.params.id)
+  .then((obj)=>{
+    if(obj.open){
+      obj.open=false;
+    }else{
+      obj.open=true;
+    }
+    obj.save()
+    .then((obj)=>{
+      res.status(200).json({
+        errors:[],
+        data : obj
+        });
+    }).catch((err)=>{
+      res.status(500).json({
+        errors:[{message:'Algo salio mal en la actualización'}],
+        data:[]
+    });
+  });
+  }).catch((err)=>{
+
+  });
+};
+
 function deleteProject(req,res,next){
   Project.remove({_id: req.params.id})
   .then((obj)=>{
@@ -171,5 +197,6 @@ module.exports={
   BuscarProject,
   getAll,
   updateProject,
+  cambiarEstado,
   deleteProject
 };
