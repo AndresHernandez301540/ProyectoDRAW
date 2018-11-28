@@ -12,6 +12,30 @@ const app = new Vue({
       ownerseleccionados:[],
       stories:[],
       mostrar:[],
+      valorhabilidades:[],
+      habilidades:[
+          {name:'Android - Junior',code:'Android'},
+          {name:'Android - Senior',code:'Android'},
+          {name:'Android - Master',code:'Android'},
+          {name:'Java - Junior',code:'Java'},
+          {name:'Java - Senior',code:'Java'},
+          {name:'Java - Master',code:'Java'},
+          {name:'Ruby - Junior',code:'Ruby'},
+          {name:'Ruby - Senior',code:'Ruby'},
+          {name:'Ruby - Master',code:'Ruby'},
+          {name:'Python - Junior',code:'Python'},
+          {name:'Python - Senior',code:'Python'},
+          {name:'Python - Master',code:'Python'},
+          {name:'Javascript - Junior',code:'Javascript'},
+          {name:'Javascript - Senior',code:'Javascript'},
+          {name:'Javascript - Master',code:'Javascript'},
+          {name:'CSS - Junior',code:'CSS'},
+          {name:'CSS - Senior',code:'CSS'},
+          {name:'CSS - Master',code:'CSS'},
+          {name:'PHP - Junior',code:'PHP'},
+          {name:'PHP - Senior',code:'PHP'},
+          {name:'PHP - Master',code:'PHP'}
+      ],
       selected: '',
       miembro:'',
       check:'0'
@@ -24,6 +48,14 @@ const app = new Vue({
         }
         this.usersoptions.push(tag)
         this.usuariosseleccionados.push(tag)
+      },
+      agregarhabilidades (newTag) {
+        const tag = {
+          name: newTag,
+          code: newTag.substring(0, 2)
+        }
+        this.habilidades.push(tag)
+        this.valorhabilidades.push(tag)
       },
       // Todas las funciones comunes de la aplicacion
       valor(){
@@ -111,8 +143,8 @@ const app = new Vue({
           document.getElementById("edscrumMastername").value=new String(this.projectedit.data._scrumMastername);
           document.getElementById("edowner").value=new String(this.projectedit.data._owner);
           document.getElementById("edownerName").value=new String(this.projectedit.data._ownerName);
-          document.getElementById("edteam").value=new String(this.projectedit.data._team);
-          document.getElementById("edteamName").value=new String(this.projectedit.data._teamNames);
+    //      document.getElementById("edteam").value=new String(this.projectedit.data._team);
+        //  document.getElementById("edteamName").value=new String(this.projectedit.data._teamNames);
         });
 
       },
@@ -126,8 +158,6 @@ const app = new Vue({
         scrumMasterName=document.getElementById("edscrumMastername").value;
         owner=document.getElementById("edowner").value;
         ownerName=document.getElementById("edownerName").value;
-        team=document.getElementById("edteam").value;
-        teamName=document.getElementById("edteamName").value;
         const datos ={
           id:id,
           name:name,
@@ -138,8 +168,6 @@ const app = new Vue({
           scrumMastername:scrumMasterName,
           owner:owner,
           ownerName:ownerName,
-          team:team,
-          teamNames:teamName,
         };
         const options={
           method:'PUT',

@@ -30,33 +30,15 @@
               id='edowners',
               name='edowners',
               v-model="ownerseleccionados",
-              deselect-label="Can't remove this value",
               track-by="_id",
               label="_fullName",
-              placeholder="Agrega a un dueño del producto",
+              placeholder="Cambia al dueño del producto",
               :options="usersoptions",
               :searchable="false",
               :allow-empty="false"
             )
             input(hidden='true',id='edowner',name='edowner' :value="ownerseleccionados._id")
             input(hidden='true',id='edownerName',name='edownerName' :value="ownerseleccionados._fullName")
-          .form-group
-            label.col-form-label(for='members') Equipo de trabajo:
-            vue-multiselect(
-              id='members',
-              name='members',
-              v-model="usuariosseleccionados",
-              tag-placeholder="Add this as new tag",
-              placeholder="Agrega a un miembro de trabajo",
-              label="_fullName",
-              track-by="_id",
-              :options="usersoptions",
-              :multiple="true",
-              :taggable="true",
-              @tag="addTag"
-            )
-            input(hidden='true',id='edteam',name='edteam', v-for="usuariosseleccionado in usuariosseleccionados" :value="usuariosseleccionado._id")
-            input(id='edteamName',name='edteamName', v-for="usuariosseleccionado in usuariosseleccionados" :value="usuariosseleccionado._fullName")                         
           .form-group                 
             button.btn.btn-primary(type='button', @click='updateproyecto' data-dismiss='modal') Actualizar 
             button.btn.btn-secondary(type='button' data-dismiss='modal') Cerrar 
