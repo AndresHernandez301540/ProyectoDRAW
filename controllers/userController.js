@@ -48,6 +48,19 @@ function indexUser(req, res, next){
     });
 };
 
+function editUser(req, res, next){
+  User.findById(req.params.id)
+      .then((obj)=>{
+        res.render('users/editprofile',{usuario:req.user,user:obj});
+      })
+      .catch((err)=>{
+        res.status(500).json({
+          errors:[{message:'Algo salio mal'}],
+          data:[]
+      });
+    });
+};
+
 function listUser(req, res, next){
   let page=req.params.page ? req.params.page : 1;
 
@@ -196,6 +209,7 @@ module.exports={
   createUser,
   indexUser,
   listUser,
+  editUser,
   getAll,
   obtenernombres,
   BuscarUsuario,

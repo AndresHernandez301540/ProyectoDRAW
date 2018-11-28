@@ -57,7 +57,13 @@ function listProject(req, res, next){
     limit:5,
     select :' _name _dueDate _startDate _description _scrumMaster _scrumMastername _owner _ownerName _team _teamNames'
   };
-  Project.paginate({},options)
+  Project.paginate({
+    $or:[
+      {_scrumMaster:req.user.id},
+      {_owner:req.user.id},
+      {_team:req.user.id}
+    ]
+  },options)
   .then((objects)=>{
     res.render('users/projects',{usuario:req.user,projects:objects});
   }).catch((err)=>{
@@ -124,11 +130,12 @@ function updateProject(req, res, next){
     obj.scrumMastername=req.body.scrumMastername ? req.body.scrumMastername : obj.scrumMastername;
     obj.owner=req.body.owner ? req.body.owner : obj.owner;
     obj.ownerName=req.body.ownerName ? req.body.ownerName : obj.ownerName;
-    obj.team=obj.team;
-    obj.teamNames=obj.teamNames;
     obj.save()
     .then((obj)=>{
-        console.log("Todo bien");
+      res.status(200).json({
+        errors:[],
+        data : obj
+        });
     }).catch((err)=>{
       res.status(500).json({
         errors:[{message:'Algo salio mal en la actualización'}],

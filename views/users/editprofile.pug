@@ -26,7 +26,7 @@ block content
                 a.dropdown-item(@click='profile(usuario.id)', href="/users/id/"+usuario.id)
                   | Mi Perfil
                 a.dropdown-item(@click='profile(usuario.id)', href="/users/edit/id/"+usuario.id)
-                  | Editar Mi Perfil   
+                  | Editar Mi Perfil 
                 a.dropdown-item(href='/auth/logout')
                   | Salir
           button.navbar-toggler.navbar-toggler-right.d-lg-none.align-self-center(type='button' data-toggle='offcanvas')
@@ -58,34 +58,48 @@ block content
             .col-lg-10.grid-margin.stretch-card
               .card
                 .card-body
-                  h4.card-title #{user._fullName}
+                  h4.card-title #{usuario._fullName}
                   .table-responsive
                       table.table
                         tbody
                           tr
                             td Nombre completo:
                             td 
-                              input.form-control(readonly,type='text',id='fullName',name='fullName' value=user._fullName)
+                              input.form-control(type='text',id='fullName',name='fullName' value=user._fullName)
                           tr  
                             td Fecha de cumpleaños
                             td 
-                              input.form-control(readonly,type='date',id='birthdayDate',name='birthdayDate', value=user._birthdayDate)
+                              input.form-control(type='date',id='birthdayDate',name='birthdayDate', value=user._birthdayDate)
                           tr
                             td Curp
                             td
-                              input.form-control(readonly,type='text',id='curp',name='curp', value=user._curp)
+                              input.form-control(type='text',id='curp',name='curp', value=user._curp)
                           tr
                             td RFC
                             td
-                              input.form-control(readonly,type='text',id='rfc',name='rfc', value=user._rfc)
+                              input.form-control(type='text',id='rfc',name='rfc', value=user._rfc)
                           tr
                             td Dirección
                             td
-                              input.form-control(readonly,type='text',id='home',name='home', value=user._home)
+                              input.form-control(type='text',id='home',name='home', value=user._home)
                             td(hidden='true')
                               input.form-control(hidden='true',type='text',id='id',name='id', value=user.id)    
                           tr
                             td Habilidades
-                            td
-                              input.form-control(readonly,type='text',id='abilities',name='abilities',value=user.abilities)
-                        
+                            td                              
+                                vue-multiselect(
+                                  id='abilities',
+                                  name='abilities',
+                                  v-model="valorhabilidades",
+                                  tag-placeholder="Add this as new tag",
+                                  placeholder="Agrega tus habilidades",
+                                  label="name",
+                                  track-by="code",
+                                  :options="habilidades",
+                                  :multiple="true",
+                                  :taggable="true",
+                                  @tag="agregarhabilidades"
+                                )
+                                input(id='abilities',name='abilities', v-for="valorhabilidad in valorhabilidades" :value="valorhabilidad.name")
+                      button.btn.btn-primary.btn-xs(@click='profile')
+                          span Guardar Informacion                

@@ -136,7 +136,6 @@ const app = new Vue({
         .then((response) => {return response.json()})
         .then((data) =>{
           this.projectedit=data;
-          console.log(this.projectedit.data._id);
           document.getElementById("edid").value=new String(this.projectedit.data._id);
           document.getElementById("eddueDate").value=new String(this.projectedit.data._startDate);
           document.getElementById("edstartDate").value=new String(this.projectedit.data._dueDate);
@@ -146,8 +145,6 @@ const app = new Vue({
           document.getElementById("edscrumMastername").value=new String(this.projectedit.data._scrumMastername);
           document.getElementById("edowner").value=new String(this.projectedit.data._owner);
           document.getElementById("edownerName").value=new String(this.projectedit.data._ownerName);
-    //      document.getElementById("edteam").value=new String(this.projectedit.data._team);
-        //  document.getElementById("edteamName").value=new String(this.projectedit.data._teamNames);
         });
 
       },
@@ -172,6 +169,7 @@ const app = new Vue({
           owner:owner,
           ownerName:ownerName,
         };
+        console.log(datos);
         const options={
           method:'PUT',
           body:JSON.stringify(datos),
@@ -184,7 +182,7 @@ const app = new Vue({
         .then(json => {
           this.projects = json.data.docs;
         });
-        (window.location="/projects/list")
+        (window.location="/")
       },
       deleteproyecto:function(id){
         const options={
@@ -257,7 +255,7 @@ const app = new Vue({
             'Content-Type': 'application/json'
           }
         };
-        fetch("/projects/update/"+id,options)
+        fetch("/projects/updatestorie/"+id,options)
         .then(response => response.json())
         .then(json => {
           this.stories = json.data.docs;
@@ -288,7 +286,7 @@ const app = new Vue({
         .then(json => {
           this.users = json.data.docs;
         });
-        (window.location="/")
+        (window.location="/users/id/"+idprofile)
       }
 
     },

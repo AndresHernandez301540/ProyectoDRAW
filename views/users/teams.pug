@@ -27,6 +27,8 @@ block content
                       i.mdi.mdi-alarm-check.mr-0.text-gray
                 a.dropdown-item(@click='profile(usuario.id)', href="/users/id/"+usuario.id)
                   | Mi Perfil
+                a.dropdown-item(@click='profile(usuario.id)', href="/users/edit/id/"+usuario.id)
+                  | Editar Mi Perfil 
                 a.dropdown-item(href='/auth/logout')
                   | Salir
           button.navbar-toggler.navbar-toggler-right.d-lg-none.align-self-center(type='button' data-toggle='offcanvas')
@@ -45,12 +47,12 @@ block content
                       small.designation.text-muted #{usuario.role}
                       span.status-indicator.online
                 button.btn.btn-success.btn-block(type='button' data-toggle='modal' data-target='#myModal')
-                  | Añadir Miembro
+                  | Añadir Usuario
                   i.mdi.mdi-plus
             li.nav-item
               a.nav-link(href='/team/list')
                 i.menu-icon.mdi.mdi-television
-                span.menu-title Equipo de trabajo
+                span.menu-title Miembros
             li.nav-item
               a.nav-link(href='/projects/list')
                 i.menu-icon.mdi.mdi-table
@@ -61,7 +63,7 @@ block content
             .col-lg-10.grid-margin.stretch-card
               .card
                 .card-body
-                  h4.card-title Miembros del equipo
+                  h4.card-title Usuarios
                   .table-responsive
                       table.table
                         thead
@@ -72,8 +74,6 @@ block content
                             th RFC
                             th Domicilio
                             th Lista de habilidades
-                            th Editar
-                            th Eliminar
                         tbody
                             tr(data-id=index, id="row"+index, v-for="user,index in users")
                               td(id='tblnombre'+index, contenteditable='false') 
@@ -83,12 +83,7 @@ block content
                               td(id='tblrfc'+index, contenteditable='false') {{user._rfc}}
                               td(id='tblhome'+index, contenteditable='false') {{user._home}}
                               td(id='tblabilities'+index, contenteditable='false') {{user._abilities}}
-                              td                       
-                                button.btn.btn-primary.btn-xs(data-toggle='modal',data-target='#editar', @click='buscar(user._id)')
-                                  span.glyphicon.glyphicon-pencil(id="btneditar"+index, data-toogle='modal', data-target='#editar')
-                              td                              
-                                button.btn.btn-danger.btn-xs(id='btneliminar', @click='deleteUser(user._id)')
-                                  span.glyphicon.glyphicon-trash
+
                             
       include modals/addmiembro.pug
       include modals/editarmiembro.pug

@@ -19,7 +19,7 @@ const authCheck=(req,res,next)=>{
 router.post('/stories/',authCheck,storieController.createTarjeta);
 router.get('/stoall/:page?',authCheck,storieController.obtenerTarjetas);
 router.get('/storie/:id?',authCheck,storieController.indexTarjeta);
-router.put('/update/:id',authCheck,storieController.updateTarjeta);
+router.put('/updatestorie/:id',authCheck,storieController.updateTarjeta);
 
 //Dashboard
 router.get('/dashboard',authCheck,dashboardController.createPage);

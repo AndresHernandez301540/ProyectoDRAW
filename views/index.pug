@@ -19,13 +19,15 @@ block content
                 a.dropdown-item.p-0
                   .d-flex.border-bottom
                     .py-3.px-4.d-flex.align-items-center.justify-content-center
-                      i.mdi.mdi-bookmark-plus-outline.mr-0.text-gray  
+                      i.mdi.mdi-bookmark-plus-outline.mr-0.text-gray
                     .py-3.px-4.d-flex.align-items-center.justify-content-center.border-left.border-right
                       i.mdi.mdi-account-outline.mr-0.text-gray 
                     .py-3.px-4.d-flex.align-items-center.justify-content-center
                       i.mdi.mdi-alarm-check.mr-0.text-gray 
                 a.dropdown-item(@click='profile(usuario.id)', href="/users/id/"+usuario.id)
                   | Mi Perfil
+                a.dropdown-item(@click='profile(usuario.id)', href="/users/edit/id/"+usuario.id)
+                  | Editar Mi Perfil  
                 a.dropdown-item(href='/auth/logout')
                   | Salir
           button.navbar-toggler.navbar-toggler-right.d-lg-none.align-self-center(type='button' data-toggle='offcanvas')
@@ -78,6 +80,9 @@ block content
                               .fluid-container
                               p.font-weight-medium.text-left.mb-0 Miembros del equipo: 
                               p {{project._teamNames}}  
+                              .fluid-container
+                              p.font-weight-medium.text-left.mb-0 Fecha de arranque:
+                              p {{project._startDate}}  
                                
                         p.text-muted.mt-3.mb-0
     include modal.pug                

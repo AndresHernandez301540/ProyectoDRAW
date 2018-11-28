@@ -17,6 +17,7 @@ const authCheck=(req,res,next)=>{
 router.post('/',authCheck,userController.createUser);
 
 router.get('/id/:id?',authCheck,userController.indexUser);
+router.get('/edit/id/:id?',authCheck,userController.editUser);
 router.get('/list/:page?',authCheck,userController.listUser);
 router.get('/buscar/:id',authCheck,userController.BuscarUsuario);
 router.get('/obtener/:page?',authCheck,userController.getAll);
