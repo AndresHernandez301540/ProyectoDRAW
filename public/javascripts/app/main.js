@@ -41,6 +41,7 @@ const app = new Vue({
       backlog:'',
       terminada:'',
       miembro:'',
+      estadoproyecto:true,
       check:'0'
     },
     methods:{
@@ -60,7 +61,6 @@ const app = new Vue({
         this.habilidades.push(tag)
         this.valorhabilidades.push(tag)
       },
-      // Todas las funciones comunes de la aplicacion
       valor(){
         document.getElementById("rank").value=this.selected;
         return this.selected;
@@ -287,8 +287,36 @@ const app = new Vue({
           this.users = json.data.docs;
         });
         (window.location="/users/id/"+idprofile)
-      }
+      },
 
+      cambiarEstado(){
+        if(this.estadoproyecto){
+          this.estadoproyecto=false;
+        }else{
+          this.estadoproyecto=true;
+        }
+        id=document.getElementById("proyectoid").value;
+        const datos ={
+          id:id,
+          open:this.estadoproyecto
+        };
+        console.log(datos);
+        const options={
+          method:'PUT',
+          body:JSON.stringify(datos),
+          headers:{
+            'Content-Type': 'application/json'
+          }
+        }
+        fetch("/projects/updatestate/"+id,options)
+        .then(response => response.json())
+        .then(json => {
+          this.projects = json.data.docs;
+        });
+
+        (window.location="/");
+
+      }
     },
     computed:{
       // Funciones que podran ser desplegables en las vistas

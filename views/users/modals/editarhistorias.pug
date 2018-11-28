@@ -33,9 +33,9 @@
           .form-group
             label.col-form-label(for= 'priorityid') Prioridad:
             select.form-control(id='priorityid', name='priorityid' v-model='prioridad')
-              option(value='1') 1
-              option(value='2') 2
-              option(value='3') 3
+              option(value='P1') 1
+              option(value='P2') 2
+              option(value='P3') 3
               
           .form-group
             label.col-form-label(for='hrsTrab') Horas trabajadas hoy:
@@ -44,14 +44,14 @@
           .form-group
             label.col-form-label(for= 'backlogid') Cambiar de tablero:
             select.form-control(id='backlogid', name='backlogid' v-model='backlog')
-              option(value='1') Release 1
-              option(value='2') Release 2
+              option(value='R1') Release 1
+              option(value='R2') Release 2
               
           .form-group
             label.col-form-label(for= 'finishedid') ¿Historia terminada?:
             select.form-control(id='finishedid', name='finishedid' v-model='terminada')
-              option(value='false') No
-              option(value='true') Si
+              option(value='H1') No
+              option(value='H2') Si
               
                     
           .form-group
