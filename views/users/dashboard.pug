@@ -66,9 +66,9 @@ block content
               if usuario.id==projects._scrumMaster
                 br
                 if projects._open
-                  button(@click='cambiarEstado') Cerrar Proyecto
+                  button.btn.btn-warning(@click='cambiarEstado') Cerrar Proyecto
                 else 
-                  button(@click='cambiarEstado') Abrir Proyecto  
+                  button.btn.btn-warning(@click='cambiarEstado') Abrir Proyecto  
               
             .row
               .col-lg-12.grid-margin.stretch-card
@@ -97,7 +97,7 @@ block content
                               tr(v-if=`storie._projectId == "${projects._id}" && storie._backlog=='0'`)                                    
                                     td(id='tblnombre'+index)
                                       if usuario.id==projects._scrumMaster 
-                                        button(data-toggle='modal',data-target='#editar',@click='buscarhistoria(storie._id)') {{storie._nombre}}
+                                        button.btn.btn-light(data-toggle='modal',data-target='#editar',@click='buscarhistoria(storie._id)') {{storie._nombre}}
                                       else 
                                         p {{storie._nombre}}
                                       input(hidden='true',id='storieId', name='storieId' v-model='storie._id')
@@ -112,14 +112,15 @@ block content
                                     td(id='tblentonces'+index)  {{storie._entonces}}
                                     if usuario.id==projects._owner
                                       td
-                                        button(@click='validTarjeta') Validar Tarjeta
+                                        button.btn.btn-light(@click='validTarjeta') Validar Tarjeta
                                       td
-                                        button(@click='rechazarTarjeta') Rechazar Tarjeta  
+                                        button.btn.btn-light(@click='rechazarTarjeta') Rechazar Tarjeta  
             .row
               .col-lg-12.grid-margin.stretch-card
                 .card
                   .card-body
-                    h4.card-title Release Backlog 1
+                    h4.card-title Release Backlog 1 
+                    button.btn.btn-success(data-toggle='modal',data-target='#retro') Agregar retrospectiva
                     .table-responsive
                       table.table
                         thead
@@ -252,6 +253,7 @@ block content
                 .card
                   .card-body
                     h4.card-title Release Backlog 2
+                    button.btn.btn-success(data-toggle='modal',data-target='#retro') Agregar retrospectiva
                     .table-responsive
                       table.table
                         thead
@@ -382,4 +384,5 @@ block content
       include modals/historias.pug
       include modals/editarhistorias.pug
       include modals/editarhistoriasrelease.pug
-      include modals/editarhistoriasrelease2.pug    
+      include modals/editarhistoriasrelease2.pug
+      include modals/createRetro.pug    
