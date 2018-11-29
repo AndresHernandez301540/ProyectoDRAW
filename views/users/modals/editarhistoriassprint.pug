@@ -1,4 +1,4 @@
-#editar3.modal(tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true')
+#editar4.modal(tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true')
   .modal-dialog(role='document')
     .modal-content
       .modal-header
@@ -40,13 +40,6 @@
         .form-group
           label.col-form-label(for='hrsTrab') Horas trabajadas hoy:
           input.form-control(type='number',id='hrsTrab',name='hrsTrab')
-        
-        .form-group
-          label.col-form-label(for= 'backlogid') Cambiar de tablero:
-          select.form-control(id='backlogid', name='backlogid' v-model='backlog')
-              option(value='6') Sprint 1
-              option(value='7') Sprint 2
-              option(value='8') Sprint 3
               
         .form-group
           label.col-form-label(for= 'finishedid') ¿Historia terminada?:

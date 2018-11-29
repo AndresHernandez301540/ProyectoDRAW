@@ -97,7 +97,7 @@ block content
                             tbody(data-id=index, id="row"+index, v-for="storie,index in stories")  
                                 tr(v-if=`storie._projectId == "${projects._id}"  && !storie._status`)                                    
                                       td(id='tblnombre'+index)
-                                        if usuario.id==projects._scrumMaster 
+                                        if !usuario.id==projects._scrumMaster 
                                           button(data-toggle='modal',data-target='#editar',@click='buscarhistoria(storie._id)') {{storie._nombre}}
                                         else 
                                           p {{storie._nombre}}
@@ -121,7 +121,7 @@ block content
               .col-lg-12.grid-margin.stretch-card
                 .card
                   .card-body
-                    h4.card-title Backlog
+                    h4.card-title Product Backlog
                     .table-responsive
                       table.table
                         thead
@@ -142,7 +142,7 @@ block content
                           tbody(data-id=index, id="row"+index, v-for="storie,index in stories")  
                               tr(v-if=`storie._projectId == "${projects._id}" && storie._backlog=='9' && storie._status`)                                    
                                     td(id='tblnombre'+index)
-                                      if usuario.id==projects._scrumMaster 
+                                      if !usuario.id==projects._scrumMaster 
                                         button.btn.btn-light(data-toggle='modal',data-target='#editar',@click='buscarhistoria(storie._id)') {{storie._nombre}}
                                       else 
                                         p {{storie._nombre}}
@@ -184,7 +184,7 @@ block content
                           tbody(data-id=index, id="row"+index, v-for="storie,index in stories")       
                               tr(v-if=`storie._projectId=="${projects._id}" && storie._backlog=='1'`)
                                     td(id='tblnombre'+index) 
-                                      if usuario.id==projects._scrumMaster 
+                                      if !usuario.id==projects._scrumMaster 
                                         button.btn.btn-light(data-toggle='modal',data-target='#editar2',@click='buscarhistoria(storie._id)') {{storie._nombre}}
                                       else 
                                         p {{storie._nombre}}
@@ -218,7 +218,10 @@ block content
                             th Entonces
                           tbody(data-id=index, id="row"+index, v-for="storie,index in stories")    
                               tr(v-if=`storie._projectId=="${projects._id}" && storie._backlog=='3'`)
-                                    td(id='tblnombre'+index) 
+                                    td(id='tblnombre'+index)
+                                    if !usuario.id==projects._scrumMaster 
+                                      button.btn.btn-light(data-toggle='modal',data-target='#editar4',@click='buscarhistoria(storie._id)') {{storie._nombre}}
+                                    else  
                                       p {{storie._nombre}}
                                     td(id='tblcomo'+index)  {{storie._como}}
                                     td(id='tblquiero'+index)  {{storie._quiero}}
@@ -251,6 +254,9 @@ block content
                           tbody(data-id=index, id="row"+index, v-for="storie,index in stories")    
                               tr(v-if=`storie._projectId=="${projects._id}" && storie._backlog=='4'`)
                                     td(id='tblnombre'+index) 
+                                    if !usuario.id==projects._scrumMaster 
+                                      button(data-toggle='modal',data-target='#editar4',@click='buscarhistoria(storie._id)') {{storie._nombre}}
+                                    else 
                                       p {{storie._nombre}}
                                     td(id='tblcomo'+index)  {{storie._como}}
                                     td(id='tblquiero'+index)  {{storie._quiero}}
@@ -283,6 +289,9 @@ block content
                           tbody(data-id=index, id="row"+index, v-for="storie,index in stories")    
                               tr(v-if=`storie._projectId=="${projects._id}" && storie._backlog=='5'`)
                                     td(id='tblnombre'+index) 
+                                    if !usuario.id==projects._scrumMaster 
+                                      button(data-toggle='modal',data-target='#editar4',@click='buscarhistoria(storie._id)') {{storie._nombre}}
+                                    else 
                                       p {{storie._nombre}}
                                     td(id='tblcomo'+index)  {{storie._como}}
                                     td(id='tblquiero'+index)  {{storie._quiero}}
@@ -317,7 +326,7 @@ block content
                           tbody(data-id=index, id="row"+index, v-for="storie,index in stories")    
                               tr(v-if=`storie._projectId=="${projects._id}" && storie._backlog=='2'`)
                                     td(id='tblnombre'+index) 
-                                      if usuario.id==projects._scrumMaster 
+                                      if !usuario.id==projects._scrumMaster 
                                         button(data-toggle='modal',data-target='#editar3',@click='buscarhistoria(storie._id)') {{storie._nombre}}
                                       else 
                                         p {{storie._nombre}}
@@ -352,6 +361,9 @@ block content
                           tbody(data-id=index, id="row"+index, v-for="storie,index in stories")    
                               tr(v-if=`storie._projectId=="${projects._id}" && storie._backlog=='6'`)
                                     td(id='tblnombre'+index) 
+                                    if !usuario.id==projects._scrumMaster 
+                                      button(data-toggle='modal',data-target='#editar4',@click='buscarhistoria(storie._id)') {{storie._nombre}}
+                                    else 
                                       p {{storie._nombre}}
                                     td(id='tblcomo'+index)  {{storie._como}}
                                     td(id='tblquiero'+index)  {{storie._quiero}}
@@ -384,6 +396,9 @@ block content
                           tbody(data-id=index, id="row"+index, v-for="storie,index in stories")    
                               tr(v-if=`storie._projectId=="${projects._id}" && storie._backlog=='7'`)
                                     td(id='tblnombre'+index) 
+                                    if !usuario.id==projects._scrumMaster 
+                                      button(data-toggle='modal',data-target='#editar4',@click='buscarhistoria(storie._id)') {{storie._nombre}}
+                                    else 
                                       p {{storie._nombre}}
                                     td(id='tblcomo'+index)  {{storie._como}}
                                     td(id='tblquiero'+index)  {{storie._quiero}}
@@ -416,6 +431,9 @@ block content
                           tbody(data-id=index, id="row"+index, v-for="storie,index in stories")    
                               tr(v-if=`storie._projectId=="${projects._id}" && storie._backlog=='8'`)
                                     td(id='tblnombre'+index) 
+                                    if !usuario.id==projects._scrumMaster 
+                                      button(data-toggle='modal',data-target='#editar4',@click='buscarhistoria(storie._id)') {{storie._nombre}}
+                                    else 
                                       p {{storie._nombre}}
                                     td(id='tblcomo'+index)  {{storie._como}}
                                     td(id='tblquiero'+index)  {{storie._quiero}}
@@ -431,4 +449,5 @@ block content
       include modals/editarhistorias.pug
       include modals/editarhistoriasrelease.pug
       include modals/editarhistoriasrelease2.pug
-      include modals/createRetro.pug    
+      include modals/createRetro.pug
+      include modals/editarhistoriassprint.pug  
