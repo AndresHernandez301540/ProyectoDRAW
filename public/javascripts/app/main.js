@@ -367,6 +367,12 @@ const app = new Vue({
 
       }
     },
+    ready(){
+      $( ".droppable-area1, .droppable-area2, .dropabble-area3, .droppable-area4" ).sortable({
+            connectWith: ".connected-sortable",
+            stack: '.connected-sortable ul'
+          }).disableSelection();
+    },
     created(){
       // Aqui se ejecuta codigo al inicializar la aplicacion, como si fuera el constructor
       fetch('/users/obtener/')
