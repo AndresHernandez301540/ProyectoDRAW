@@ -46,6 +46,7 @@ block content
                     div
                       small.designation.text-muted #{usuario.role}
                       span.status-indicator.online
+
                 button.btn.btn-success.btn-block(type='button' data-toggle='modal' data-target='#myModal')
                   | Crear Tarjeta
                   i.mdi.mdi-plus
@@ -69,7 +70,53 @@ block content
                   button.btn.btn-warning(@click='cambiarEstado') Cerrar Proyecto
                 else 
                   button.btn.btn-warning(@click='cambiarEstado') Abrir Proyecto  
-              
+
+            .row
+              if projects.owner==usuario.id
+                .col-lg-12.grid-margin.stretch-card
+                  .card
+                    .card-body                    
+                      h4.card-title Validar Tarjetas                    
+                      .table-responsive
+                        table.table
+                          thead
+                            tr
+                              th Nombre 
+                              th Como
+                              th Quiero
+                              th De tal manera
+                              th Prioridad
+                              th Tamaño
+                              th Unidad
+                              th Dado
+                              th Cuando
+                              th Entonces
+                              if usuario.id==projects._owner
+                                th Validar Tarjeta
+                                th Rechazar Tarjeta
+                            tbody(data-id=index, id="row"+index, v-for="storie,index in stories")  
+                                tr(v-if=`storie._projectId == "${projects._id}"  && !storie._status`)                                    
+                                      td(id='tblnombre'+index)
+                                        if usuario.id==projects._scrumMaster 
+                                          button(data-toggle='modal',data-target='#editar',@click='buscarhistoria(storie._id)') {{storie._nombre}}
+                                        else 
+                                          p {{storie._nombre}}
+                                        input(hidden='true',id='storieId', name='storieId' v-model='storie._id')
+                                      td(id='tblcomo'+index)  {{storie._como}}
+                                      td(id='tblquiero'+index)  {{storie._quiero}}
+                                      td(id='tblmanera'+index)  {{storie._manera}}
+                                      td(id='tblprioridad'+index)  {{storie._prioridad}}
+                                      td(id='tbltamaño'+index)  {{storie._tamaño}}
+                                      td(id='tblunidad'+index)  {{storie._unidad}}
+                                      td(id='tbldado'+index)  {{storie._dado}}
+                                      td(id='tblcuando'+index)  {{storie._cuando}}
+                                      td(id='tblentonces'+index)  {{storie._entonces}}
+                                      if usuario.id==projects._owner
+                                        td
+                                          button.btn.btn-light(@click='validTarjeta') Validar Tarjeta
+                                        td
+                                          button.btn.btn-light(@click='rechazarTarjeta') Rechazar Tarjeta  
+          
             .row
               .col-lg-12.grid-margin.stretch-card
                 .card
@@ -92,9 +139,8 @@ block content
                             if usuario.id==projects._owner
                               th Validar Tarjeta
                               th Rechazar Tarjeta
-                          tbody(data-id=index, id="row"+index, v-for="storie,index in stories")
-                            if !projects._status     
-                              tr(v-if=`storie._projectId == "${projects._id}" && storie._backlog=='0'`)                                    
+                          tbody(data-id=index, id="row"+index, v-for="storie,index in stories")  
+                              tr(v-if=`storie._projectId == "${projects._id}" && storie._backlog=='9' && storie._status`)                                    
                                     td(id='tblnombre'+index)
                                       if usuario.id==projects._scrumMaster 
                                         button.btn.btn-light(data-toggle='modal',data-target='#editar',@click='buscarhistoria(storie._id)') {{storie._nombre}}
@@ -139,7 +185,7 @@ block content
                               tr(v-if=`storie._projectId=="${projects._id}" && storie._backlog=='1'`)
                                     td(id='tblnombre'+index) 
                                       if usuario.id==projects._scrumMaster 
-                                        button(data-toggle='modal',data-target='#editar',@click='buscarhistoria(storie._id)') {{storie._nombre}}
+                                        button.btn.btn-light(data-toggle='modal',data-target='#editar',@click='buscarhistoria(storie._id)') {{storie._nombre}}
                                       else 
                                         p {{storie._nombre}}
                                     td(id='tblcomo'+index)  {{storie._como}}
