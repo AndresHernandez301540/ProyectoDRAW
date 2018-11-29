@@ -104,6 +104,11 @@ function getAll(req, res, next){
   });
 };
 
+function burndown(req,res,next){
+  res.render('users/burndown',{usuario:req.user});
+};
+
+
 function BuscarProject(req, res, next){
   Project.findById(req.params.id)
       .then((obj)=>{
@@ -196,6 +201,7 @@ module.exports={
   listProject,
   BuscarProject,
   getAll,
+  burndown,
   updateProject,
   cambiarEstado,
   deleteProject
