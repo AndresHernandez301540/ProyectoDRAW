@@ -61,6 +61,7 @@ block content
         .main-panel
           .content-wrapper
             strong #{projects._name}
+            input(hidden='true' id='proyectoid', name='proyectoid' value=projects._id)
             div
               if usuario.id==projects._scrumMaster
                 br
@@ -68,8 +69,7 @@ block content
                   button(@click='cambiarEstado') Cerrar Proyecto
                 else 
                   button(@click='cambiarEstado') Abrir Proyecto  
-                input(hidden='true', id='proyectoid', name='proyectoid' value=projects._id)
-                br
+              
             .row
               .col-lg-12.grid-margin.stretch-card
                 .card
@@ -89,10 +89,18 @@ block content
                             th Dado
                             th Cuando
                             th Entonces
-                          tbody(data-id=index, id="row"+index, v-for="storie,index in stories")    
-                              tr(v-if=`storie._projectId == "${projects._id}" && storie._backlog=='0'`)
-                                    td(id='tblnombre'+index) 
-                                      button(data-toggle='modal',data-target='#editar',@click='buscarhistoria(storie._id)') {{storie._nombre}}
+                            if usuario.id==projects._owner
+                              th Validar Tarjeta
+                              th Rechazar Tarjeta
+                          tbody(data-id=index, id="row"+index, v-for="storie,index in stories")
+                            if !projects._status     
+                              tr(v-if=`storie._projectId == "${projects._id}" && storie._backlog=='0'`)                                    
+                                    td(id='tblnombre'+index)
+                                      if usuario.id==projects._scrumMaster 
+                                        button(data-toggle='modal',data-target='#editar',@click='buscarhistoria(storie._id)') {{storie._nombre}}
+                                      else 
+                                        p {{storie._nombre}}
+                                      input(hidden='true',id='storieId', name='storieId' v-model='storie._id')
                                     td(id='tblcomo'+index)  {{storie._como}}
                                     td(id='tblquiero'+index)  {{storie._quiero}}
                                     td(id='tblmanera'+index)  {{storie._manera}}
@@ -102,6 +110,11 @@ block content
                                     td(id='tbldado'+index)  {{storie._dado}}
                                     td(id='tblcuando'+index)  {{storie._cuando}}
                                     td(id='tblentonces'+index)  {{storie._entonces}}
+                                    if usuario.id==projects._owner
+                                      td
+                                        button(@click='validTarjeta') Validar Tarjeta
+                                      td
+                                        button(@click='rechazarTarjeta') Rechazar Tarjeta  
             .row
               .col-lg-12.grid-margin.stretch-card
                 .card
@@ -121,10 +134,13 @@ block content
                             th Dado
                             th Cuando
                             th Entonces
-                          tbody(data-id=index, id="row"+index, v-for="storie,index in stories")    
+                          tbody(data-id=index, id="row"+index, v-for="storie,index in stories")       
                               tr(v-if=`storie._projectId=="${projects._id}" && storie._backlog=='1'`)
                                     td(id='tblnombre'+index) 
-                                      button(data-toggle='modal',data-target='#editar2',@click='buscarhistoria(storie._id)') {{storie._nombre}}
+                                      if usuario.id==projects._scrumMaster 
+                                        button(data-toggle='modal',data-target='#editar',@click='buscarhistoria(storie._id)') {{storie._nombre}}
+                                      else 
+                                        p {{storie._nombre}}
                                     td(id='tblcomo'+index)  {{storie._como}}
                                     td(id='tblquiero'+index)  {{storie._quiero}}
                                     td(id='tblmanera'+index)  {{storie._manera}}
@@ -156,7 +172,7 @@ block content
                           tbody(data-id=index, id="row"+index, v-for="storie,index in stories")    
                               tr(v-if=`storie._projectId=="${projects._id}" && storie._backlog=='3'`)
                                     td(id='tblnombre'+index) 
-                                      a(v-bind:href="'/dashboard'") {{storie._nombre}}
+                                      p {{storie._nombre}}
                                     td(id='tblcomo'+index)  {{storie._como}}
                                     td(id='tblquiero'+index)  {{storie._quiero}}
                                     td(id='tblmanera'+index)  {{storie._manera}}
@@ -188,7 +204,7 @@ block content
                           tbody(data-id=index, id="row"+index, v-for="storie,index in stories")    
                               tr(v-if=`storie._projectId=="${projects._id}" && storie._backlog=='4'`)
                                     td(id='tblnombre'+index) 
-                                      a(v-bind:href="'/dashboard'") {{storie._nombre}}
+                                      p {{storie._nombre}}
                                     td(id='tblcomo'+index)  {{storie._como}}
                                     td(id='tblquiero'+index)  {{storie._quiero}}
                                     td(id='tblmanera'+index)  {{storie._manera}}
@@ -220,7 +236,7 @@ block content
                           tbody(data-id=index, id="row"+index, v-for="storie,index in stories")    
                               tr(v-if=`storie._projectId=="${projects._id}" && storie._backlog=='5'`)
                                     td(id='tblnombre'+index) 
-                                      a(v-bind:href="'/dashboard'") {{storie._nombre}}
+                                      p {{storie._nombre}}
                                     td(id='tblcomo'+index)  {{storie._como}}
                                     td(id='tblquiero'+index)  {{storie._quiero}}
                                     td(id='tblmanera'+index)  {{storie._manera}}
@@ -253,7 +269,10 @@ block content
                           tbody(data-id=index, id="row"+index, v-for="storie,index in stories")    
                               tr(v-if=`storie._projectId=="${projects._id}" && storie._backlog=='2'`)
                                     td(id='tblnombre'+index) 
-                                      button(data-toggle='modal',data-target='#editar3',@click='buscarhistoria(storie._id)') {{storie._nombre}}
+                                      if usuario.id==projects._scrumMaster 
+                                        button(data-toggle='modal',data-target='#editar',@click='buscarhistoria(storie._id)') {{storie._nombre}}
+                                      else 
+                                        p {{storie._nombre}}
                                     td(id='tblcomo'+index)  {{storie._como}}
                                     td(id='tblquiero'+index)  {{storie._quiero}}
                                     td(id='tblmanera'+index)  {{storie._manera}}
@@ -285,7 +304,7 @@ block content
                           tbody(data-id=index, id="row"+index, v-for="storie,index in stories")    
                               tr(v-if=`storie._projectId=="${projects._id}" && storie._backlog=='6'`)
                                     td(id='tblnombre'+index) 
-                                      a(v-bind:href="'/dashboard'") {{storie._nombre}}
+                                      p {{storie._nombre}}
                                     td(id='tblcomo'+index)  {{storie._como}}
                                     td(id='tblquiero'+index)  {{storie._quiero}}
                                     td(id='tblmanera'+index)  {{storie._manera}}
@@ -317,7 +336,7 @@ block content
                           tbody(data-id=index, id="row"+index, v-for="storie,index in stories")    
                               tr(v-if=`storie._projectId=="${projects._id}" && storie._backlog=='7'`)
                                     td(id='tblnombre'+index) 
-                                      a(v-bind:href="'/dashboard'") {{storie._nombre}}
+                                      p {{storie._nombre}}
                                     td(id='tblcomo'+index)  {{storie._como}}
                                     td(id='tblquiero'+index)  {{storie._quiero}}
                                     td(id='tblmanera'+index)  {{storie._manera}}
@@ -349,7 +368,7 @@ block content
                           tbody(data-id=index, id="row"+index, v-for="storie,index in stories")    
                               tr(v-if=`storie._projectId=="${projects._id}" && storie._backlog=='8'`)
                                     td(id='tblnombre'+index) 
-                                      a(v-bind:href="'/dashboard'") {{storie._nombre}}
+                                      p {{storie._nombre}}
                                     td(id='tblcomo'+index)  {{storie._como}}
                                     td(id='tblquiero'+index)  {{storie._quiero}}
                                     td(id='tblmanera'+index)  {{storie._manera}}

@@ -20,7 +20,7 @@ router.get('/id/:id?',authCheck,projectController.indexTarjeta);
 router.get('/list/:page?',authCheck,projectController.listTarjeta);
 router.get('/obtener/:page?',authCheck,projectController.getAll);
 router.put('/update/:id',authCheck,projectController.updateTarjeta);
-
+router.put('/estado/:id',authCheck,projectController.cambiarEstado);
 router.delete('/delete/:id',authCheck,projectController.deleteTarjeta);
 
 module.exports = router;

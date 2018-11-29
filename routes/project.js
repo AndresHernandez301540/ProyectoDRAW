@@ -20,6 +20,8 @@ router.post('/add/stories/',authCheck,storieController.createTarjeta);
 router.get('/stoall/:page?',authCheck,storieController.obtenerTarjetas);
 router.get('/storie/:id?',authCheck,storieController.indexTarjeta);
 router.put('/updatestorie/:id',authCheck,storieController.updateTarjeta);
+router.put('/estado/:id',authCheck,storieController.cambiarEstado);
+router.delete('/delete/:id',authCheck,storieController.deleteTarjeta);
 
 //Dashboard
 router.get('/dashboard',authCheck,dashboardController.createPage);

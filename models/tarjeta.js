@@ -16,11 +16,12 @@ const schema = Schema({
   _entonces:String,
   _hrsTrab:Number,
   _backlog:String,
-  _terminado:Boolean
+  _terminado:Boolean,
+  _status:Boolean
 });
 
 class Tarjeta {
-  constructor(projectId,como,quiero,manera,prioridad,tamaño) {
+  constructor(projectId,nombre,como,quiero,manera,prioridad,tamaño,unidad,dado,cuando,entonces,hrsTrab,backlog,terminado,status) {
     _projectId=projectId;
     _nombre=nombre;
     _como=como;
@@ -37,6 +38,7 @@ class Tarjeta {
     _hrsTrab=hrsTrab;
     _backlog=backlog;
     _terminado=terminado;
+    _status:status
   }
   get projectId(){
     return this._projectId;
@@ -125,7 +127,12 @@ class Tarjeta {
   set terminado(v){
     this._terminado=v;
   }
-
+  get status(){
+    return this._status;
+  }
+  set status(v){
+    this._status=v;
+  }
 }
 schema.plugin(mongoosePaginate);
 schema.loadClass(Tarjeta);

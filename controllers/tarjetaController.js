@@ -24,7 +24,8 @@ function createTarjeta(req, res, next){
       _entonces:req.body.entonces,
       _hrsTrab:req.body.hrsTrab,
       _backlog:req.body.backlog,
-      _terminado:req.body.terminado
+      _terminado:req.body.terminado,
+      _status:false
     });
 
     tarjeta.save()
@@ -61,11 +62,10 @@ function listTarjeta(req, res, next){
 
   const options = {
     page:page,
-    select :'_id _projectId _nombre _como _quiero _manera _prioridad _tamaño _unidad _dado _cuando _entonces _hrsTrab _backlog _terminado'
+    select :'_id _projectId _nombre _como _quiero _manera _prioridad _tamaño _unidad _dado _cuando _entonces _hrsTrab _backlog _terminado _status'
   };
   Tarjeta.paginate({},options)
   .then((objects)=>{
-    console.log(objects);
     res.render('users/dashboard',{usuario:req.user,projects:objects});
   }).catch((err)=>{
     res.status(500).json({
@@ -80,11 +80,10 @@ function obtenerTarjetas(req, res, next){
   const options = {
     page:page,
     limit:50,
-    select :'_id _projectId _nombre _como _quiero _manera _prioridad _tamaño _unidad _dado _cuando _entonces _hrsTrab _backlog _terminado'
+    select :'_id _projectId _nombre _como _quiero _manera _prioridad _tamaño _unidad _dado _cuando _entonces _hrsTrab _backlog _terminado _status'
   };
   Tarjeta.paginate({},options)
   .then((objects)=>{
-    console.log(objects)
     res.status(200).json({
       errors:[],
       data:objects
@@ -130,6 +129,28 @@ function updateTarjeta(req, res, next){
   });
 };
 
+
+function cambiarEstado(req, res, next){
+  Tarjeta.findById(req.params.id)
+  .then((obj)=>{
+    obj.status=true;
+    obj.save()
+    .then((obj)=>{
+      res.status(200).json({
+        errors:[],
+        data : obj
+        });
+    }).catch((err)=>{
+      res.status(500).json({
+        errors:[{message:'Algo salio mal en la actualización'}],
+        data:[]
+    });
+  });
+  }).catch((err)=>{
+
+  });
+};
+
 function deleteTarjeta(req,res,next){
   Tarjeta.remove({_id: req.params.id})
   .then((obj)=>{
@@ -152,5 +173,6 @@ module.exports={
   listTarjeta,
   obtenerTarjetas,
   updateTarjeta,
+  cambiarEstado,
   deleteTarjeta
 };

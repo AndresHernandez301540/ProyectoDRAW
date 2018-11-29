@@ -42,6 +42,7 @@ const app = new Vue({
       terminada:'',
       miembro:'',
       estadoproyecto:true,
+      validarTarjeta:true,
       check:'0'
     },
     methods:{
@@ -313,10 +314,51 @@ const app = new Vue({
         .then(json => {
           this.projects = json.data.docs;
         });
-
         (window.location="/");
 
+      },
+
+      validTarjeta(){
+
+        id=document.getElementById("storieId").value;
+        idproyect=document.getElementById("proyectoid").value;
+        const datos ={
+          id:id,
+          status:this.validarTarjeta
+        };
+        console.log(datos);
+        const options={
+          method:'PUT',
+          body:JSON.stringify(datos),
+          headers:{
+            'Content-Type': 'application/json'
+          }
+        }
+        fetch("/projects/estado/"+id,options)
+        .then(response => response.json())
+        .then(json => {
+          this.stories = json.data.docs;
+        });
+        (window.location="/projects/dashboard/"+idproyecto);
+      },
+
+      rechazarTarjeta(){
+        id=document.getElementById("storieId").value;
+        idproyecto=document.getElementById("proyectoid").value;
+        const options={
+          method:'DELETE',
+          headers:{
+            'Content-Type': 'application/json'
+          }
+        };
+        fetch("/projects/delete/"+id,options)
+        .then(response => response.json())
+        .then(json => {
+          this.stories = json.data.docs;
+        });
+        (window.location="/projects/dashboard/"+idproyecto);
       }
+
     },
     computed:{
       // Funciones que podran ser desplegables en las vistas
