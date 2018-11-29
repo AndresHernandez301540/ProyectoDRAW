@@ -1,5 +1,5 @@
 extends layout
-block content 
+block content
   div(id='app')
     .container-scroller
       nav.navbar.default-layout.col-lg-12.col-12.p-0.fixed-top.d-flex.flex-row
@@ -21,13 +21,13 @@ block content
                     .py-3.px-4.d-flex.align-items-center.justify-content-center
                       i.mdi.mdi-bookmark-plus-outline.mr-0.text-gray
                     .py-3.px-4.d-flex.align-items-center.justify-content-center.border-left.border-right
-                      i.mdi.mdi-account-outline.mr-0.text-gray 
+                      i.mdi.mdi-account-outline.mr-0.text-gray
                     .py-3.px-4.d-flex.align-items-center.justify-content-center
-                      i.mdi.mdi-alarm-check.mr-0.text-gray 
+                      i.mdi.mdi-alarm-check.mr-0.text-gray
                 a.dropdown-item(@click='profile(usuario.id)', href="/users/id/"+usuario.id)
                   | Mi Perfil
                 a.dropdown-item(@click='profile(usuario.id)', href="/users/edit/id/"+usuario.id)
-                  | Editar Mi Perfil  
+                  | Editar Mi Perfil
                 a.dropdown-item(href='/auth/logout')
                   | Salir
           button.navbar-toggler.navbar-toggler-right.d-lg-none.align-self-center(type='button' data-toggle='offcanvas')
@@ -57,11 +57,11 @@ block content
               a.nav-link(href='/projects/list')
                 i.menu-icon.mdi.mdi-table
                 span.menu-title Proyectos
-                
+
         .content-wrapper
           h1 Mis proyectos
             .row
-              .col-xl-3.col-lg-3.col-md-3.col-sm-6.grid-margin.stretch-card(v-for='project in projects')            
+              .col-xl-3.col-lg-3.col-md-3.col-sm-6.grid-margin.stretch-card(v-for='project in projects')
                   a(v-bind:href="'/projects/dashboard/'+project._id")
                     .card.card-statistics
                       .card-body
@@ -78,17 +78,17 @@ block content
                             div(v-else)
                               p Cerrado
                             .fluid-container
-                            p.font-weight-medium.text-left.mb-0 Scrum Master: 
+                            p.font-weight-medium.text-left.mb-0 Scrum Master:
                             p {{project._scrumMastername}}
                             .fluid-container
-                            p.font-weight-medium.text-left.mb-0 Dueño del proyecto: 
+                            p.font-weight-medium.text-left.mb-0 Dueño del proyecto:
                             p {{project._ownerName}}
                             .fluid-container
-                            p.font-weight-medium.text-left.mb-0 Miembros del equipo: 
-                            p {{project._teamNames}}  
+                            p.font-weight-medium.text-left.mb-0 Miembros del equipo:
+                            p {{project._teamNames}}
                             .fluid-container
                             p.font-weight-medium.text-left.mb-0 Fecha de arranque:
-                            p {{project._startDate}}  
-                               
+                            p {{project._startDate}}
+
                         p.text-muted.mt-3.mb-0
-    include modal.pug                
+    include modal.pug
