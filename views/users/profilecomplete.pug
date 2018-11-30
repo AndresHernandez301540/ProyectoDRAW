@@ -1,98 +1,105 @@
 extends ../layout
 block content
-    div(id='app')
-      .container-scroller
-        nav.navbar.default-layout.col-lg-12.col-12.p-0.fixed-top.d-flex.flex-row
-          .text-center.navbar-brand-wrapper.d-flex.align-items-top.justify-content-center
-            a.navbar-brand.brand-logo(href='/')
-              strong SCRUMPage
-            a.navbar-brand.brand-logo-mini(href='/')
-              img(src='/images/logo-mini.svg' alt='logo')
-          .navbar-menu-wrapper.d-flex.align-items-center
+  div(id='app')
+    .container-scroller
+      nav.navbar.default-layout.col-lg-12.col-12.p-0.fixed-top.d-flex.flex-row
+        .text-center.navbar-brand-wrapper.d-flex.align-items-top.justify-content-center
+          a.navbar-brand.brand-logo(href='/')
+            strong SCRUMPage
+          a.navbar-brand.brand-logo-mini(href='/')
+            img(src='/images/logo-mini.svg' alt='logo')
+        .navbar-menu-wrapper.d-flex.align-items-center
+          ul.navbar-nav.navbar-nav-right
+            li.nav-item.dropdown.d-none.d-xl-inline-block
+              a#UserDropdown.nav-link.dropdown-toggle(href='#' data-toggle='dropdown' aria-expanded='false')
+                span.profile-text Hola, #{usuario.fullName}!
+                img.img-xs.rounded.circle(src=usuario.thumbnail)
+              .dropdown-menu.dropdown-menu-right.navbar-dropdown(aria-labelledby='UserDropdown')
+                a.dropdown-item.p-0
+                  .d-flex.border-bottom
+                    .py-3.px-4.d-flex.align-items-center.justify-content-center
+                      i.mdi.mdi-bookmark-plus-outline.mr-0.text-gray
+                    .py-3.px-4.d-flex.align-items-center.justify-content-center.border-left.border-right
+                      i.mdi.mdi-account-outline.mr-0.text-gray
+                    .py-3.px-4.d-flex.align-items-center.justify-content-center
+                      i.mdi.mdi-alarm-check.mr-0.text-gray
+                a.dropdown-item(@click='profile(usuario.id)', href="/users/id/"+usuario.id)
+                  | Mi Perfil
+                a.dropdown-item(@click='profile(usuario.id)', href="/users/edit/id/"+usuario.id)
+                  | Editar Mi Perfil
+                a.dropdown-item(href='/auth/logout')
+                  | Salir
+          button.navbar-toggler.navbar-toggler-right.d-lg-none.align-self-center(type='button' data-toggle='offcanvas')
+            span.mdi.mdi-menu
+      .container-fluid.page-body-wrapper
+        nav#sidebar.sidebar.sidebar-offcanvas
+          ul.nav
+            li.nav-item.nav-profile
+              .nav-link
+                .user-wrapper
+                  .profile-image
+                    img(src=usuario.thumbnail)
+                  .text-wrapper
+                    p.profile-name #{usuario.fullName}
+                    div
+                      small.designation.text-muted #{usuario.role}
+                      span.status-indicator.online
+            li.nav-item
+              a.nav-link(href='/team/list')
+                i.menu-icon.mdi.mdi-television
+                span.menu-title Miembros
+            li.nav-item
+              a.nav-link(href='/projects/list')
+                i.menu-icon.mdi.mdi-table
+                span.menu-title Proyectos
 
-            ul.navbar-nav.navbar-nav-right
-              li.nav-item.dropdown.d-none.d-xl-inline-block
-                a#UserDropdown.nav-link.dropdown-toggle(href='#' data-toggle='dropdown' aria-expanded='false')
-                  span.profile-text Hola, #{usuario.fullName}!
-                  img.img-xs.rounded.circle(src=usuario.thumbnail)
-                .dropdown-menu.dropdown-menu-right.navbar-dropdown(aria-labelledby='UserDropdown')
-                  a.dropdown-item.p-0
-                    .d-flex.border-bottom
-                      .py-3.px-4.d-flex.align-items-center.justify-content-center
-                        i.mdi.mdi-bookmark-plus-outline.mr-0.text-gray  
-                      .py-3.px-4.d-flex.align-items-center.justify-content-center.border-left.border-right
-                        i.mdi.mdi-account-outline.mr-0.text-gray 
-                      .py-3.px-4.d-flex.align-items-center.justify-content-center
-                        i.mdi.mdi-alarm-check.mr-0.text-gray 
-                  a.dropdown-item(@click='profile(usuario.id)', href="/users/id/"+usuario.id)
-                    | Mi Perfil
-                  a.dropdown-item(@click='profile(usuario.id)', href="/users/edit/id/"+usuario.id)
-                    | Editar Mi Perfil   
-                  a.dropdown-item(href='/auth/logout')
-                    | Salir
-            button.navbar-toggler.navbar-toggler-right.d-lg-none.align-self-center(type='button' data-toggle='offcanvas')
-              span.mdi.mdi-menu
-        .container-fluid.page-body-wrapper
-          nav#sidebar.sidebar.sidebar-offcanvas
-            ul.nav
-              li.nav-item.nav-profile
-                .nav-link
-                  .user-wrapper
-                    .profile-image
-                      img(src=usuario.thumbnail)
-                    .text-wrapper
-                      p.profile-name #{usuario.fullName}
-                      div
-                        small.designation.text-muted #{usuario.role}
-                        span.status-indicator.online
-              li.nav-item
-                a.nav-link(href='/team/list')
-                  i.menu-icon.mdi.mdi-television
-                  span.menu-title Miembros
-              li.nav-item
-                a.nav-link(href='/projects/list')
-                  i.menu-icon.mdi.mdi-table
-                  span.menu-title Proyectos
-          .content-wrapper
-            .row
-              .container
-                .row
-                  .col-xs-12.col-sm-12.col-md-6.col-lg-6.col-xs-offset-0.col-sm-offset-0.col-md-offset-3.col-lg-offset-3.toppad                        
-                    .panel.panel-info
-                      .panel-heading
-                        h3.panel-title #{usuario._fullName}
-                      .panel-body
-                        .row
-                          .col-md-9.col-lg-9
-                            table.table.table-user-information
-                              tbody
-                                tr
-                                  td Nombre completo:
-                                  td 
-                                    input.form-control(type='text',id='fullName',name='fullName' value=usuario.fullName)
-                                tr  
-                                  td Fecha de cumpleaños
-                                  td 
-                                    input.form-control(type='date',id='birthdayDate',name='birthdayDate', value=usuario.birthdayDate)
-                                tr
-                                  td Curp
-                                  td
-                                    input.form-control(type='text',id='curp',name='curp', value=usuario.curp)
-                                tr
-                                  td RFC
-                                  td
-                                    input.form-control(type='text',id='rfc',name='rfc', value=usuario.rfc)
-                                tr
-                                  td Dirección
-                                  td
-                                    input.form-control(type='text',id='home',name='home', value=usuario.home)
-                                  td(hidden='true')
-                                    input.form-control(type='text',id='id',name='id', value=usuario.id)
-                                tr
-                                  td Habilidades
-                                  td
-                                    input.form-control(type='text',id='abilities',name='abilities', value=usuario.abilities)
-                                  
-                    .col-xs-12.col-sm-12.col-md-6.col-lg-6.col-xs-offset-0.col-sm-offset-0.col-md-offset-3.col-lg-offset-3.toppad                                          
-                    button.btn.btn-primary.btn-xs(@click='profile')
-                      span.glyphicon.glyphicon-pencil(id="btneditar"+index)
+        .content-wrapper
+          .row
+            .col-lg-10.grid-margin.stretch-card
+              .card
+                .card-body
+                  h4.card-title #{usuario._fullName}
+                  .table-responsive
+                      table.table
+                        tbody
+                          tr
+                            td Nombre completo:
+                            td
+                              input.form-control(type='text',id='fullName',name='fullName' value=usuario.fullName)
+                          tr
+                            td Fecha de Nacimiento
+                            td
+                              input.form-control(type='date',id='birthdayDate',name='birthdayDate', value=usuario._birthdayDate)
+                          tr
+                            td Curp
+                            td
+                              input.form-control(type='text',id='curp',name='curp', value=usuario._curp)
+                          tr
+                            td RFC
+                            td
+                              input.form-control(type='text',id='rfc',name='rfc', value=usuario._rfc)
+                          tr
+                            td Dirección
+                            td
+                              input.form-control(type='text',id='home',name='home', value=usuario._home)
+                            td(hidden='true')
+                              input.form-control(hidden='true',type='text',id='id',name='id', value=usuario.id)
+                          tr
+                            td Habilidades
+                            td
+                                vue-multiselect(
+                                  id='abilities',
+                                  name='abilities',
+                                  v-model="valorhabilidades",
+                                  tag-placeholder="Add this as new tag",
+                                  placeholder="Agrega tus habilidades",
+                                  label="name",
+                                  track-by="code",
+                                  :options="habilidades",
+                                  :multiple="true",
+                                  :taggable="true",
+                                  @tag="agregarhabilidades"
+                                )
+                                input(hidden='true',id='abilities',name='abilities', v-for="valorhabilidad in valorhabilidades" :value="valorhabilidad.name")
+                      button.btn.btn-primary.btn-xs(@click='profile')
+                          span Guardar Informacion

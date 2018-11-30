@@ -1,20 +1,20 @@
 module.exports={
   google:{
-    clientID:process.env.Google_ClientID,
-    clientSecret:process.env.Google_ClientSecret
+    clientID:'49998123457-tiq308sh6fuq7lno4oqu9p0dorobgdo0.apps.googleusercontent.com',
+    clientSecret:'PvA1cZS6hU1o2RxgZt0cyGDJ'
   },
   facebook:{
-    appID:process.env.Facebook_appID,
-    appSecret:process.env.Facebook_appSecret
+    appID:'348199639277842',
+    appSecret:'7a182900ab7f5b424864d1b42dbb9c25'
   },
   twitter:{
-    consumerKey:process.env.Twitter_ConsumerKey,
-    consumerSecret:process.env.Twitter_ConsumerSecret
+    consumerKey:'WFWYHY7Jeq48BU0Wl81vCIzVo',
+    consumerSecret:'tDuizeRh8lCxHwL5nZaYBMb755jqDGF4OJoF3s1e1bw46YuMp6'
   },
   mongodb:{
-    dbURI:process.env.dbURI
+    dbURI:'mongodb://ahernandez:hola1234@ds113134.mlab.com:13134/drawdb'
   },
   session:{
-    cookieKey:process.env.cookieKey
+    cookieKey:'sajdhasjkdsa'
   }
 };

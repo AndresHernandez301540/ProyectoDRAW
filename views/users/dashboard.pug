@@ -58,7 +58,10 @@ block content
               a.nav-link(href='/projects/list')
                 i.menu-icon.mdi.mdi-table
                 span.menu-title Proyectos
-
+            li.nav-item
+              a.nav-link(href='/projects/retro/'+projects._id)
+                i.menu-icon.mdi.mdi-clipboard-text
+                span.menu-title Retrospectivas
         .main-panel
           .content-wrapper
             strong #{projects._name}

@@ -1,11 +1,11 @@
-extends layout
+extends ../layout
 block content
   div(id='app')
     .container-scroller
       nav.navbar.default-layout.col-lg-12.col-12.p-0.fixed-top.d-flex.flex-row
         .text-center.navbar-brand-wrapper.d-flex.align-items-top.justify-content-center
           a.navbar-brand.brand-logo(href='/')
-            strong Prueba
+            strong SCRUMPage
           a.navbar-brand.brand-logo-mini(href='/')
             img(src='/images/logo-mini.svg' alt='logo')
         .navbar-menu-wrapper.d-flex.align-items-center
@@ -46,53 +46,35 @@ block content
                     div
                       small.designation.text-muted #{usuario.role}
                       span.status-indicator.online
-                button.btn.btn-success.btn-block(type='button' data-toggle='modal' data-target='#myModal')
-                  | Proyecto Nuevo
-                  i.mdi.mdi-plus
             li.nav-item
               a.nav-link(href='/team/list')
-                i.menu-icon.mdi.mdi-account-multiple
+                i.menu-icon.mdi.mdi-television
                 span.menu-title Miembros
             li.nav-item
               a.nav-link(href='/projects/list')
                 i.menu-icon.mdi.mdi-table
                 span.menu-title Proyectos
 
-        .content-wrapper
-          h1 Mis proyectos
-            .row
-              .col-xl-3.col-lg-3.col-md-3.col-sm-6.grid-margin.stretch-card(v-for='project in projects')                             
-                      .card.card-statistics
-                        .card-body
-                          .clearfix
-                            .float-left
-                              i.mdi.mdi-receipt.text-warning.icon-lg
-                            .float-right
-                              p.font-weight-medium.mb-0.text-left Nombre del proyecto:
-                              p {{project._name}}
-                              .fluid.container
-                              p.font-weight-medium.text-left.mb-0 Estado del proyecto:
-                              div(v-if=`project._open`)
-                                  a(v-bind:href="'/projects/dashboard/'+project._id") 
-                                    button.btn.btn-success Abierto
-                              div(v-else-if=`project._scrumMaster == "${usuario._id}"  && !project._open`)
-                                  a(v-bind:href="'/projects/dashboard/'+project._id") 
-                                    button.btn.btn-danger Cerrado
-                              div(v-else)
-                                  button.btn.btn-danger Cerrado
-                              .fluid-container
-                              p.font-weight-medium.text-left.mb-0 Scrum Master:
-                              p {{project._scrumMastername}}
-                              .fluid-container
-                              p.font-weight-medium.text-left.mb-0 Dueño del proyecto:
-                              p {{project._ownerName}}
-                              .fluid-container
-                              p.font-weight-medium.text-left.mb-0 Miembros del equipo:
-                              p {{project._teamNames}}
-                              .fluid-container
-                              p.font-weight-medium.text-left.mb-0 Fecha de arranque:
-                              p {{project._startDate}}   
-                
 
-                          p.text-muted.mt-3.mb-0
-    include modal.pug
+        .content-wrapper
+            .row
+              .col-xl-3.col-lg-3.col-md-3.col-sm-6.grid-margin.stretch-card(v-if=`retro._projectId == "${projects._id}"`,v-for='retro in retrospectivas')                             
+                .card.card-statistics 
+                  .card-body 
+                    .clearfix 
+                      .float-left
+                        i.mdi.mdi-receipt.text-warning.icon-lg 
+                        p Retrospectiva
+                      .float-right
+                        p.font-weight-medium.mb-0.text-left                       
+                        .fluid-container
+                        p.font-weight-medium.text-left.mb-0 ¿Que hice bien?
+                        p {{retro._bien}}
+                        .fluid-container
+                        p.font-weight-medium.text-left.mb-0 ¿Que hice mal?
+                        p {{retro._mal}}
+                        .fluid-container
+                        p.font-weight-medium.text-left.mb-0 ¿En que puedo mejorar?
+                        p {{retro._mejorar}}
+
+              

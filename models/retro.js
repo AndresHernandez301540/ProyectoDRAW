@@ -3,16 +3,24 @@ const Schema = mongoose.Schema; // MODELO ES5 DE MONGOOSE
 const mongoosePaginate = require('mongoose-paginate-v2');
 
 const schema = Schema({
+  _projectId:{type: Schema.Types.ObjectId,ref:'Project'},
   _bien: String,
   _mal:String,
   _mejorar:String
 });
 
 class Retro {
-  constructor(bien,mal,mejorar) {
+  constructor(projectId,bien,mal,mejorar) {
+    _projectId=projectId
     _bien=bien;
     _mal=mal;
     _mejorar=mejorar;
+  }
+  get projectId(){
+    return this._projectId;
+  }
+  set projectId(v){
+    this._projectId=v;
   }
   get bien(){
     return this._bien;

@@ -6,10 +6,11 @@
         button.close(type='button' data-dismiss='modal' aria-label='Close')
           span(aria-hidden='true') &times;
       .modal-body
-        form(action='/projects/add/stories/',method='POST')
+        form(action='/projects/add/retro/',method='POST')
           .form-group
             label.col-form-label(for='bien') ¿Qué hice bien?
             input.form-control(type='text', id='bien', name='bien')
+            input.form-control(hidden='true',type='text', id='projectId', name='projectId', value=projects._id)            
           .form-group
             label.col-form-label(for='mal') ¿Qué hice mal?
             textarea.form-control(id='mal',name='mal')

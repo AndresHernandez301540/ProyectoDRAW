@@ -3,6 +3,7 @@ var router = express.Router();
 const projectController=require('../controllers/projectController');
 const storieController=require('../controllers/tarjetaController');
 const dashboardController=require('../controllers/dashboardController');
+const retroController=require('../controllers/retroController');
 const { check, body, params} = require('express-validator/check');
 
 const authCheck=(req,res,next)=>{
@@ -24,7 +25,10 @@ router.put('/updatestorie/:id',authCheck,storieController.updateTarjeta);
 router.put('/estado/:id',authCheck,storieController.cambiarEstado);
 router.delete('/delete/:id',authCheck,storieController.deleteTarjeta);
 
-
+//Retrospectivas
+router.post('/add/retro/',authCheck,retroController.createRetro);
+router.get('/retro/:id',authCheck,retroController.indexRetro);
+router.get('/retroall/:page?',authCheck,retroController.getAll);
 
 //Dashboard
 router.get('/dashboard',authCheck,dashboardController.createPage);

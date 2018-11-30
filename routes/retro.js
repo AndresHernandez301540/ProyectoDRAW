@@ -11,7 +11,7 @@ const authCheck=(req,res,next)=>{
     next();
   }
 };
-router.get('/',authCheck,retroController.createRetro);
+router.get('/retro/',authCheck,retroController.createRetro);
 router.get('/id/:id?',authCheck,projectController.indexRetro);
 
 module.exports = router;

@@ -88,5 +88,5 @@ block content
                           tr
                             td Habilidades
                             td
-                              input.form-control(readonly,type='text',id='abilities',name='abilities',value=user.abilities)
-                        
+                              for abilities in user._abilities 
+                                p #{abilities.name}

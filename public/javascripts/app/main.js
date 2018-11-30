@@ -13,6 +13,7 @@ const app = new Vue({
       stories:[],
       mostrar:[],
       valorhabilidades:[],
+      retrospectivas:[],
       habilidades:[
           {name:'Android - Junior',code:'Android'},
           {name:'Android - Senior',code:'Android'},
@@ -273,7 +274,7 @@ const app = new Vue({
           curp:document.getElementById("curp").value,
           rfc:document.getElementById("rfc").value,
           home:document.getElementById("home").value,
-          abilities:document.getElementById("abilities").value
+          abilities:this.valorhabilidades
         }
         const options={
           method:'PUT',
@@ -287,7 +288,7 @@ const app = new Vue({
         .then(json => {
           this.users = json.data.docs;
         });
-        (window.location="/users/id/"+idprofile)
+        (window.location="/")
       },
 
       cambiarEstado(){
@@ -389,11 +390,16 @@ const app = new Vue({
       .then(response => response.json())
       .then(json =>{
         this.stories=json.data.docs
-      })
+      });
       fetch('/users/nombres/')
       .then(response => response.json())
       .then(json =>{
         this.usersoptions=json.data.docs
+      });
+      fetch('/projects/retroall/')
+      .then(response => response.json())
+      .then(json =>{
+        this.retrospectivas=json.data.docs
       })
     }
   });

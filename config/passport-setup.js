@@ -54,7 +54,7 @@ passport.use(new GoogleStrategy({
 passport.use(new FacebookStrategy({
     clientID: key.facebook.appID,
     clientSecret: key.facebook.appSecret,
-    callbackURL: "https://proyecto-draw.herokuapp.com/auth/facebook/callback"
+    callbackURL: "http://localhost:3000/auth/facebook/callback"
   },(accessToken,refreshToken,profile,done)=>{
     // Comprobar que el usuario ya esta en mongo
     User.findOne({_socialId:profile.id}).then((currentUser)=>{
@@ -88,7 +88,7 @@ passport.use(new FacebookStrategy({
 passport.use(new TwitterStrategy({
     consumerKey: key.twitter.consumerKey,
     consumerSecret: key.twitter.consumerSecret,
-    callbackURL: "https://proyecto-draw.herokuapp.com/auth/twitter/callback"
+    callbackURL: "http://localhost:3000/auth/twitter/callback"
   },(accessToken,refreshToken,profile,done)=>{
     // Comprobar que el usuario ya esta en mongo
     console.log(profile);
